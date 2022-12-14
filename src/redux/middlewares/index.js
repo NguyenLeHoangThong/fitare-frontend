@@ -4,9 +4,9 @@ import routerMiddleware from "redux/middlewares/router";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (history) => {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.REACT_APP_NODE_ENV !== 'production') {
     return [routerMiddleware(history), loggerMiddleware, sagaMiddleware];
   } else {
-    return [sagaMiddleware];
+    return [routerMiddleware(history), sagaMiddleware];
   }
 };

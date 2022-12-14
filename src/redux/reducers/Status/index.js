@@ -3,9 +3,9 @@ import * as types from "./actionTypes";
 
 const initial = {
     isLoading: false,
-    isLoadingAuth: true,
-    error: undefined
-  };
+    error: undefined,
+    success: undefined,
+};
 
 export const statusReducer = (state = initial, action) =>
     produce(state, (draft) => {
@@ -15,6 +15,9 @@ export const statusReducer = (state = initial, action) =>
                 break;
             case types.SET_ERROR_REDUCER:
                 draft.error = action.error;
+                break;
+            case types.SET_SUCCESS_REDUCER:
+                draft.success = action.success;
                 break;
             default:
                 return state;

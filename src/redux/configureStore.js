@@ -15,7 +15,7 @@ export const createConfigureStore = () => {
     middleware: (getDefaultMiddleware) => {
       return [...getDefaultMiddleware({ thunk: false }), sagaMiddleware, ...middlewares(history)]
     },
-    devTools: process.env.NODE_ENV !== 'production'
+    devTools: process.env.REACT_APP_NODE_ENV !== 'production'
   })
   
   sagaMiddleware.run(rootSaga);
