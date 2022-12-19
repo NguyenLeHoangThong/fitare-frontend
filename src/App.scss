@@ -4,7 +4,11 @@ $navbar-height: 80px;
   text-align: center;
 }
 
-.pageSection{
+.pageSection {
   padding: 0 20px;
   margin-top: $navbar-height;
+}
+
+.fileinput input[type="file"] {
+  display: none;
 }

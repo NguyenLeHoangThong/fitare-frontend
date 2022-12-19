@@ -1,0 +1,27 @@
+:root {
+  --select-fontSize: 20px;  
+}
+
+.root {
+  text-align: left;
+  &[class~="has-danger"] {
+    &::after {
+      display: none;
+    }
+    [class~="react-select__control"] {
+      border-color: #ffcfcf;
+    }
+  }
+}
+
+.optionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: var(--select-fontSize);
+  color: var(--color-blue);
+}
+
+.optionLabel {
+  font-weight: 600;
+}

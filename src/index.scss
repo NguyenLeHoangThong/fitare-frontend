@@ -2,11 +2,23 @@
 
 $roboto-main: "Roboto", serif;
 
+$theme-colors: (
+  // reset bootstrap default
+  "primary": #305973,
+  "link": #305973,
+  "blue": #305973,
+  "indigo": #305973
+);
+@import "~bootstrap/scss/bootstrap";
+
 :root {
   --color-white: #f9f9f9;
   --color-blue: #305973;
   --color-yellow: #ded5c4;
+  --color-yellow-light: rgb(222, 213, 196, 0.5);
   --color-orange: #ef7e56;
+  --color-red: #ff0000;
+  --color-gray: #616161;
 }
 
 body {
@@ -43,4 +55,32 @@ p {
 ol,
 ul {
   list-style: none;
+}
+
+.form-control{
+  border-color: var(--color-blue);
+  &:focus {
+    border-color: var(--color-blue);
+    box-shadow: 0 0 0 1.6px var(--color-blue);
+  }
+  &::placeholder {
+    color: #888888;
+    font-weight: 400;
+    opacity: 0.8,
+  }
+  font-size: 16px;
+}
+
+.form-check-input {
+  border-color: var(--color-gray);
+
+  &:checked {
+    background-color: var(--color-blue);
+    border-color: var(--color-blue);
+  }
+
+  &:focus {
+    border-color: var(--color-gray);
+    box-shadow: 0 0 0 0.6px var(--color-blue);
+  }
 }

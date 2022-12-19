@@ -8,8 +8,10 @@ const Routers = () => {
     return (
         <Suspense fallback={<LoadingScreen />}>
             <Switch>
-                <Route path={routes.default} render={(props) => <Default {...props} />} />
-                <Redirect to={routes.default} />
+                <>
+                    <Route path={routes.default} render={(props) => <Default {...props} />} />
+                    <Redirect to={routes.default} />
+                </>
             </Switch>
         </Suspense>
     )

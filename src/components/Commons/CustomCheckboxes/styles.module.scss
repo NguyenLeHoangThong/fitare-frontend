@@ -1,0 +1,38 @@
+.checkboxWrapper {
+    background-color: var(--color-yellow-light);
+    border: 1px solid #fff;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 20px;
+}
+
+.checkbox {
+    cursor: pointer;
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    padding-left: calc(1.5em + 16px);
+
+    &:not(:last-child) {
+        margin: 0 0 16px 0;
+    }
+    &:hover {
+        background-color: var(--color-white);
+    }
+    input {
+        cursor: pointer;
+        top: 50%;
+        position: absolute;
+        transform: translateY(calc(-50% - 4.5px));
+    }
+    label {
+        display: block;
+        cursor: pointer;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+}
+
+.errorMessage {
+    color: var(--bs-red);
+}
