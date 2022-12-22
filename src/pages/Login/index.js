@@ -12,7 +12,8 @@ import * as yup from "yup";
 import classes from "./styles.module.scss";
 //import components from "";
 import { setLoading } from "redux/reducers/Status/actionTypes";
-
+import { FaEnvelope } from 'react-icons/fa';
+import { FaLock } from "react-icons/fa";
 const Login = memo((props) => {
 
     const dispatch = useDispatch()
@@ -46,23 +47,35 @@ const Login = memo((props) => {
         console.log(data);
     }
     return (
-        <div>
-            <Form onSubmit={handleSubmit(onSubmit)}>
-                <CustomInput
-                    inputRef="email"
-                    //className={classes.textareaInput}
-                    placeholder="email"
-                    control={control}
-                    errorMessage={errors?.email?.message}
-                />
+        <div className={classes.loginBox}>
+            <div className={classes.title}>SIGN IN</div>
+
+            <Form onSubmit={handleSubmit(onSubmit)} >
+                <div className={classes.flex}> 
+                    <FaEnvelope className={classes.icon} />
+                    <CustomInput
+                        inputRef="email"
+                        className={classes.textboxInput}
+                        placeholder="email"
+                        control={control}
+                        errorMessage={errors?.email?.message}
+                    />
+                </div>
+                <div className={classes.flex}> 
+                <FaLock className={classes.icon} />
                 <CustomInput
                     inputRef="password"
-                    //className={classes.textareaInput}
+                    className={classes.textboxInput}
                     placeholder="password"
                     control={control}
                     errorMessage={errors?.password?.message}
                 />
-                 <Button type="submit" className={classes.btnLogin}>Submit !</Button>
+                </div>
+                <div className={classes.flexContent}>
+                    <Button type="" className={classes.btnRegister}>Sign Up</Button>
+                    <Button type="submit" className={classes.btnLogin}>Sign In</Button>
+                </div>
+                
             </Form>
         </div>
     )
