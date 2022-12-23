@@ -51,7 +51,7 @@ const Login = memo((props) => {
             <div className={classes.title}>SIGN IN</div>
 
             <Form onSubmit={handleSubmit(onSubmit)} >
-                <div className={classes.flex}> 
+                <div className={classes.flexInput}> 
                     <FaEnvelope className={classes.icon} />
                     <CustomInput
                         inputRef="email"
@@ -61,7 +61,7 @@ const Login = memo((props) => {
                         errorMessage={errors?.email?.message}
                     />
                 </div>
-                <div className={classes.flex}> 
+                <div className={classes.flexInput}> 
                 <FaLock className={classes.icon} />
                 <CustomInput
                     inputRef="password"

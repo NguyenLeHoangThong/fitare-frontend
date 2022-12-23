@@ -15,6 +15,11 @@
 
 
 .btnLogin{
+    &:hover {
+        background-color: var(--color-orange);
+        border-style:none;
+    }
+
     border-style: solid;
     border-radius: 1.75rem;
     padding: 0.5rem 1rem;
@@ -27,7 +32,10 @@
 }
 
 .btnRegister{
-    
+    &:hover {
+        background-color: var(--color-orange);
+        border-style:none;
+    }
 
     background-color: var(--color-white);
     color: var(--color-blue);
@@ -68,10 +76,16 @@
 }
 
 .textboxInput{
+    transition: height 0.5s;
+
+
     border-radius: 1rem;
     border-width:2px;
-    margin: 1.75rem 0rem;
+    //
+
+    
 }
+
 
 .flex{
     display: flex;
@@ -83,9 +97,20 @@
 .icon{
     color:var(--color-blue);
     font-size: 2.5rem;
+    
 }
 
 .flexContent{
     display:flex;
     justify-content: space-evenly;
+}
+
+.flexInput{
+    display: flex;
+    flex-direction: row;
+    //align-items: center;
+    gap: 1rem;
+    min-height: 4.5rem; 
+
+    margin: 1rem 0rem;
 }
