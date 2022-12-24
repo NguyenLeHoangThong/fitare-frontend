@@ -10,7 +10,6 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import classes from "./styles.module.scss";
-//import components from "";
 import { setLoading } from "redux/reducers/Status/actionTypes";
 import { FaEnvelope } from 'react-icons/fa';
 import { FaLock } from "react-icons/fa";
@@ -40,9 +39,6 @@ const Login = memo((props) => {
     });
 
     const onSubmit = async (data) => {
-        //await dispatch(setLoading(true))
-
-
         //xử lý data được submit
         console.log(data);
     }
@@ -69,10 +65,11 @@ const Login = memo((props) => {
                     placeholder="password"
                     control={control}
                     errorMessage={errors?.password?.message}
+                    isPassword
                 />
                 </div>
                 <div className={classes.flexContent}>
-                    <Button type="" className={classes.btnRegister}>Sign Up</Button>
+                    <Button className={classes.btnRegister}>Sign Up</Button>
                     <Button type="submit" className={classes.btnLogin}>Sign In</Button>
                 </div>
                 

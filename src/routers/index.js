@@ -10,13 +10,11 @@ const Routers = () => {
     return (
         <Suspense fallback={<LoadingScreen />}>
             <Switch>
-                <>
-                    <Route path={routes.default} render={(props) => <Default {...props} />} />
-                    <Route path={routes.login} render={(props) => <Login {...props} />} />
-                    <Route path={routes.setSummary} render={(props) => <SetSummary {...props} />} />
-                    <Route path={routes.setContent} render={(props) => <SetContent {...props} />} />
-                    {/* <Redirect to={routes.default} /> */}
-                </>
+                <Route path={routes.default} exact render={(props) => <Default {...props} />} />
+                <Route path={routes.login} exact render={(props) => <Login {...props} />} />
+                <Route path={routes.setSummary} exact render={(props) => <SetSummary {...props} />} />
+                <Route path={routes.setContent} exact render={(props) => <SetContent {...props} />} />
+                <Route><Redirect to={routes.default} /></Route>
             </Switch>
         </Suspense>
     )
