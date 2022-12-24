@@ -49,7 +49,7 @@
     font-size: 1.5rem;
     font-weight: 600;
 
-    min-width: 7rem;
+    min-width: 12.75rem;
     min-height: 1.5rem;
 }
 
@@ -75,7 +75,7 @@
     font-size: 1.5rem;
     font-weight: 600;
 
-    min-width: 7rem;
+    min-width: 12.75rem;
     min-height: 1.5rem;
 }
 
@@ -180,7 +180,7 @@
 
 .flexContent {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-even;
 
     min-width: 500px;
 }

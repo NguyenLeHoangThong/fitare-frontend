@@ -80,8 +80,8 @@ const Login = memo((props) => {
                 </Row>
 
                 <div className={classes.flexContent}>
-                    <Button type="" className={classes.btnFavorites}>Add To Favorites</Button>
-                    <Button type="submit" className={classes.btnStart}>Start Set</Button>
+                    <Button type="" className={classes.btnFavorites}>ADD TO FAVORITES</Button>
+                    <Button type="submit" className={classes.btnStart}>START SET</Button>
                 </div>
             </div>
         </div>

@@ -58,30 +58,27 @@ const Login = memo((props) => {
     return (
         <div>
 
-            <Button type="" className={clsx(classes.btnReturn, classes.setMargin)}>	&#60; ALL EXERCISE </Button>
+            <Button type="" className={clsx(classes.btnReturn, classes.setMargin)}>	&#60; SET SUMAMRY </Button>
             <div className={classes.summaryBox}>
                 <div className={classes.setName}>EXERCISE-PLAN-NAME</div>
-                <div className={classes.setCreator}>Set Creator: Creator-name</div>
+                <div className={classes.setExercise}>PUSH UP</div>
 
+                <img src={summaryLogo} className={classes.image} alt="setImage" />
 
                 <Row className ={classes.infoBox}>
-                    <Col xs={12} md={4} className={classes.flexCenter}>
-                        <img src={summaryLogo} className={classes.image} alt="setImage" />
+                    <Col xs={12} md={8} className={classes.flexCenter}> 
+                        <div className={classes.instruction}>Instruction: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur euismod libero ut rhoncus efficitur. Duis congue porttitor dui quis scelerisque. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi vel consequat augue, sed cursus odio.</div>
                     </Col>
-                    <Col xs={12} md={5} className={classes.flexCenter}> 
-                        <div className={classes.description}>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur euismod libero ut rhoncus efficitur. Duis congue porttitor dui quis scelerisque. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi vel consequat augue, sed cursus odio.</div>
-                    </Col>
-                    <Col xs={12} md={3} className={clsx(classes.flexCenter, classes.leftColumn) }>
-                        <div className={classes.tagBox}> Difficulty</div>
-                        <div className={classes.tagBox}> Chest, Shoulder, Leg</div>
-                        <div className={classes.tagBox}> BMI &#60; 18.5</div>
-                        <div className={classes.tagBox}> 18 Hours</div>
+                    <Col xs={12} md={4} className={clsx(classes.flexCenter) }>
+                        <div className={classes.tagBox}> 4 SETS X 18 REPS</div>
+                        <Button href="https://google.com" className={classes.btnVideo} target="_blank" rel="noopener noreferrer">Video Tutorial</Button>
                     </Col>
                 </Row>
 
                 <div className={classes.flexContent}>
-                    <Button type="" className={classes.btnFavorites}>Add To Favorites</Button>
-                    <Button type="submit" className={classes.btnStart}>Start Set</Button>
+                    <Button type="" className={classes.btnFavorites}>RETURN</Button>
+                    <div className={classes.pageNumberBox}> 1/4 </div>
+                    <Button type="submit" className={classes.btnFinish}>FINISH</Button>
                 </div>
             </div>
         </div>
