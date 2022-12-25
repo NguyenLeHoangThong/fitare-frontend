@@ -72,7 +72,7 @@ const Login = memo((props) => {
                 />
                 </div>
                 <div className={classes.flexContent}>
-                    <Button type="" className={classes.btnRegister}>Sign Up</Button>
+                    <Button className={classes.btnRegister}>Sign Up</Button>
                     <Button type="submit" className={classes.btnLogin}>Sign In</Button>
                 </div>
                 

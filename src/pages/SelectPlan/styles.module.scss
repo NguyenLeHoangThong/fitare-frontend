@@ -1,0 +1,31 @@
+.bannerImage {
+    width: 900px;
+    height: 300px;
+}
+
+.Box{
+    margin: 2rem;
+}
+
+.flex{
+    display:flex;
+    flex-direction: column;
+}
+
+.filterBox{
+    border-color: var(--color-blue);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 1rem;
+    
+    width: 320px;
+
+    min-height: 60rem; 
+}
+
+.planBox{
+    border-radius: 1rem;
+    background-color: var(--color-yellow);
+    min-height: 60rem; 
+ 
+}
