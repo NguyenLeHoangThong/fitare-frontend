@@ -7,6 +7,7 @@ import Login from "pages/Login";
 import Register from "pages/Register";
 import SetSummary from "pages/SetSummary";
 import SetContent from "pages/SetContent";
+import SetFinish from "pages/SetFinish";
 const Routers = () => {
     return (
         <Suspense fallback={<LoadingScreen />}>
@@ -16,6 +17,8 @@ const Routers = () => {
                     <Route path={routes.setSummary} render={(props) => <SetSummary {...props} />}  exact />
                     {/* <Redirect to={routes.default} /> */}
                     <Route path={routes.setContent} render={(props) => <SetContent {...props} />} exact />
+                    <Route path={routes.setFinish} render={(props) => <SetFinish {...props} />} exact />
+                    
                     <Route path={routes.default} render={(props) => <Default {...props} />} exact />
                     
                     <Route><Redirect to={routes.default} /></Route>

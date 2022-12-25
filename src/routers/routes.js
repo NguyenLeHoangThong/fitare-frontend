@@ -4,5 +4,6 @@ export const routes = {
     register: "/register",
     setSummary: "/setSummary",    
     setContent: "/setContent",
+    setFinish: "/setFinish",
     default: "/"
 }
