@@ -7,7 +7,7 @@ import clsx from "clsx";
 const CustomInput = memo((props) => {
 
     // @ts-ignore
-    const { control, inputRef, placeholder, className, errorMessage, textType } = props;
+    const { control, inputRef, placeholder, className, errorMessage, textType, isPassword } = props;
 
     return (
         <FormGroup>
@@ -24,6 +24,7 @@ const CustomInput = memo((props) => {
                         ref={ref}
                         isInvalid={errorMessage}
                         placeholder={placeholder}
+                        type={isPassword ? "password" : ""}
                     />
                 )}
             />
