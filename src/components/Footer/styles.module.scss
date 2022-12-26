@@ -1,0 +1,68 @@
+* {
+     box-sizing: border-box;
+}
+
+a {
+     color: inherit;
+}
+
+.footer {
+     width: 100%;
+     height: max-content;
+     // padding: 50px;
+     margin-top: 100px;
+     background-color: rgba(11, 27, 51, 0.904);
+     color: white;
+
+     position: absolute;
+     left: 0;
+
+}
+
+.appName {
+     width: 100%;
+     height: max-content;
+     padding: 20px;
+     background-color: rgb(11, 27, 51);
+     margin-bottom: 30px;
+     text-align: center;
+     font-weight: bold;
+}
+
+.brandList {
+     padding: 20px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 50px;
+
+}
+
+.brandList * {
+     width: 30px;
+     height: 30px;
+}
+
+.line {
+     border-top: 1px solid white;
+     margin: 20px 100px 0 100px;
+}
+
+.references {
+     margin: 20px;
+     padding: 30px;
+     display: grid;
+     grid-template-columns: auto auto auto;
+     grid-gap: 30px;
+}
+
+.references div {
+     text-align: center;
+}
+
+.rights {
+     text-align: center;
+     font-weight: bold;
+     font-style: italic;
+     padding: 30px;
+}

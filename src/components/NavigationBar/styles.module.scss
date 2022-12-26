@@ -1,0 +1,64 @@
+* {
+     box-sizing: border-box;
+}
+
+.navigationBar {
+     width: 100%;
+     height: max-content;
+     padding: 20px 20px;
+     background-image: linear-gradient(to bottom, rgb(245, 245, 248), rgba(236, 238, 245, 0.475));
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+
+     position: absolute;
+     left: 0;
+     top: 0;
+}
+
+.navigator {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-center;
+     gap: 0 100px;
+     align-items: center;
+}
+
+.navigator > div {
+     cursor: pointer;
+}
+
+.navigator > div:hover {
+     padding: 10px;
+     border: none;
+     border-radius: 12px;
+
+     background:rgb(236, 136, 59);
+     color: white;
+     font-weight: bolder;
+}
+
+.currentRoute {
+     padding: 10px;
+     border: 1px solid rgb(236, 136, 59);
+     border-radius: 12px;
+     color: rgb(181, 105, 23);
+     font-weight: bolder;
+}
+
+.username {
+     background-image: linear-gradient(to top, rgb(46, 79, 109), rgba(24, 117, 170, 0.998));
+     padding: 10px;
+     border: none;
+     border-radius: 12px;
+     color: rgba(214, 219, 226, 0.92);
+     font-weight: bolder;
+     cursor: pointer;
+}
+
+.username:hover {
+     filter: brightness(120%);
+}
