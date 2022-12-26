@@ -10,7 +10,7 @@ import SetContent from "pages/SetContent";
 import SetFinish from "pages/SetFinish";
 import SelectPlan from "pages/SelectPlan";
 
-const Routers = () => {
+const Routers = () =>   {
     return (
         <Suspense fallback={<LoadingScreen />}>
             <Switch>

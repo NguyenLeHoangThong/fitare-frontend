@@ -2,7 +2,10 @@
 .btnLogin{
     &:hover {
         background-color: var(--color-orange);
-        border-style:none;
+        
+        border-style: solid;
+        border-color: rgba(0,0,0,0);
+    
     }
 
     border-style: solid;
@@ -63,6 +66,7 @@
 .textboxInput{
     transition: height 0.5s;
 
+    min-width: 302.5px;
 
     border-radius: 1rem;
     border-width:2px;

@@ -6,13 +6,17 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import clsx from 'clsx'
 import { setLoading } from "redux/reducers/Status/actionTypes";
+
+import { Link } from "react-router-dom";
+import { routes } from "routers/routes.js";
+
 //Image:
 import summaryLogo from './summaryImage.png';
 const SetSummary = memo((props) => {
 
     return (
         <div>
-            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	&#60; ALL EXERCISE </Button>
+            <Button className={clsx(classes.btnReturn, classes.setMargin)}><Link to={routes.selectPlan} className={classes.noDecorBack}>&#60; ALL EXERCISE </Link>	</Button>
             <div className={classes.summaryBox}>
                 <div className={classes.setName}>EXERCISE-PLAN-NAME</div>
                 <div className={classes.setCreator}>Set Creator: Creator-name</div>
@@ -28,11 +32,14 @@ const SetSummary = memo((props) => {
                         <div className={clsx(classes.tagBox, classes.flexCol)}>
                             <div>Difficulty</div>
                             <div className={classes.flexRow}>
-                                <div className={clsx(classes.diffNode, classes.on)}>,</div>
-                                <div className={clsx(classes.diffNode, classes.on)}>,</div>
-                                <div className={clsx(classes.diffNode, classes.off)}>,</div>
-                                <div className={clsx(classes.diffNode, classes.off)}>,</div>
-                                <div className={clsx(classes.diffNode, classes.off)}>,</div>
+                                {
+
+                                }
+                                <div className={clsx(classes.diffNode, classes.on)}></div>
+                                <div className={clsx(classes.diffNode, classes.on)}></div>
+                                <div className={clsx(classes.diffNode, classes.off)}></div>
+                                <div className={clsx(classes.diffNode, classes.off)}></div>
+                                <div className={clsx(classes.diffNode, classes.off)}></div>
                             </div>
                         </div>
                         <div className={classes.tagBox}> Chest, Shoulder, Leg</div>
@@ -43,7 +50,7 @@ const SetSummary = memo((props) => {
 
                 <div className={classes.flexContent}>
                     <Button className={classes.btnFavorites}>ADD TO FAVORITES</Button>
-                    <Button type="submit" className={classes.btnStart}>START SET</Button>
+                    <Button type="submit" className={classes.btnStart} ><Link to={routes.setContent} className={classes.noDecorStart}>START SET</Link></Button>
                 </div>
             </div>
         </div>

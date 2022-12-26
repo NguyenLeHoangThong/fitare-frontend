@@ -2,9 +2,10 @@ import { memo } from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
 import classes from "./styles.module.scss";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import clsx from 'clsx'
+import clsx from 'clsx';
+
+import { Link } from "react-router-dom";
+import { routes } from "routers/routes.js";
 
 //Image:
 import summaryLogo from './finishImage.png';
@@ -12,7 +13,7 @@ import summaryLogo from './finishImage.png';
 const SetFinish = memo((props) => {
     return (
         <div>
-            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	&#60; PREVIOUS EXERCISE </Button>
+            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	<Link to={routes.setContent} className={classes.noDecorBack}>&#60; PREVIOUS EXERCISE </Link></Button>
             <div className={classes.summaryBox}>
                 <div className={classes.setName}>EXERCISE-PLAN-NAME</div>
                 <div className={classes.setComplete}>SET COMPLETED!</div>
@@ -25,7 +26,7 @@ const SetFinish = memo((props) => {
                     <div className={classes.resultText}>Inspiring Quotes </div>
                 </div>
 
-                <Button className={classes.btnFinish}>FINISH</Button>
+                <Button className={classes.btnFinish}><Link to={routes.setSummary} className={classes.noDecorStart}>FINISH</Link></Button>
 
             </div>
         </div>

@@ -29,3 +29,12 @@
     min-height: 60rem; 
  
 }
+
+.noDecorStart{
+    &:hover{
+        color: var(--color-white);
+    }
+    text-decoration: none;
+    color: var(--color-white);
+    
+}

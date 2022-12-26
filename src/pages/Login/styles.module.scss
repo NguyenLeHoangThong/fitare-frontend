@@ -4,7 +4,10 @@
 .btnLogin{
     &:hover {
         background-color: var(--color-orange);
-        border-style:none;
+        
+        border-style: solid;
+        border-color: rgba(0,0,0,0);
+    
     }
 
     border-style: solid;
@@ -21,9 +24,11 @@
 .btnRegister{
     &:hover {
         background-color: var(--color-orange);
-        border-style:none;
+        
+        border-style: solid;
+        border-color: rgba(0,0,0,0);
     }
-
+    text-decoration: none;
     background-color: var(--color-white);
     color: var(--color-blue);
     border-width: 2px;
@@ -65,6 +70,7 @@
 .textboxInput{
     transition: height 0.5s;
 
+    min-width: 302.5px;
 
     border-radius: 1rem;
     border-width:2px;
@@ -100,4 +106,13 @@
     min-height: 4.5rem; 
 
     margin: 1rem 0rem;
+}
+
+.noDecor{
+    &:hover{
+        color: var(--color-white);
+    }
+    text-decoration: none;
+    color: var(--color-blue);
+    
 }

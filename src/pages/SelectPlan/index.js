@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import clsx from 'clsx'
 import Form from 'react-bootstrap/Form';
 
-const Default = memo((props) => {
+const SelectPlan = memo((props) => {
 
     // const schema = useMemo(() => {
     //     return yup.object().shape({
@@ -58,4 +58,4 @@ const Default = memo((props) => {
     )
 })
 
-export default Default;
+export default SelectPlan;

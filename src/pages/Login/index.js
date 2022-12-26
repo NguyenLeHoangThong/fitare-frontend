@@ -2,10 +2,8 @@ import { memo, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { push } from "connected-react-router";
-import UploadImage from "components/Commons/UploadImage";
 import CustomInput from "components/Commons/CustomInput";
-import CustomSelect from "components/Commons/CustomSelect";
-import CustomCheckboxes from "components/Commons/CustomCheckboxes";
+
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -13,6 +11,9 @@ import classes from "./styles.module.scss";
 import { setLoading } from "redux/reducers/Status/actionTypes";
 import { FaEnvelope } from 'react-icons/fa';
 import { FaLock } from "react-icons/fa";
+
+import { Link } from 'react-router-dom';
+import { routes } from 'routers/routes.js';
 const Login = memo((props) => {
 
     const dispatch = useDispatch()
@@ -69,7 +70,7 @@ const Login = memo((props) => {
                 />
                 </div>
                 <div className={classes.flexContent}>
-                    <Button className={classes.btnRegister}>Sign Up</Button>
+                    <Button className={classes.btnRegister}> <Link to={routes.register} className={classes.noDecor}>Sign Up</Link> </Button>
                     <Button type="submit" className={classes.btnLogin}>Sign In</Button>
                 </div>
                 
