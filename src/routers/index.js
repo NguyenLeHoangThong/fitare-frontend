@@ -6,6 +6,7 @@ import Default from "pages/Default";
 import Login from "pages/Login";
 import SetSummary from "pages/SetSummary";
 import SetContent from "pages/SetContent";
+import TraineeAuthRoute from "./TraineeAuthRoute";
 
 const Routers = () => {
     return (
@@ -13,8 +14,8 @@ const Routers = () => {
             <Switch>
                 <Route path={routes.default} exact render={(props) => <Default {...props} />} />
                 <Route path={routes.login} exact render={(props) => <Login {...props} />} />
-                <Route path={routes.setSummary} exact render={(props) => <SetSummary {...props} />} />
-                <Route path={routes.setContent} exact render={(props) => <SetContent {...props} />} />
+                <TraineeAuthRoute path={routes.setSummary} exact render={(props) => <SetSummary {...props} />} />
+                <TraineeAuthRoute path={routes.setContent} exact render={(props) => <SetContent {...props} />} />
                 <Route><Redirect to={routes.default} /></Route>
             </Switch>
         </Suspense>
