@@ -1,12 +1,11 @@
-$navbar-height: 80px;
+$navbar-height: 91px;
 
 .App {
   text-align: center;
 }
 
 .pageSection {
-  padding: 0 20px;
-  margin-top: $navbar-height;
+  padding: $navbar-height 20px 0 20px;
 }
 
 .fileinput input[type="file"] {
