@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { BsFacebook } from 'react-icons/bs';
 import { BsGoogle } from 'react-icons/bs';
 import { BsYoutube } from 'react-icons/bs';

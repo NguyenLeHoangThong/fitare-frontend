@@ -15,7 +15,7 @@ const Routers = () => {
                 <Route path={routes.login} exact render={(props) => <Login {...props} />} />
                 <Route path={routes.setSummary} exact render={(props) => <SetSummary {...props} />} />
                 <Route path={routes.setContent} exact render={(props) => <SetContent {...props} />} />
-                {/* <Route><Redirect to={routes.default} /></Route> */}
+                <Route><Redirect to={routes.default} /></Route>
             </Switch>
         </Suspense>
     )
