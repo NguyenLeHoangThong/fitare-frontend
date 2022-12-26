@@ -9,7 +9,7 @@ import clsx from 'clsx'
 //Image:
 import summaryLogo from './finishImage.png';
 
-const SetContent = memo((props) => {
+const SetFinish = memo((props) => {
     return (
         <div>
             <Button className={clsx(classes.btnReturn, classes.setMargin)}>	&#60; PREVIOUS EXERCISE </Button>
@@ -33,4 +33,4 @@ const SetContent = memo((props) => {
 
 })
 
-export default SetContent;
+export default SetFinish;

@@ -14,7 +14,7 @@ import classes from "./styles.module.scss";
 import { setLoading } from "redux/reducers/Status/actionTypes";
 import { FaEnvelope } from 'react-icons/fa';
 import { FaLock } from "react-icons/fa";
-const Login = memo((props) => {
+const Register = memo((props) => {
 
     const dispatch = useDispatch()
 
@@ -92,4 +92,4 @@ const Login = memo((props) => {
 
 })
 
-export default Login;
+export default Register;
