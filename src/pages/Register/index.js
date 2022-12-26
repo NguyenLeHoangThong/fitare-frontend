@@ -48,7 +48,7 @@ const Login = memo((props) => {
     }
     return (
         <div className={classes.loginBox}>
-            <div className={classes.title}>SIGN IN</div>
+            <div className={classes.title}>SIGN UP</div>
 
             <Form onSubmit={handleSubmit(onSubmit)} >
                 <div className={classes.flexInput}> 
@@ -67,6 +67,16 @@ const Login = memo((props) => {
                     inputRef="password"
                     className={classes.textboxInput}
                     placeholder="password"
+                    control={control}
+                    errorMessage={errors?.password?.message}
+                />
+                </div>
+                <div className={classes.flexInput}> 
+                <FaLock className={classes.icon} />
+                <CustomInput
+                    inputRef="password"
+                    className={classes.textboxInput}
+                    placeholder="confirm password"
                     control={control}
                     errorMessage={errors?.password?.message}
                 />

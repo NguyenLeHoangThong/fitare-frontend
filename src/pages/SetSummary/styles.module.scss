@@ -113,7 +113,19 @@
     margin: 4rem 0;
 }
 
+.diffNode{
+    height: 0.5rem;
+    width: 1.5rem;
+    border-radius: 0.75rem;
+    color: rgba(0, 0, 0, 0);
+}
+.on{
+    background-color: var(--color-blue);
+}
 
+.off{
+    background-color: var(--color-yellow);
+}
 //Title
 .setName {
     color: black;
@@ -163,9 +175,20 @@
     gap: 1rem;
 }
 
+.flexRow {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.flexCol{
+    display:flex;
+    flex-direction: column;
+}
+
 .flexContent {
     display: flex;
-    justify-content: space-even;
+    justify-content: space-between;
 
     min-width: 500px;
 }

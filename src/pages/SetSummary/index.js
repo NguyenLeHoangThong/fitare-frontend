@@ -25,7 +25,16 @@ const SetSummary = memo((props) => {
                         <div className={classes.description}>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur euismod libero ut rhoncus efficitur. Duis congue porttitor dui quis scelerisque. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi vel consequat augue, sed cursus odio.</div>
                     </Col>
                     <Col xs={12} md={3} className={clsx(classes.flexCenter, classes.leftColumn)}>
-                        <div className={classes.tagBox}> Difficulty</div>
+                        <div className={clsx(classes.tagBox, classes.flexCol)}>
+                            <div>Difficulty</div>
+                            <div className={classes.flexRow}>
+                                <div className={clsx(classes.diffNode, classes.on)}>,</div>
+                                <div className={clsx(classes.diffNode, classes.on)}>,</div>
+                                <div className={clsx(classes.diffNode, classes.off)}>,</div>
+                                <div className={clsx(classes.diffNode, classes.off)}>,</div>
+                                <div className={clsx(classes.diffNode, classes.off)}>,</div>
+                            </div>
+                        </div>
                         <div className={classes.tagBox}> Chest, Shoulder, Leg</div>
                         <div className={classes.tagBox}> BMI &#60; 18.5</div>
                         <div className={classes.tagBox}> 18 Hours</div>
