@@ -1,5 +1,8 @@
 import classes from "./styles.module.scss";
 import { memo } from "react";
+import { Link } from "react-router-dom";
+
+import { routes } from "routers/routes";
 
 const CustomDropdown = memo((props) => {
 
@@ -10,9 +13,15 @@ const CustomDropdown = memo((props) => {
         <div>
             {
                 (isOpened) && <div className={classes.dropdown}>
-                    {optionList.map((option, index) => {
-                        return <div key={index}>{option}</div>
-                    })}
+                    {
+                        Object.entries(optionList).map((option, index) => {
+                            return <div key = {index}>
+                                <Link to = {option[1]}>
+                                    {option[0]}
+                                </Link>
+                            </div>
+                        })
+                    }
                 </div>
             }
         </div>

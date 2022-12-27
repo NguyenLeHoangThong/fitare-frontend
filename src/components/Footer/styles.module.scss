@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Passions+Conflict&display=swap');
+
+.appName {
+     width: 100%;
+     height: max-content;
+     padding: 20px 0 0 0;
+     margin-bottom: 10px;
+     text-align: center;
+     font-weight: bold;
+     font-size: 120%;
+}
+
+.slogan {
+     text-align: center;
+     font-family: 'Passions Conflict', cursive;
+     font-size: 36px;
+     line-height: 1;
+     margin-bottom: 20px;
+}
+
 .brandList a {
      color: inherit;
 }
@@ -14,16 +34,6 @@
      position: absolute;
      left: 0;
 
-}
-
-.appName {
-     width: 100%;
-     height: max-content;
-     padding: 20px;
-     margin-bottom: 30px;
-     text-align: center;
-     font-weight: bold;
-     font-size: 120%;
 }
 
 .brandList {

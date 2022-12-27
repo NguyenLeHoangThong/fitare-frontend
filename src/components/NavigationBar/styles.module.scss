@@ -28,21 +28,24 @@
 }
 
 .navigator > div:hover {
-     padding: 10px;
-     border: none;
-     border-radius: 12px;
-
      background:rgb(236, 136, 59);
      color: white;
      font-weight: bolder;
+     letter-spacing: -0.01em;
 }
 
-.currentRoute {
+.route {
+     max-width: 150px;
      padding: 10px;
-     border: 1px solid rgb(236, 136, 59);
+     border: 1px solid transparent;
      border-radius: 12px;
+}
+
+.active {
+     border: 1px solid rgb(236, 136, 59);
      color: rgb(181, 105, 23);
      font-weight: bolder;
+     letter-spacing: -0.01em;
 }
 
 .username {
@@ -59,9 +62,4 @@
 
 .username:hover {
      filter: brightness(120%);
-}
-
-.route {
-     padding: 10px;
-     border: 1px solid transparent;
 }

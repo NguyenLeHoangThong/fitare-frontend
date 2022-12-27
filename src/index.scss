@@ -57,6 +57,15 @@ ul {
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: inherit;
+}
+
 .form-control{
   border-color: var(--color-blue);
   &:focus {
