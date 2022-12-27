@@ -8,8 +8,8 @@ import Register from "pages/Register";
 import SetSummary from "pages/SetSummary";
 import SetContent from "pages/SetContent";
 import SetFinish from "pages/SetFinish";
-import SelectPlan from "pages/SelectPlan";
-import CreatePlan from "pages/CreatePlan";
+import Plans from "pages/Plans";
+import MyPlans from "pages/MyPlans";
 import SetExercisePlan from "pages/SetExercisePlan";
 import TraineeAuthRoute from "./TraineeAuthRoute";
 
@@ -21,8 +21,8 @@ const Routers = () => {
                 <Route path={routes.login} exact render={(props) => <Login {...props} />} />
                 <Route path={routes.register} exact render={(props) => <Register {...props} />} />
                 
-                <Route path={routes.selectPlan} exact render={(props) => <SelectPlan {...props} />} />
-                <Route path={routes.createPlan} exact render={(props) => <CreatePlan {...props} />} />
+                <Route path={routes.Plans} exact render={(props) => <Plans {...props} />} />
+                <Route path={routes.myPlans} exact render={(props) => <MyPlans {...props} />} />
                 <Route path={routes.setExercisePlan} exact render={(props) => <SetExercisePlan {...props} />} />
                 
                 <Route path={routes.setSummary} exact render={(props) => <SetSummary {...props} />} />
