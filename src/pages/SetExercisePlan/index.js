@@ -8,9 +8,11 @@ import clsx from 'clsx'
 import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import { GrClose } from 'react-icons/gr';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import { Link } from 'react-router-dom';
 
-const SelectPlan = memo((props) => {
+const CreatePlan = memo((props) => {
 
     // const schema = useMemo(() => {
     //     return yup.object().shape({
@@ -37,11 +39,14 @@ const SelectPlan = memo((props) => {
     //     console.log(data);
     // }
 
-    return <div className={classes.dropdownChoice}>
-            <div className={classes.content}>
-                content <GrClose />
+    return (
+        <div className={classes.wrapper}>     
+            <Link to = 'createPlan' className={classes.link}>&#60; YOUR EXERCISE PLAN</Link>
+            <div className={classes.container}>
+                
             </div>
-           </div>
+        </div>
+    )
 })
 
-export default SelectPlan;
+export default CreatePlan;

@@ -4,6 +4,8 @@ export const routes = {
     register: "/register",
 
     selectPlan: "/selectplan",
+    createPlan: "/createplan",
+    setExercisePlan: "/setexerciseplan",
 
     setSummary: "/setsummary",    
     setContent: "/setcontent",

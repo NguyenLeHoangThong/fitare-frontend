@@ -10,7 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { GrClose } from 'react-icons/gr';
 
-const SelectPlan = memo((props) => {
+const CreatePlan = memo((props) => {
 
     // const schema = useMemo(() => {
     //     return yup.object().shape({
@@ -44,4 +44,4 @@ const SelectPlan = memo((props) => {
            </div>
 })
 
-export default SelectPlan;
+export default CreatePlan;

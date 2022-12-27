@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import DropdownChoice from "./components/DropDown";
 
-const SelectPlan = memo((props) => {
+const CreatePlan = memo((props) => {
 
     // const schema = useMemo(() => {
     //     return yup.object().shape({
@@ -38,6 +38,7 @@ const SelectPlan = memo((props) => {
     // const onSubmit = (data) => {
     //     console.log(data);
     // }
+
 
     const [dropdownMenu, setDropdownMenu] = useState(<div />);
     const [content, setContent] = useState("");
@@ -105,7 +106,7 @@ const SelectPlan = memo((props) => {
                                     className="me-2"
                                     aria-label="Search"
                                 />
-                                <Button className={classes.btnSearch}>Search</Button>
+                                <Button className={clsx(classes.btnSearch)}>Create</Button>
                             </Form>
                         </div>
 
@@ -155,57 +156,8 @@ const SelectPlan = memo((props) => {
                                 </div>
 
                                 <div className={classes.btn}>
-                                    <Button className={classes.btnSelect}>Select</Button>
-
-                                </div>
-
-                            </div>
-
-                            <div className={classes.exercisePlan}>
-                                <div className={classes.titleExer}>Weight Loss Exercises</div>
-                                <div className={classes.details}>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.bmi)}>
-                                            BMI &#62; 18.5
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.muscle)}>
-                                            CHEST, SHOULDERS, LEGS
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.durationTime)}>
-                                            1
-                                        </div>
-                                        <div className={clsx(classes.infor, classes.durationUnit)}>
-                                            HOURS
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.intensity)}>
-                                            <div className={classes.name}>
-                                                DIFFICULTY
-                                            </div>
-                                            <div className={classes.level}>
-                                                <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                            </div>
-                                            <div className={classes.txt}>
-                                                Suitable for beginners
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className={classes.creatorName}>
-                                    Trương Gia Huy
-                                </div>
-
-                                <div className={classes.btn}>
+                                    <Button className={classes.btnEdit}>Edit</Button>
+                                    <Button className={classes.btnDelete}>Delete</Button>
                                     <Button className={classes.btnSelect}>Select</Button>
                                 </div>
 
@@ -256,6 +208,60 @@ const SelectPlan = memo((props) => {
                                 </div>
 
                                 <div className={classes.btn}>
+                                    <Button className={classes.btnEdit}>Edit</Button>
+                                    <Button className={classes.btnDelete}>Delete</Button>
+                                    <Button className={classes.btnSelect}>Select</Button>
+                                </div>
+
+                            </div>
+
+                            <div className={classes.exercisePlan}>
+                                <div className={classes.titleExer}>Weight Loss Exercises</div>
+                                <div className={classes.details}>
+                                    <div className={classes.inforBox}>
+                                        <div className={clsx(classes.infor, classes.bmi)}>
+                                            BMI &#62; 18.5
+                                        </div>
+                                    </div>
+                                    <div className={classes.inforBox}>
+                                        <div className={clsx(classes.infor, classes.muscle)}>
+                                            CHEST, SHOULDERS, LEGS
+                                        </div>
+                                    </div>
+                                    <div className={classes.inforBox}>
+                                        <div className={clsx(classes.infor, classes.durationTime)}>
+                                            1
+                                        </div>
+                                        <div className={clsx(classes.infor, classes.durationUnit)}>
+                                            HOURS
+                                        </div>
+                                    </div>
+                                    <div className={classes.inforBox}>
+                                        <div className={clsx(classes.infor, classes.intensity)}>
+                                            <div className={classes.name}>
+                                                DIFFICULTY
+                                            </div>
+                                            <div className={classes.level}>
+                                                <div className={clsx(classes.diffNode, classes.on)}></div>
+                                                <div className={clsx(classes.diffNode, classes.on)}></div>
+                                                <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                <div className={clsx(classes.diffNode, classes.off)}></div>
+                                            </div>
+                                            <div className={classes.txt}>
+                                                Suitable for beginners
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className={classes.creatorName}>
+                                    Trương Gia Huy
+                                </div>
+
+                                <div className={classes.btn}>
+                                    <Button className={classes.btnEdit}>Edit</Button>
+                                    <Button className={classes.btnDelete}>Delete</Button>
                                     <Button className={classes.btnSelect}>Select</Button>
                                 </div>
 
@@ -273,4 +279,4 @@ const SelectPlan = memo((props) => {
     )
 })
 
-export default SelectPlan;
+export default CreatePlan;
