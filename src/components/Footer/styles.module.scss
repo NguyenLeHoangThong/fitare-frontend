@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Passions+Conflict&display=swap');
+
+.appName {
+     width: 100%;
+     height: max-content;
+     padding: 20px 0 0 0;
+     margin-bottom: 10px;
+     text-align: center;
+     font-weight: bold;
+     font-size: 120%;
+}
+
+.slogan {
+     text-align: center;
+     font-family: 'Passions Conflict', cursive;
+     font-size: 36px;
+     line-height: 1;
+     margin-bottom: 20px;
+}
+
+.brandList a {
+     color: inherit;
+}
+
+.footer {
+     width: 100%;
+     height: max-content;
+     // padding: 50px;
+     margin-top: 100px;
+     background-image: linear-gradient(to bottom, rgb(37, 61, 91), var(--color-blue));
+     // background-color: var(--color-blue);
+     color: white;
+
+     position: absolute;
+     left: 0;
+
+}
+
+.brandList {
+     padding: 20px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 50px;
+
+}
+
+.brandList * {
+     width: 30px;
+     height: 30px;
+}
+
+.line {
+     border-top: 1px solid white;
+     margin: 20px 100px 0 100px;
+}
+
+.references {
+     margin: 20px;
+     padding: 30px;
+     display: grid;
+     grid-template-columns: auto auto auto;
+     grid-gap: 30px;
+}
+
+.references div {
+     text-align: center;
+}
+
+.rights {
+     text-align: center;
+     font-weight: bold;
+     font-style: italic;
+     padding: 30px;
+}

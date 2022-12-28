@@ -1,0 +1,75 @@
+.navigationBar {
+     width: 100%;
+     height: max-content;
+     padding: 20px 20px;
+     background-image: linear-gradient(to bottom, rgb(245, 245, 248), rgba(236, 238, 245, 0.475));
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+
+     position: absolute;
+     left: 0;
+     top: 0;
+
+     a {
+          text-decoration: none;
+          color: inherit;
+     }
+
+     a:hover {
+          color: inherit;
+     }
+
+}
+
+.navigator {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-center;
+     gap: 0 100px;
+     align-items: center;
+}
+
+.navigator>div {
+     cursor: pointer;
+}
+
+.navigator>div:hover {
+     background: rgb(236, 136, 59);
+     color: white;
+     font-weight: bolder;
+     letter-spacing: -0.01em;
+}
+
+.route {
+     max-width: 150px;
+     padding: 10px;
+     border: 1px solid transparent;
+     border-radius: 12px;
+}
+
+.active {
+     border: 1px solid rgb(236, 136, 59);
+     color: rgb(181, 105, 23);
+     font-weight: bolder;
+     letter-spacing: -0.01em;
+}
+
+.username {
+     background-image: linear-gradient(to top, rgb(46, 79, 109), rgba(24, 117, 170, 0.998));
+     padding: 10px;
+     border: none;
+     border-radius: 12px;
+     color: white;
+     font-weight: bolder;
+     cursor: pointer;
+
+     position: relative;
+}
+
+.username:hover {
+     filter: brightness(120%);
+}
