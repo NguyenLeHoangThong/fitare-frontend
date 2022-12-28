@@ -86,7 +86,7 @@ const Default = memo((props) => {
                 <Button type="submit">Submit !</Button>
             </Form> */}
 
-            <NavigationBar user_role = {'Trainer'} username = {'@lnthuy'} current_route = {'Marketplace'} />
+            <NavigationBar />
             <Footer />
         </div>
     )
