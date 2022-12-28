@@ -13,6 +13,16 @@
      position: absolute;
      left: 0;
      top: 0;
+
+     a {
+          text-decoration: none;
+          color: inherit;
+     }
+
+     a:hover {
+          color: inherit;
+     }
+
 }
 
 .navigator {
@@ -23,12 +33,12 @@
      align-items: center;
 }
 
-.navigator > div {
+.navigator>div {
      cursor: pointer;
 }
 
-.navigator > div:hover {
-     background:rgb(236, 136, 59);
+.navigator>div:hover {
+     background: rgb(236, 136, 59);
      color: white;
      font-weight: bolder;
      letter-spacing: -0.01em;
