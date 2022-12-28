@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import classes from "./styles.module.scss";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Container } from 'react-bootstrap';
 import clsx from 'clsx'
 import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -55,7 +56,7 @@ const CreatePlan = memo((props) => {
             <NavigationBar />
             <Row className={classes.Box}>
                 <Col xs={12} md={3} className={clsx(classes.flex)}>
-                <div className={classes.filterBox}>
+                    <div className={classes.filterBox}>
                         <div className={classes.header}>FILTER</div>
                         <div className={clsx(classes.bmiLevel, classes.selection)}>
                             <DropdownButton id="dropdown-basic-button" title="BMI level">
@@ -109,10 +110,10 @@ const CreatePlan = memo((props) => {
                                     <div className={classes.name}>15 - 30 Minutes</div>
                                 </Dropdown.Item>
                                 <Dropdown.Item href="#/action-2" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>30 - 60 Minutes</div> 
+                                    <div className={classes.name}>30 - 60 Minutes</div>
                                 </Dropdown.Item>
                                 <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>60 - 90 Minutes</div>  
+                                    <div className={classes.name}>60 - 90 Minutes</div>
                                 </Dropdown.Item>
                             </DropdownButton>
                         </div>
@@ -141,7 +142,7 @@ const CreatePlan = memo((props) => {
                     </div>
                 </Col>
                 <Col xs={12} md={9} className={clsx(classes.flex)}>
-                    <div className={classes.planBox}>
+                    <Container className={classes.planBox}>
                         <div className={classes.search}>
                             <Form className="d-flex" >
                                 <Form.Control
@@ -154,8 +155,8 @@ const CreatePlan = memo((props) => {
                             </Form>
                         </div>
 
-                        <div className={classes.boxExercisePlan}>
-                            <div className={classes.exercisePlan}>
+                        <Row className={classes.boxExercisePlan}>
+                            <Col xs={12} md={6} lg={4} className={classes.exercisePlan}>
                                 <div className={classes.titleExer}>Weight Loss Exercises</div>
                                 <div className={classes.details}>
                                     <div className={classes.inforBox}>
@@ -205,9 +206,9 @@ const CreatePlan = memo((props) => {
                                     <Button className={classes.btnSelect}>Select</Button>
                                 </div>
 
-                            </div>
+                            </Col>
 
-                            <div className={classes.exercisePlan}>
+                            <Col xs={12} md={6} lg={4} className={classes.exercisePlan}>
                                 <div className={classes.titleExer}>Weight Loss Exercises</div>
                                 <div className={classes.details}>
                                     <div className={classes.inforBox}>
@@ -257,9 +258,9 @@ const CreatePlan = memo((props) => {
                                     <Button className={classes.btnSelect}>Select</Button>
                                 </div>
 
-                            </div>
+                            </Col>
 
-                            <div className={classes.exercisePlan}>
+                            <Col xs={12} md={6} lg={4} className={classes.exercisePlan}>
                                 <div className={classes.titleExer}>Weight Loss Exercises</div>
                                 <div className={classes.details}>
                                     <div className={classes.inforBox}>
@@ -309,9 +310,9 @@ const CreatePlan = memo((props) => {
                                     <Button className={classes.btnSelect}>Select</Button>
                                 </div>
 
-                            </div>
+                            </Col>
 
-                            <div className={classes.exercisePlan}>
+                            <Col xs={12} md={6} lg={4} className={classes.exercisePlan}>
                                 <div className={classes.titleExer}>Weight Loss Exercises</div>
                                 <div className={classes.details}>
                                     <div className={classes.inforBox}>
@@ -361,9 +362,9 @@ const CreatePlan = memo((props) => {
                                     <Button className={classes.btnSelect}>Select</Button>
                                 </div>
 
-                            </div>
-                        </div>
-                    </div>
+                            </Col>
+                        </Row>
+                    </Container>
 
 
                 </Col>

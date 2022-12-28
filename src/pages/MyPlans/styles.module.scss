@@ -64,20 +64,12 @@
     padding: 5% 5%;
 }
 
-.boxExercisePlan {
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-    column-gap: 18px;
-}
-
-.boxExercisePlan .exercisePlan {
+.exercisePlan {
     border: 1px solid var(--color-white);
     border-radius: 8px;
     background-color: var(--color-white);
-    width: 32%;
-    min-height: 300px;
-    margin-top: 8%;
+    margin-top: 36px;
+    padding: 24px 0;
 }
 
 .exercisePlan .titleExer {

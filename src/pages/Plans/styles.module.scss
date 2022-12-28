@@ -68,20 +68,12 @@
     position: sticky;
 }*/
 
-.boxExercisePlan {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    column-gap: 18px;
-}
-
-.boxExercisePlan .exercisePlan {
+.exercisePlan {
     border: 1px solid var(--color-white);
     border-radius: 8px;
     background-color: var(--color-white);
-    width: 32%;
-    min-height: 300px;
-    margin-top: 8%;
+    padding: 24px 0;
+    margin-top: 36px;
 }
 
 .exercisePlan .titleExer {
