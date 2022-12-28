@@ -13,7 +13,7 @@ import MyPlans from "pages/MyPlans";
 import SetExercisePlan from "pages/SetExercisePlan";
 import TraineeAuthRoute from "./TraineeAuthRoute";
 
-const Routers = () => {
+const Routers = () =>   {
     return (
         <Suspense fallback={<LoadingScreen />}>
             <Switch>

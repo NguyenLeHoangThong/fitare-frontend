@@ -2,10 +2,7 @@ import { memo, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { push } from "connected-react-router";
-import UploadImage from "components/Commons/UploadImage";
 import CustomInput from "components/Commons/CustomInput";
-import CustomSelect from "components/Commons/CustomSelect";
-import CustomCheckboxes from "components/Commons/CustomCheckboxes";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -14,7 +11,7 @@ import classes from "./styles.module.scss";
 import { setLoading } from "redux/reducers/Status/actionTypes";
 import { FaEnvelope } from 'react-icons/fa';
 import { FaLock } from "react-icons/fa";
-const Login = memo((props) => {
+const Register = memo((props) => {
 
     const dispatch = useDispatch()
 
@@ -48,7 +45,7 @@ const Login = memo((props) => {
     }
     return (
         <div className={classes.loginBox}>
-            <div className={classes.title}>SIGN IN</div>
+            <div className={classes.title}>SIGN UP</div>
 
             <Form onSubmit={handleSubmit(onSubmit)} >
                 <div className={classes.flexInput}> 
@@ -71,6 +68,16 @@ const Login = memo((props) => {
                     errorMessage={errors?.password?.message}
                 />
                 </div>
+                <div className={classes.flexInput}> 
+                <FaLock className={classes.icon} />
+                <CustomInput
+                    inputRef="password"
+                    className={classes.textboxInput}
+                    placeholder="confirm password"
+                    control={control}
+                    errorMessage={errors?.password?.message}
+                />
+                </div>
                 <div className={classes.flexContent}>
                     <Button className={classes.btnRegister}>Sign Up</Button>
                     <Button type="submit" className={classes.btnLogin}>Sign In</Button>
@@ -82,4 +89,4 @@ const Login = memo((props) => {
 
 })
 
-export default Login;
+export default Register;

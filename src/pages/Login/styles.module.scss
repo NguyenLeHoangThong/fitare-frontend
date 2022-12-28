@@ -1,23 +1,13 @@
 
-:root{
-    --fs-xl: 10vw;
-    --fs-1200: 2.5rem;
-    --fs-1000: 2rem;
-    --fs-800: 1.75rem;
-    --fs-600: 1.5rem;
-    --fs-500: 1.25rem;
-    --fs-400: 1rem;
-
-    --fs-font-progress-count: 0.9rem;
-    --fs-font-seating: 1rem;
-    --fs-font-payment: 1.5rem;
-}  
 
 
 .btnLogin{
     &:hover {
         background-color: var(--color-orange);
-        border-style:none;
+        
+        border-style: solid;
+        border-color: rgba(0,0,0,0);
+    
     }
 
     border-style: solid;
@@ -34,9 +24,11 @@
 .btnRegister{
     &:hover {
         background-color: var(--color-orange);
-        border-style:none;
+        
+        border-style: solid;
+        border-color: rgba(0,0,0,0);
     }
-
+    text-decoration: none;
     background-color: var(--color-white);
     color: var(--color-blue);
     border-width: 2px;
@@ -78,6 +70,7 @@
 .textboxInput{
     transition: height 0.5s;
 
+    min-width: 302.5px;
 
     border-radius: 1rem;
     border-width:2px;
@@ -113,4 +106,13 @@
     min-height: 4.5rem; 
 
     margin: 1rem 0rem;
+}
+
+.noDecor{
+    &:hover{
+        color: var(--color-white);
+    }
+    text-decoration: none;
+    color: var(--color-blue);
+    
 }

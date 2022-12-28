@@ -6,13 +6,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import clsx from 'clsx'
 
+
+import { Link } from "react-router-dom";
+import { routes } from "routers/routes.js";
+
+
 //Image:
 import summaryLogo from './summaryImage.png';
 
 const SetContent = memo((props) => {
     return (
         <div>
-            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	&#60; ALL EXERCISE </Button>
+            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	<Link to={routes.setSummary} className={classes.noDecorBack}>&#60; ALL EXERCISE</Link> </Button>
             <div className={classes.summaryBox}>
                 <div className={classes.setName}>EXERCISE-PLAN-NAME</div>
                 <div className={classes.setExercise}>PUSH UP</div>
@@ -32,7 +37,7 @@ const SetContent = memo((props) => {
                 <div className={classes.flexContent}>
                     <Button className={classes.btnFavorites}>RETURN</Button>
                     <div className={classes.pageNumberBox}> 1/4 </div>
-                    <Button className={classes.btnFinish}>FINISH</Button>
+                    <Button className={classes.btnFinish}><Link to={routes.setFinish} className={classes.noDecorStart}>FINISH</Link></Button>
                    </div>
             </div>
         </div>
