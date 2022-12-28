@@ -19,7 +19,7 @@ export const bmiTypes = [
     },
     {
         id: 4,
-        description: ">30",
+        description: ">= 30",
         name: "Obesity",
         value: "OBESITY"
     },
@@ -56,17 +56,17 @@ export const muscleGroupTypes = [
 export const durationTypes = [
     {
         id: 1,
-        name: "15 - 30 minutes",
+        name: "15 - 30",
         value: "15_30"
     },
     {
         id: 2,
-        name: "30 - 60 minutes",
+        name: "30 - 60",
         value: "30_60"
     },
     {
         id: 3,
-        name: "60 - 90 minutes",
+        name: "60 - 90",
         value: "60_90"
     }
 ];
@@ -75,27 +75,27 @@ export const durationTypes = [
 export const levelTypes = [
     {
         id: 1,
-        name: "1",
+        name: "Level 1 - Beginner",
         value: "BEGINNER"
     },
     {
         id: 2,
-        name: "2",
+        name: "Level 2 - Intermediate",
         value: "INTERMEDIATE"
     },
     {
         id: 3,
-        name: "3",
+        name: "Level 3 - Advanced",
         value: "ADVANCED"
     },
     {
-        id: 3,
-        name: "4",
+        id: 4,
+        name: "Level 4 - Hard",
         value: "HARD"
     },
     {
-        id: 3,
-        name: "5",
+        id: 5,
+        name: "Level 5 - Extreme",
         value: "EXTREME"
     }
 ];
