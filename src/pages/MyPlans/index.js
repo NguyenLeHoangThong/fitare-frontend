@@ -11,6 +11,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import DropdownChoice from "./components/DropDown";
+import NavigationBar from "components/NavigationBar";
+import Footer from "components/Footer";
 
 const CreatePlan = memo((props) => {
 
@@ -50,6 +52,7 @@ const CreatePlan = memo((props) => {
 
     return (
         <div>
+            <NavigationBar />
             <Row className={classes.Box}>
                 <Col xs={12} md={3} className={clsx(classes.flex)}>
                 <div className={classes.filterBox}>
@@ -365,7 +368,7 @@ const CreatePlan = memo((props) => {
 
                 </Col>
             </Row>
-
+            <Footer />
         </div>
     )
 })
