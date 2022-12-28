@@ -37,11 +37,16 @@ const CreatePlan = memo((props) => {
     //     console.log(data);
     // }
 
-    return <div className={classes.dropdownChoice}>
+    return (
+        <div className={classes.dropdownChoice}>
             <div className={classes.content}>
-                content <GrClose />
+                content
             </div>
-           </div>
+            <div className={classes.icon}>
+                <GrClose />
+            </div>
+        </div>
+    ) 
 })
 
 export default CreatePlan;

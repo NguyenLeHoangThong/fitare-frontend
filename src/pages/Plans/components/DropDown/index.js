@@ -10,7 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { GrClose } from 'react-icons/gr';
 
-const SelectPlan = memo((props) => {
+const Plans = memo((props) => {
 
     // const schema = useMemo(() => {
     //     return yup.object().shape({
@@ -37,11 +37,17 @@ const SelectPlan = memo((props) => {
     //     console.log(data);
     // }
 
-    return <div className={classes.dropdownChoice}>
+    return (
+        <div className={classes.dropdownChoice}>
             <div className={classes.content}>
-                content <GrClose />
+                content
             </div>
-           </div>
+            <div className={classes.icon}>
+                <GrClose />
+            </div>
+        </div>
+    ) 
+    
 })
 
-export default SelectPlan;
+export default Plans;

@@ -52,45 +52,86 @@ const CreatePlan = memo((props) => {
         <div>
             <Row className={classes.Box}>
                 <Col xs={12} md={3} className={clsx(classes.flex)}>
-                    <div className={classes.filterBox}>
+                <div className={classes.filterBox}>
                         <div className={classes.header}>FILTER</div>
                         <div className={clsx(classes.bmiLevel, classes.selection)}>
                             <DropdownButton id="dropdown-basic-button" title="BMI level">
-                                <Dropdown.Item href="#/action-1" onClick={onAddBtnClick}>&#60;	18.5</Dropdown.Item>
-                                <Dropdown.Item href="#/action-2" onClick={onAddBtnClick}>18.5 - 24.9</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick}>25 - 29.9</Dropdown.Item>
-                                <Dropdown.Item href="#/action-4" onClick={onAddBtnClick}>&#62; 30</Dropdown.Item>
+                                <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>Underweight</div>
+                                    <div className={classes.number}>&#60; 18.5</div>
+                                </Dropdown.Item>
+
+                                <Dropdown.Item href="#/action-2" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>Normal weight</div>
+                                    <div className={classes.number}>18.5 - 24.9</div>
+                                </Dropdown.Item>
+
+                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>Overweight</div>
+                                    <div className={classes.number}>25 - 29.9</div>
+                                </Dropdown.Item>
+
+                                <Dropdown.Item href="#/action-4" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>Obesity</div>
+                                    <div className={classes.number}>&#62; 30</div>
+                                </Dropdown.Item>
                             </DropdownButton>
                         </div>
                         {dropdownMenu}
 
                         <div className={clsx(classes.muscleGroup, classes.selection)}>
                             <DropdownButton id="dropdown-basic-button" title="Muscle Group">
-                                <Dropdown.Item href="#/action-1">Arms</Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">Chest</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">Abdomen</Dropdown.Item>
-                                <Dropdown.Item href="#/action-4">Shoulders</Dropdown.Item>
-                                <Dropdown.Item href="#/action-5">Legs</Dropdown.Item>
+                                <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>Arms</div>
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-2" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>Chest</div>
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>Abdomen</div>
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-4" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>Shoulders</div>
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-5" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>Legs</div>
+                                </Dropdown.Item>
                             </DropdownButton>
                         </div>
                         {dropdownMenu}
 
                         <div className={clsx(classes.duration, classes.selection)}>
                             <DropdownButton id="dropdown-basic-button" title="Duration">
-                                <Dropdown.Item href="#/action-1">15 - 30 Minutes</Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">30 - 60 Minutes</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">60 - 90 Minutes</Dropdown.Item>
+                                <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>15 - 30 Minutes</div>
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-2" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>30 - 60 Minutes</div> 
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>60 - 90 Minutes</div>  
+                                </Dropdown.Item>
                             </DropdownButton>
                         </div>
                         {dropdownMenu}
 
                         <div className={clsx(classes.intensityLevel, classes.selection)}>
                             <DropdownButton id="dropdown-basic-button" title="Intensity Level">
-                                <Dropdown.Item href="#/action-1">1</Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">2</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">3</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">4</Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">5</Dropdown.Item>
+                                <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>1</div>
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-2" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>2</div>
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>3</div>
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>4</div>
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
+                                    <div className={classes.name}>5</div>
+                                </Dropdown.Item>
                             </DropdownButton>
                         </div>
                         {dropdownMenu}
@@ -267,7 +308,57 @@ const CreatePlan = memo((props) => {
 
                             </div>
 
+                            <div className={classes.exercisePlan}>
+                                <div className={classes.titleExer}>Weight Loss Exercises</div>
+                                <div className={classes.details}>
+                                    <div className={classes.inforBox}>
+                                        <div className={clsx(classes.infor, classes.bmi)}>
+                                            BMI &#62; 18.5
+                                        </div>
+                                    </div>
+                                    <div className={classes.inforBox}>
+                                        <div className={clsx(classes.infor, classes.muscle)}>
+                                            CHEST, SHOULDERS, LEGS
+                                        </div>
+                                    </div>
+                                    <div className={classes.inforBox}>
+                                        <div className={clsx(classes.infor, classes.durationTime)}>
+                                            1
+                                        </div>
+                                        <div className={clsx(classes.infor, classes.durationUnit)}>
+                                            HOURS
+                                        </div>
+                                    </div>
+                                    <div className={classes.inforBox}>
+                                        <div className={clsx(classes.infor, classes.intensity)}>
+                                            <div className={classes.name}>
+                                                DIFFICULTY
+                                            </div>
+                                            <div className={classes.level}>
+                                                <div className={clsx(classes.diffNode, classes.on)}></div>
+                                                <div className={clsx(classes.diffNode, classes.on)}></div>
+                                                <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                <div className={clsx(classes.diffNode, classes.off)}></div>
+                                            </div>
+                                            <div className={classes.txt}>
+                                                Suitable for beginners
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div className={classes.creatorName}>
+                                    Trương Gia Huy
+                                </div>
+
+                                <div className={classes.btn}>
+                                    <Button className={classes.btnEdit}>Edit</Button>
+                                    <Button className={classes.btnDelete}>Delete</Button>
+                                    <Button className={classes.btnSelect}>Select</Button>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 
