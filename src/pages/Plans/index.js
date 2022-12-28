@@ -59,7 +59,7 @@ const Plans = memo((props) => {
                     <div className={classes.filterBox}>
                         <div className={classes.header}>FILTER</div>
                         <div className={clsx(classes.bmiLevel, classes.selection)}>
-                            <DropdownButton id="dropdown-basic-button" title="BMI level">
+                            <DropdownButton className={classes.dropdownBtn} id="dropdown-basic-button" title="BMI level">
                                 <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
                                     <div className={classes.name}>Underweight</div>
                                     <div className={classes.number}>&#60; 18.5</div>
@@ -84,7 +84,7 @@ const Plans = memo((props) => {
                         {dropdownMenu}
 
                         <div className={clsx(classes.muscleGroup, classes.selection)}>
-                            <DropdownButton id="dropdown-basic-button" title="Muscle Group">
+                            <DropdownButton className={classes.dropdownBtn} id="dropdown-basic-button" title="Muscle Group">
                                 <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
                                     <div className={classes.name}>Arms</div>
                                 </Dropdown.Item>
@@ -105,7 +105,7 @@ const Plans = memo((props) => {
                         {dropdownMenu}
 
                         <div className={clsx(classes.duration, classes.selection)}>
-                            <DropdownButton id="dropdown-basic-button" title="Duration">
+                            <DropdownButton className={classes.dropdownBtn} id="dropdown-basic-button" title="Duration">
                                 <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
                                     <div className={classes.name}>15 - 30 Minutes</div>
                                 </Dropdown.Item>
@@ -120,7 +120,7 @@ const Plans = memo((props) => {
                         {dropdownMenu}
 
                         <div className={clsx(classes.intensityLevel, classes.selection)}>
-                            <DropdownButton id="dropdown-basic-button" title="Intensity Level">
+                            <DropdownButton className={classes.dropdownBtn} id="dropdown-basic-button" title="Intensity Level">
                                 <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
                                     <div className={classes.name}>1</div>
                                 </Dropdown.Item>

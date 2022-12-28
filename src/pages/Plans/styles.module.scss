@@ -36,14 +36,23 @@
     margin-bottom: 2px;
 }
 
-.filterBox .selection .dropdown {
+.filterBox .selection .dropdown:not(:last-of-type) {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 0;
     margin: 0;
-    border: 1px solid var(--color-blue);
-    border-radius: 4px;
+    border-bottom: 1px solid var(--color-blue);
+    border-radius: 0px;
+}
+
+.filterBox .selection .dropdown:last-of-type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
+    margin: 0;
+    border-radius: 0px;
 }
 
 .dropdown .name {
@@ -186,4 +195,15 @@
     
     min-width: 120px;
     min-height: 25px;
+}
+
+.dropdownBtn {
+    button {
+        background-color: transparent;
+        color: var(--color-blue);
+    }
+    & > div {
+        padding: 0;
+        border: 1px solid var(--color-blue);
+    }
 }

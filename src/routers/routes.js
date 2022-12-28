@@ -3,7 +3,7 @@ export const routes = {
     login: "/login",
     register: "/register",
 
-    Plans: "/plans",
+    plans: "/plans",
     myPlans: "/myplans",
     setExercisePlan: "/setexerciseplan",
 

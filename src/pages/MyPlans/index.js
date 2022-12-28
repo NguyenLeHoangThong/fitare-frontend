@@ -59,7 +59,7 @@ const CreatePlan = memo((props) => {
                     <div className={classes.filterBox}>
                         <div className={classes.header}>FILTER</div>
                         <div className={clsx(classes.bmiLevel, classes.selection)}>
-                            <DropdownButton id="dropdown-basic-button" title="BMI level">
+                            <DropdownButton className={classes.dropdownBtn} id="dropdown-basic-button" title="BMI level">
                                 <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
                                     <div className={classes.name}>Underweight</div>
                                     <div className={classes.number}>&#60; 18.5</div>
@@ -84,7 +84,7 @@ const CreatePlan = memo((props) => {
                         {dropdownMenu}
 
                         <div className={clsx(classes.muscleGroup, classes.selection)}>
-                            <DropdownButton id="dropdown-basic-button" title="Muscle Group">
+                            <DropdownButton className={classes.dropdownBtn} id="dropdown-basic-button" title="Muscle Group">
                                 <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
                                     <div className={classes.name}>Arms</div>
                                 </Dropdown.Item>
@@ -105,7 +105,7 @@ const CreatePlan = memo((props) => {
                         {dropdownMenu}
 
                         <div className={clsx(classes.duration, classes.selection)}>
-                            <DropdownButton id="dropdown-basic-button" title="Duration">
+                            <DropdownButton className={classes.dropdownBtn} id="dropdown-basic-button" title="Duration">
                                 <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
                                     <div className={classes.name}>15 - 30 Minutes</div>
                                 </Dropdown.Item>
@@ -120,7 +120,7 @@ const CreatePlan = memo((props) => {
                         {dropdownMenu}
 
                         <div className={clsx(classes.intensityLevel, classes.selection)}>
-                            <DropdownButton id="dropdown-basic-button" title="Intensity Level">
+                            <DropdownButton className={classes.dropdownBtn} id="dropdown-basic-button" title="Intensity Level">
                                 <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
                                     <div className={classes.name}>1</div>
                                 </Dropdown.Item>
@@ -156,212 +156,216 @@ const CreatePlan = memo((props) => {
                         </div>
 
                         <Row className={classes.boxExercisePlan}>
-                            <Col xs={12} md={6} lg={4} className={classes.exercisePlan}>
-                                <div className={classes.titleExer}>Weight Loss Exercises</div>
-                                <div className={classes.details}>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.bmi)}>
-                                            BMI &#62; 18.5
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.muscle)}>
-                                            CHEST, SHOULDERS, LEGS
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.durationTime)}>
-                                            1
-                                        </div>
-                                        <div className={clsx(classes.infor, classes.durationUnit)}>
-                                            HOURS
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.intensity)}>
-                                            <div className={classes.name}>
-                                                DIFFICULTY
-                                            </div>
-                                            <div className={classes.level}>
-                                                <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                            </div>
-                                            <div className={classes.txt}>
-                                                Suitable for beginners
+                            <Col xs={12} md={6} lg={4}>
+                                <div className={classes.exercisePlan}>
+                                    <div className={classes.titleExer}>Weight Loss Exercises</div>
+                                    <div className={classes.details}>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.bmi)}>
+                                                BMI &#62; 18.5
                                             </div>
                                         </div>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.muscle)}>
+                                                CHEST, SHOULDERS, LEGS
+                                            </div>
+                                        </div>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.durationTime)}>
+                                                1
+                                            </div>
+                                            <div className={clsx(classes.infor, classes.durationUnit)}>
+                                                HOURS
+                                            </div>
+                                        </div>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.intensity)}>
+                                                <div className={classes.name}>
+                                                    DIFFICULTY
+                                                </div>
+                                                <div className={classes.level}>
+                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                </div>
+                                                <div className={classes.txt}>
+                                                    Suitable for beginners
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className={classes.creatorName}>
+                                        Trương Gia Huy
+                                    </div>
+
+                                    <div className={classes.btn}>
+                                        <Button className={classes.btnEdit}>Edit</Button>
+                                        <Button className={classes.btnDelete}>Delete</Button>
+                                        <Button className={classes.btnSelect}>Select</Button>
                                     </div>
                                 </div>
-
-                                <div className={classes.creatorName}>
-                                    Trương Gia Huy
-                                </div>
-
-                                <div className={classes.btn}>
-                                    <Button className={classes.btnEdit}>Edit</Button>
-                                    <Button className={classes.btnDelete}>Delete</Button>
-                                    <Button className={classes.btnSelect}>Select</Button>
-                                </div>
-
                             </Col>
 
-                            <Col xs={12} md={6} lg={4} className={classes.exercisePlan}>
-                                <div className={classes.titleExer}>Weight Loss Exercises</div>
-                                <div className={classes.details}>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.bmi)}>
-                                            BMI &#62; 18.5
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.muscle)}>
-                                            CHEST, SHOULDERS, LEGS
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.durationTime)}>
-                                            1
-                                        </div>
-                                        <div className={clsx(classes.infor, classes.durationUnit)}>
-                                            HOURS
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.intensity)}>
-                                            <div className={classes.name}>
-                                                DIFFICULTY
-                                            </div>
-                                            <div className={classes.level}>
-                                                <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                            </div>
-                                            <div className={classes.txt}>
-                                                Suitable for beginners
+                            <Col xs={12} md={6} lg={4}>
+                                <div className={classes.exercisePlan}>
+                                    <div className={classes.titleExer}>Weight Loss Exercises</div>
+                                    <div className={classes.details}>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.bmi)}>
+                                                BMI &#62; 18.5
                                             </div>
                                         </div>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.muscle)}>
+                                                CHEST, SHOULDERS, LEGS
+                                            </div>
+                                        </div>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.durationTime)}>
+                                                1
+                                            </div>
+                                            <div className={clsx(classes.infor, classes.durationUnit)}>
+                                                HOURS
+                                            </div>
+                                        </div>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.intensity)}>
+                                                <div className={classes.name}>
+                                                    DIFFICULTY
+                                                </div>
+                                                <div className={classes.level}>
+                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                </div>
+                                                <div className={classes.txt}>
+                                                    Suitable for beginners
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className={classes.creatorName}>
+                                        Trương Gia Huy
+                                    </div>
+
+                                    <div className={classes.btn}>
+                                        <Button className={classes.btnEdit}>Edit</Button>
+                                        <Button className={classes.btnDelete}>Delete</Button>
+                                        <Button className={classes.btnSelect}>Select</Button>
                                     </div>
                                 </div>
-
-                                <div className={classes.creatorName}>
-                                    Trương Gia Huy
-                                </div>
-
-                                <div className={classes.btn}>
-                                    <Button className={classes.btnEdit}>Edit</Button>
-                                    <Button className={classes.btnDelete}>Delete</Button>
-                                    <Button className={classes.btnSelect}>Select</Button>
-                                </div>
-
                             </Col>
 
-                            <Col xs={12} md={6} lg={4} className={classes.exercisePlan}>
-                                <div className={classes.titleExer}>Weight Loss Exercises</div>
-                                <div className={classes.details}>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.bmi)}>
-                                            BMI &#62; 18.5
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.muscle)}>
-                                            CHEST, SHOULDERS, LEGS
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.durationTime)}>
-                                            1
-                                        </div>
-                                        <div className={clsx(classes.infor, classes.durationUnit)}>
-                                            HOURS
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.intensity)}>
-                                            <div className={classes.name}>
-                                                DIFFICULTY
-                                            </div>
-                                            <div className={classes.level}>
-                                                <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                            </div>
-                                            <div className={classes.txt}>
-                                                Suitable for beginners
+                            <Col xs={12} md={6} lg={4}>
+                                <div className={classes.exercisePlan}>
+                                    <div className={classes.titleExer}>Weight Loss Exercises</div>
+                                    <div className={classes.details}>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.bmi)}>
+                                                BMI &#62; 18.5
                                             </div>
                                         </div>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.muscle)}>
+                                                CHEST, SHOULDERS, LEGS
+                                            </div>
+                                        </div>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.durationTime)}>
+                                                1
+                                            </div>
+                                            <div className={clsx(classes.infor, classes.durationUnit)}>
+                                                HOURS
+                                            </div>
+                                        </div>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.intensity)}>
+                                                <div className={classes.name}>
+                                                    DIFFICULTY
+                                                </div>
+                                                <div className={classes.level}>
+                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                </div>
+                                                <div className={classes.txt}>
+                                                    Suitable for beginners
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className={classes.creatorName}>
+                                        Trương Gia Huy
+                                    </div>
+
+                                    <div className={classes.btn}>
+                                        <Button className={classes.btnEdit}>Edit</Button>
+                                        <Button className={classes.btnDelete}>Delete</Button>
+                                        <Button className={classes.btnSelect}>Select</Button>
                                     </div>
                                 </div>
-
-                                <div className={classes.creatorName}>
-                                    Trương Gia Huy
-                                </div>
-
-                                <div className={classes.btn}>
-                                    <Button className={classes.btnEdit}>Edit</Button>
-                                    <Button className={classes.btnDelete}>Delete</Button>
-                                    <Button className={classes.btnSelect}>Select</Button>
-                                </div>
-
                             </Col>
 
-                            <Col xs={12} md={6} lg={4} className={classes.exercisePlan}>
-                                <div className={classes.titleExer}>Weight Loss Exercises</div>
-                                <div className={classes.details}>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.bmi)}>
-                                            BMI &#62; 18.5
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.muscle)}>
-                                            CHEST, SHOULDERS, LEGS
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.durationTime)}>
-                                            1
-                                        </div>
-                                        <div className={clsx(classes.infor, classes.durationUnit)}>
-                                            HOURS
-                                        </div>
-                                    </div>
-                                    <div className={classes.inforBox}>
-                                        <div className={clsx(classes.infor, classes.intensity)}>
-                                            <div className={classes.name}>
-                                                DIFFICULTY
-                                            </div>
-                                            <div className={classes.level}>
-                                                <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                <div className={clsx(classes.diffNode, classes.off)}></div>
-                                            </div>
-                                            <div className={classes.txt}>
-                                                Suitable for beginners
+                            <Col xs={12} md={6} lg={4}>
+                                <div className={classes.exercisePlan}>
+                                    <div className={classes.titleExer}>Weight Loss Exercises</div>
+                                    <div className={classes.details}>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.bmi)}>
+                                                BMI &#62; 18.5
                                             </div>
                                         </div>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.muscle)}>
+                                                CHEST, SHOULDERS, LEGS
+                                            </div>
+                                        </div>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.durationTime)}>
+                                                1
+                                            </div>
+                                            <div className={clsx(classes.infor, classes.durationUnit)}>
+                                                HOURS
+                                            </div>
+                                        </div>
+                                        <div className={classes.inforBox}>
+                                            <div className={clsx(classes.infor, classes.intensity)}>
+                                                <div className={classes.name}>
+                                                    DIFFICULTY
+                                                </div>
+                                                <div className={classes.level}>
+                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
+                                                </div>
+                                                <div className={classes.txt}>
+                                                    Suitable for beginners
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className={classes.creatorName}>
+                                        Trương Gia Huy
+                                    </div>
+
+                                    <div className={classes.btn}>
+                                        <Button className={classes.btnEdit}>Edit</Button>
+                                        <Button className={classes.btnDelete}>Delete</Button>
+                                        <Button className={classes.btnSelect}>Select</Button>
                                     </div>
                                 </div>
-
-                                <div className={classes.creatorName}>
-                                    Trương Gia Huy
-                                </div>
-
-                                <div className={classes.btn}>
-                                    <Button className={classes.btnEdit}>Edit</Button>
-                                    <Button className={classes.btnDelete}>Delete</Button>
-                                    <Button className={classes.btnSelect}>Select</Button>
-                                </div>
-
                             </Col>
                         </Row>
                     </Container>

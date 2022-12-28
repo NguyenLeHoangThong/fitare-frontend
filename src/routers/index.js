@@ -21,7 +21,7 @@ const Routers = () => {
                 <Route path={routes.login} exact render={(props) => <Login {...props} />} />
                 <Route path={routes.register} exact render={(props) => <Register {...props} />} />
                 
-                <Route path={routes.Plans} exact render={(props) => <Plans {...props} />} />
+                <Route path={routes.plans} exact render={(props) => <Plans {...props} />} />
                 <Route path={routes.myPlans} exact render={(props) => <MyPlans {...props} />} />
                 <Route path={routes.setExercisePlan} exact render={(props) => <SetExercisePlan {...props} />} />
                 
