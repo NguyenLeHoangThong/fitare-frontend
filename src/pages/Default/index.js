@@ -2,6 +2,9 @@ import { memo, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { push } from "connected-react-router";
+
+import NavigationBar from "components/NavigationBar";
+import Footer from "components/Footer";
 import UploadImage from "components/Commons/UploadImage";
 import CustomInput from "components/Commons/CustomInput";
 import CustomSelect from "components/Commons/CustomSelect";
@@ -82,6 +85,9 @@ const Default = memo((props) => {
 
                 <Button type="submit">Submit !</Button>
             </Form> */}
+
+            <NavigationBar />
+            <Footer />
         </div>
     )
 })
