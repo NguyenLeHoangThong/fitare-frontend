@@ -26,6 +26,11 @@ const Plans = memo((props) => {
     const [muscleFilters, setMuscleFilters] = useState([]);
     const [durationFilters, setDurationFilters] = useState([]);
     const [levelFilters, setLevelFilters] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
+
+    const handleChangeSearch = (value) => {
+        setSearchValue(value);
+    } 
 
     const DropdownChoice = (value, name, handleClickBtn, index) => {
 
@@ -79,10 +84,18 @@ const Plans = memo((props) => {
                 return true;
             }
         })
+        .filter((i5) => {
+            if (!searchValue) {
+                return true;
+            }
+            else {
+                return i5.name.toLowerCase().includes(searchValue.toLowerCase());
+            }
+        })
 
         setContent(renderArray);
 
-    }, [bmiFilters, muscleFilters, durationFilters, levelFilters])
+    }, [bmiFilters, muscleFilters, durationFilters, levelFilters, searchValue])
 
     const dispatch = useDispatch();
 
@@ -247,12 +260,12 @@ const Plans = memo((props) => {
                         <div className={classes.search}>
                             <Form className="d-flex" >
                                 <Form.Control
-                                    type="search"
-                                    placeholder="Search"
-                                    className="me-2"
+                                    type="text"
+                                    placeholder="Search by name"
                                     aria-label="Search"
+                                    value={searchValue}
+                                    onChange={(e) => handleChangeSearch(e.target.value)}
                                 />
-                                <Button className={classes.btnSearch}>Search</Button>
                             </Form>
                         </div>
 
