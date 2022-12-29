@@ -11,22 +11,23 @@ import { routes } from "routers/routes.js";
 import summaryLogo from './finishImage.png';
 
 const SetFinish = memo((props) => {
+
+    const { planName } = props;
+
     return (
         <div>
-            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	<Link to={routes.setContent} className={classes.noDecorBack}>&#60; PREVIOUS EXERCISE </Link></Button>
+            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	<Link to={routes.plans} className={classes.noDecorBack}>&#60; PREVIOUS EXERCISES </Link></Button>
             <div className={classes.summaryBox}>
-                <div className={classes.setName}>EXERCISE-PLAN-NAME</div>
+                <div className={classes.setName}>{planName}</div>
                 <div className={classes.setComplete}>SET COMPLETED!</div>
 
                 <img src={summaryLogo} className={classes.image} alt="setImage" />
 
                 <div className={classes.resultBox}>
-                    <div className={classes.resultText}>DAILY STREAK: 30 DAYS  </div>
-                    <div className={classes.resultText}>Expected Calorie Burns: 100cal  </div>
-                    <div className={classes.resultText}>Inspiring Quotes </div>
+                    <div className={classes.resultText}>“Strength does not come from physical capacity. It comes from an indomitable will.” - <i>Mahatma Gandhi</i></div>
                 </div>
 
-                <Button className={classes.btnFinish}><Link to={routes.setSummary} className={classes.noDecorStart}>FINISH</Link></Button>
+                <Button className={classes.btnFinish}><Link to={routes.plans} className={classes.noDecorStart}>FINISH</Link></Button>
 
             </div>
         </div>

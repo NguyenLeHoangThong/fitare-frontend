@@ -6,6 +6,7 @@ import CustomDropdown from "components/Commons/CustomDropdown";
 import classes from "./styles.module.scss";
 import clsx from "clsx";
 import { UserTypes } from "models/User";
+import logo from './logo.png';
 
 const NavigationBar = () => {
 
@@ -18,12 +19,25 @@ const NavigationBar = () => {
 
     return (
         <div className={classes.navigationBar}>
-            <img src="logo.png" alt="logo" width='50px' />
+            <img src={logo} alt="logo" width='50px' />
 
             <div className={classes.navigator}>
-                {(user?.type === UserTypes.TRAINER && router?.location?.pathname === '/myplans') ? <div className={clsx(classes.route, classes.active)}>My post</div> : ((user?.type === 'TRAINER') && <div className={classes.route}><Link to={routes.default}>My post</Link></div>)}
+                {
+                    (user?.type === UserTypes.TRAINER && router?.location?.pathname === '/myplans')
+                        ?
+                        <div className={clsx(classes.route, classes.active)}>My post</div>
+                        :
+                        (user?.type === UserTypes.TRAINER
+                            ?
+                            <div className={classes.route}>
+                                <Link to={routes.default}>My post</Link>
+                            </div>
+                            :
+                            null
+                        )
+                }
                 {(router?.location?.pathname === '/myfavorites') ? <div className={clsx(classes.route, classes.active)}> Favorites </div> : <div className={classes.route}><Link to={routes.default}>Favorites</Link></div>}
-                {(router?.location?.pathname === '/plans') ? <div className={clsx(classes.route, classes.active)}> Marketplace </div> : <div className={classes.route}><Link to={routes.default}>My post</Link></div>}
+                {(router?.location?.pathname === routes.plans) ? <div className={clsx(classes.route, classes.active)}> Marketplace </div> : <div className={classes.route}><Link to={routes.plans}>Marketplace</Link></div>}
             </div>
 
             {

@@ -82,7 +82,6 @@
 }
 
 .exercisePlan .titleExer {
-    display: flex;
     align-items: center;
     min-height: 50%;
     font-size: 40px;
@@ -115,10 +114,6 @@
 
 .inforBox .muscle {
     font-size: 64% !important;
-}
-
-.inforBox .durationTime {
-    font-size: 180% !important;
 }
 
 .exercisePlan .creatorName {
