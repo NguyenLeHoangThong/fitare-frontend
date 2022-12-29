@@ -12,7 +12,7 @@ import { setLoading } from "redux/reducers/Status/actionTypes";
 import { FaEnvelope } from 'react-icons/fa';
 import { FaLock } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
-
+import { BsFillTelephoneFill } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import { routes } from 'routers/routes.js';
 
@@ -23,10 +23,14 @@ const Register = memo((props) => {
     const schema = useMemo(() => {
         return yup.object().shape({
             email: yup.string().email("Please input valid email").required("Please input email"),
-            password: yup.string().required("Please input password"),
+            password: yup.string().required("Please input password").matches(
+                /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+                "Password need more security"
+            ),
             conPassword: yup.string().oneOf([yup.ref('password'), null], "Passwords must match"),
             firstName: yup.string().required("Please input First Name"),
             lastName: yup.string().required("Please input Last Name"),
+            phoneNumber: yup.string().required("Please input Phone Number"),
         })
     }, []);
 
@@ -76,7 +80,7 @@ const Register = memo((props) => {
                                 placeholder="password"
                                 control={control}
                                 errorMessage={errors?.password?.message}
-                                isPassword 
+                                isPassword
                             />
                         </div>
                         <div className={classes.flexInput}>
@@ -87,7 +91,7 @@ const Register = memo((props) => {
                                 placeholder="confirm password"
                                 control={control}
                                 errorMessage={errors?.conPassword?.message}
-                                isPassword 
+                                isPassword
                             />
                         </div>
                     </div>
@@ -99,8 +103,8 @@ const Register = memo((props) => {
                                 className={classes.textboxInput}
                                 placeholder="First Name"
                                 control={control}
-                                errorMessage={errors?.email?.message}
-                                
+                                errorMessage={errors?.firstName?.message}
+
                             />
                         </div>
                         <div className={classes.flexInput}>
@@ -110,16 +114,36 @@ const Register = memo((props) => {
                                 className={classes.textboxInput}
                                 placeholder="Last Name"
                                 control={control}
-                                errorMessage={errors?.email?.message}
-                                
+                                errorMessage={errors?.lastName?.message}
+
                             />
                         </div>
+                        <div className={classes.flexInput}>
+                            <BsFillTelephoneFill className={classes.icon} />
+                            <CustomInput
+                                inputRef="phoneNumber"
+                                className={classes.textboxInput}
+                                placeholder="Phone Number"
+                                control={control}
+                                errorMessage={errors?.phoneNumber?.message}
 
+                            />
+                        </div>
                     </div>
 
                 </div>
 
                 <div className={classes.flexContent}>
+                    <div className={classes.checkBoxBox}>
+                        <input
+                        type="checkbox"
+                        className={classes.checkBox}
+                        id="isAdmin"
+                        />
+                        <span class={classes.checkMark}></span>
+                        <label htmlFor="isAdmin">Is Trainer Account</label>
+                    </div>
+
                     <Button className={classes.btnLogin}><Link to={routes.login} className={classes.noDecor}>Sign In</Link></Button>
                     <Button type="submit" className={classes.btnRegister}>Sign Up</Button>
                 </div>
