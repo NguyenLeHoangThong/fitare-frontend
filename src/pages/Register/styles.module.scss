@@ -63,13 +63,10 @@
 .textboxInput {
     transition: height 0.5s;
 
-    min-width: 302.5px;
-
+    width: 302.5px;
     border-radius: 1rem;
     border-width: 2px;
     //
-
-
 }
 
 
@@ -104,6 +101,10 @@
 .flexBox {
     display: flex;
     gap: 2rem;
+    width: 760px;
+    p {
+        max-width: 302px;
+    }
 }
 
 .column {
