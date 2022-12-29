@@ -9,6 +9,5 @@ export const routes = {
 
     setSummary: "/plans-summary/:id",    
     setContent: "/plans-content/:id",
-    setFinish: "/setfinish",
     default: "/"
 }   

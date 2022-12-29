@@ -25,7 +25,6 @@ const SetSummary = memo((props) => {
         dispatch(setLoading(true));
         ExercisePlanService.getOneAvailableExercisePlan(id)
             .then((res) => {
-                console.log("Res: ", res)
                 if (!res) {
                     dispatch(push("/plans"));
                 }
