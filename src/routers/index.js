@@ -9,8 +9,10 @@ import SetSummary from "pages/SetSummary";
 import SetContent from "pages/SetContent";
 import Plans from "pages/Plans";
 import MyPlans from "pages/MyPlans";
+import QCList from "pages/QCList";
 import SetExercisePlan from "pages/SetExercisePlan";
 import TraineeAuthRoute from "./TraineeAuthRoute";
+
 
 const Routers = () =>   {
     return (
@@ -26,6 +28,8 @@ const Routers = () =>   {
                 
                 <Route path={routes.setSummary} render={(props) => <SetSummary {...props} />} />
                 <Route path={routes.setContent} exact render={(props) => <SetContent {...props} />} />
+                
+                <Route path={routes.QCList} exact render={(props) => <QCList {...props} />} />
                 
                 <TraineeAuthRoute path={routes.setSummary} exact render={(props) => <SetSummary {...props} />} />
                 <TraineeAuthRoute path={routes.setContent} exact render={(props) => <SetContent {...props} />} />
