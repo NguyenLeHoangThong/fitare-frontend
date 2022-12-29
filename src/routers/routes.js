@@ -7,8 +7,8 @@ export const routes = {
     myPlans: "/myplans",
     setExercisePlan: "/setexerciseplan",
 
-    setSummary: "/setsummary",    
-    setContent: "/setcontent",
+    setSummary: "/plans-summary/:id",    
+    setContent: "/plans-content/:id",
     setFinish: "/setfinish",
     default: "/"
 }   

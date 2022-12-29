@@ -16,6 +16,8 @@ import { ExercisePlanService } from "services/ExercisePlan";
 import { getBMITypes, getMuscleGroupTypes, getDurationTypes, getLevelTypes, difficultyFormatArray } from "utils/exercisePlan";
 import { GrClose } from 'react-icons/gr';
 import { bmiTypes, muscleGroupTypes, durationTypes, levelTypes } from "models/ExercisePlan";
+import { Link } from "react-router-dom";
+import { routes } from "routers/routes.js";
 
 const Plans = memo((props) => {
 
@@ -30,7 +32,7 @@ const Plans = memo((props) => {
 
     const handleChangeSearch = (value) => {
         setSearchValue(value);
-    } 
+    }
 
     const DropdownChoice = (value, name, handleClickBtn, index) => {
 
@@ -49,49 +51,49 @@ const Plans = memo((props) => {
     useEffect(() => {
 
         const renderArray = [...defaultContent]
-        .filter((i1) => {
-            if (bmiFilters?.length > 0) {
-                return bmiFilters.findIndex((f1) => i1.bmi === f1.value) !== -1
-            }
-            else {
-                return true;
-            }
-        })
-        .filter((i2) => {
-            if (muscleFilters?.length > 0) {
-                if (!i2?.muscleGroup || !i2?.muscleGroup?.length) {
-                    return false;
+            .filter((i1) => {
+                if (bmiFilters?.length > 0) {
+                    return bmiFilters.findIndex((f1) => i1.bmi === f1.value) !== -1
                 }
-                return i2?.muscleGroup.some(r=> muscleFilters.map((item) => item?.value).indexOf(r) >= 0)
-            }
-            else {
-                return true;
-            }
-        })
-        .filter((i3) => {
-            if (durationFilters?.length > 0) {
-                return durationFilters.findIndex((f3) => i3.hours === f3.value) !== -1
-            }
-            else {
-                return true;
-            }
-        })
-        .filter((i4) => {
-            if (levelFilters?.length > 0) {
-                return levelFilters.findIndex((f4) => i4.level === f4.value) !== -1
-            }
-            else {
-                return true;
-            }
-        })
-        .filter((i5) => {
-            if (!searchValue) {
-                return true;
-            }
-            else {
-                return i5.name.toLowerCase().includes(searchValue.toLowerCase());
-            }
-        })
+                else {
+                    return true;
+                }
+            })
+            .filter((i2) => {
+                if (muscleFilters?.length > 0) {
+                    if (!i2?.muscleGroup || !i2?.muscleGroup?.length) {
+                        return false;
+                    }
+                    return i2?.muscleGroup.some(r => muscleFilters.map((item) => item?.value).indexOf(r) >= 0)
+                }
+                else {
+                    return true;
+                }
+            })
+            .filter((i3) => {
+                if (durationFilters?.length > 0) {
+                    return durationFilters.findIndex((f3) => i3.hours === f3.value) !== -1
+                }
+                else {
+                    return true;
+                }
+            })
+            .filter((i4) => {
+                if (levelFilters?.length > 0) {
+                    return levelFilters.findIndex((f4) => i4.level === f4.value) !== -1
+                }
+                else {
+                    return true;
+                }
+            })
+            .filter((i5) => {
+                if (!searchValue) {
+                    return true;
+                }
+                else {
+                    return i5.name.toLowerCase().includes(searchValue.toLowerCase());
+                }
+            })
 
         setContent(renderArray);
 
@@ -149,10 +151,6 @@ const Plans = memo((props) => {
     const handleRemoveFilterLevel = (value) => {
         setLevelFilters([...levelFilters].filter((item) => item.value !== value.value));
     };
-
-    const handleSelectExercise = (id) => {
-        console.log("id: ", id)
-    }
 
     return (
         <div>
@@ -335,7 +333,7 @@ const Plans = memo((props) => {
                                             </div>
 
                                             <div className={classes.btn}>
-                                                <Button className={classes.btnSelect} onClick={() => handleSelectExercise(plan?.id)}>Select</Button>
+                                                <Link to={`/plans-summary/${plan?.id}`} className={classes.btnSelect}>Select</Link>
                                             </div>
                                         </div>
                                     </Col>

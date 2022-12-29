@@ -11,6 +11,16 @@ export class ExercisePlanService {
       });
   }
 
+  static async getOneAvailableExercisePlan(id) {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/exerciseplans/${id}?status=censored`)
+      .then((res) => {
+        return Promise.resolve(res.data);
+      })
+      .catch((e) => {
+        return Promise.reject(e?.response?.data);
+      });
+  }
+
   static async createAExercisePlan(data) {
     return axios.post(`${process.env.REACT_APP_BACKEND_URL}/exerciseplans`, data)
       .then((res) => {

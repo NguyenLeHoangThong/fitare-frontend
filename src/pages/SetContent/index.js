@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import clsx from 'clsx'
 
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { routes } from "routers/routes.js";
 
 
@@ -15,9 +15,12 @@ import { routes } from "routers/routes.js";
 import summaryLogo from './summaryImage.png';
 
 const SetContent = memo((props) => {
+
+    const { id } = useParams();
+
     return (
         <div>
-            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	<Link to={routes.setSummary} className={classes.noDecorBack}>&#60; ALL EXERCISE</Link> </Button>
+            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	<Link to={`/plans-summary/${id}`} className={classes.noDecorBack}>&#60; ALL EXERCISE</Link> </Button>
             <div className={classes.summaryBox}>
                 <div className={classes.setName}>EXERCISE-PLAN-NAME</div>
                 <div className={classes.setExercise}>PUSH UP</div>
