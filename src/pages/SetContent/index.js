@@ -11,6 +11,8 @@ import { routes } from "routers/routes.js";
 import { setLoading, setErrorMess } from "redux/reducers/Status/actionTypes";
 import { push } from "connected-react-router";
 import SetFinish from "./components/SetFinish";
+import NavigationBar from "components/NavigationBar";
+import Footer from "components/Footer";
 
 //Image:
 import summaryLogo from './summaryImage.png';
@@ -56,6 +58,7 @@ const SetContent = memo((props) => {
 
     return (
         <>
+            <NavigationBar />
             {
                 showFinishAllSet ? (
                     <SetFinish planName={exercises[currentStep]?.exercisePlanName} />
@@ -69,7 +72,7 @@ const SetContent = memo((props) => {
                                         <div className={classes.setName}>{exercises[currentStep]?.exercisePlanName}</div>
                                         <div className={classes.setExercise}>{exercises[currentStep]?.name}</div>
 
-                                        <img src={summaryLogo} className={classes.image} alt="setImage" />
+                                        <img src={exercises[currentStep]?.bannerImageUrl || summaryLogo} className={classes.image} alt="setImage" />
 
                                         <Row className={classes.infoBox}>
                                             <Col xs={12} md={8} className={classes.flexCenter}>
@@ -93,8 +96,9 @@ const SetContent = memo((props) => {
                                     </div>
                                 ) : null
                             }
-                        </div >
+                        </div>
                     )}
+            <Footer />
         </>
     )
 
