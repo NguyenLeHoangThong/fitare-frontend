@@ -24,9 +24,7 @@ const SetFinish = memo((props) => {
                 <img src={summaryLogo} className={classes.image} alt="setImage" />
 
                 <div className={classes.resultBox}>
-                    <div className={classes.resultText}>DAILY STREAK: 30 DAYS  </div>
-                    <div className={classes.resultText}>Expected Calorie Burns: 100cal  </div>
-                    <div className={classes.resultText}>Inspiring Quotes </div>
+                    <div className={classes.resultText}>“Strength does not come from physical capacity. It comes from an indomitable will.” - <i>Mahatma Gandhi</i></div>
                 </div>
 
                 <Button className={classes.btnFinish}><Link to={routes.plans} className={classes.noDecorStart}>FINISH</Link></Button>

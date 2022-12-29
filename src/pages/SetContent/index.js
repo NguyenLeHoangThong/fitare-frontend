@@ -65,7 +65,7 @@ const SetContent = memo((props) => {
                 )
                     : (
                         <div>
-                            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	<Link to={`/plans-summary/${id}`} className={classes.noDecorBack}>&#60; ALL EXERCISE</Link> </Button>
+                            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	<Link to={`/plans-summary/${id}`} className={classes.noDecorBack}>&#60; BACK TO SUMMARY</Link> </Button>
                             {
                                 exercises?.length ? (
                                     <div className={classes.summaryBox}>
