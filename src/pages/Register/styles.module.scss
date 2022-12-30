@@ -4,7 +4,6 @@
 
         border-style: solid;
         border-color: rgba(0, 0, 0, 0);
-
     }
 
     border-style: solid;
@@ -49,9 +48,11 @@
 
     margin: 3.75rem 2.25rem;
     border-radius: 1rem;
-
+    
+    input[type="checkbox"] {
+        transform: scale(2);
+    }
 }
-
 
 .title {
     font-size: 2.5rem;
@@ -69,7 +70,6 @@
     //
 }
 
-
 .flex {
     display: flex;
     flex-direction: row;
@@ -80,7 +80,6 @@
 .icon {
     color: var(--color-blue);
     font-size: 2.5rem;
-
 }
 
 .flexContent {
@@ -110,9 +109,7 @@
 .column {
     display: flex;
     flex-direction: column;
-
 }
-
 
 .noDecor {
     &:hover {
@@ -121,21 +118,11 @@
 
     text-decoration: none;
     color: var(--color-blue);
-
 }
 
 .checkBoxBox {
-    display: flex; 
+    display: flex;
     gap: 0.5rem;
     align-items: center;
     font-size: 1.25rem;
 }
-
-
-input[type=checkbox] {
-    transform: scale(2);
-}
-
-
-
-

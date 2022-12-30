@@ -3,16 +3,16 @@
     height: 300px;
 }
 
-.Box{
+.Box {
     margin: 2rem;
 }
 
-.flex{
-    display:flex;
+.flex {
+    display: flex;
     flex-direction: column;
 }
 
-.filterBox{
+.filterBox {
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -21,7 +21,7 @@
     border-width: 2px;
     border-radius: 1rem;
     width: 320px;
-    min-height: 60rem; 
+    min-height: 60rem;
 }
 
 .filterBox .header {
@@ -33,7 +33,7 @@
 
 .filterBox .selection {
     margin-left: 16%;
-    margin-bottom: 2px;
+    margin-bottom: 36px;
 }
 
 .filterBox .selection .dropdown:not(:last-of-type) {
@@ -66,19 +66,24 @@
     font-size: 16px;
 }
 
-.planBox{
+.planBox {
     border-radius: 1rem;
     background-color: var(--color-yellow);
-    min-height: 60rem; 
+    min-height: 60rem;
     padding: 5% 5%;
 }
+
+/*.planBox .search {
+    position: sticky;
+}*/
 
 .exercisePlan {
     border: 1px solid var(--color-white);
     border-radius: 8px;
     background-color: var(--color-white);
-    margin-top: 36px;
     padding: 24px 0;
+    margin-top: 36px;
+    min-height: 242px;
 }
 
 .exercisePlan .titleExer {
@@ -134,18 +139,18 @@
     gap: 2px;
 }
 
-.intensity .level .diffNode{
+.intensity .level .diffNode {
     height: 10px;
     width: 8px;
     border-radius: 2px;
     color: var(--color-orange);
 }
 
-.intensity .level .on{
+.intensity .level .on {
     background-color: var(--color-blue);
 }
 
-.intensity .level .off{
+.intensity .level .off {
     background-color: var(--color-yellow);
 }
 
@@ -157,8 +162,7 @@
 .exercisePlan .btn {
     display: flex;
     justify-content: end;
-    margin: 4px 4px;
-    gap: 3px;
+    margin: 4px 4px 0 0;
 }
 
 .btnSearch {
@@ -169,7 +173,12 @@
     }
 }
 
-.btnDelete {
+.btnSelect {
+    display: block;
+    padding: 4px 24px;
+    text-align: center;
+    text-decoration: none;
+
     &:hover {
         background-color: var(--color-orange);
         color: var(--color-white);
@@ -184,9 +193,41 @@
 
     font-size: 16px;
     font-weight: 600;
-    
+
+    min-width: 120px;
+    min-height: 25px;
+}
+
+.btnDelete {
+    &:hover {
+        opacity: 0.8;
+        background-color: var(--bs-red);
+        border: 1px solid var(--bs-red);
+    }
+
+    background-color: var(--bs-red);
+    border: 1px solid var(--bs-red);
+    color: var(--color-white);
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 16px;
+
+    font-size: 16px;
+    font-weight: 600;
+
     min-width: 80px;
     min-height: 25px;
+}
+
+.btn {
+    justify-content: center !important;
+    button {
+        margin-left: 12px;
+    }
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
 }
 
 .btnEdit {
@@ -204,43 +245,72 @@
 
     font-size: 16px;
     font-weight: 600;
-    
+
     min-width: 80px;
     min-height: 25px;
 }
 
-.btnSelect {
-    &:hover {
-        background-color: var(--color-orange);
-        color: var(--color-white);
-        border-color: var(--color-orange);
-    }
-
-    background-color: var(--color-blue);
-    color: var(--color-white);
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 16px;
-
-    font-size: 16px;
-    font-weight: 600;
-    
-    min-width: 120px;
-    min-height: 25px;
-}
-
 .dropdownBtn {
-    button {
-        background-color: var(--color-blue);
-        color: var(--color-white);
-
-        &:hover {
-            background-color: var(--color-orange);
-            border: 1px solid var(--color-orange);
-        }
-    }
     & > div {
         padding: 0;
         border: 1px solid var(--color-blue);
     }
+}
+
+.dropdownChoice {
+    display: flex;
+    flex-direction: row;
+    //justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-color: var(--color-blue);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+    margin: 4px 4px 0 0;
+}
+
+.content {
+    min-width: 100px;
+    text-align: center;
+    color: var(--color-orange);
+}
+
+.icon {
+    width: 15%;
+    border-left: 1px solid var(--color-blue);
+    border-right: none;
+    padding: 7px 0px;
+    border-radius: 0px 4px 4px 0;
+    background-color: transparent;
+    svg {
+        fill: var(--color-orange);
+    }
+}
+
+.filterWrapper {
+    margin: 8px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.createPlanWrapper {
+    display: flex;
+    justify-content: flex-end;
+    button {
+        background-color: var(--color-orange);
+        border: 1px solid var(--color-orange);
+        &:hover {
+            background-color: var(--color-orange);
+            opacity: 0.8;
+            border: 1px solid var(--color-orange);
+        }
+        transition: all 0.3s ease;
+    }
+    a {
+        font-size: 24px;
+        color: #fff;
+        text-decoration: none;
+    }
+    margin-bottom: 12px;
 }

@@ -10,7 +10,7 @@ import { Link, useParams } from "react-router-dom";
 import { routes } from "routers/routes.js";
 import { setLoading, setErrorMess } from "redux/reducers/Status/actionTypes";
 import { push } from "connected-react-router";
-import SetFinish from "./components/SetFinish";
+import SetFinish from "./SetFinish";
 import NavigationBar from "components/NavigationBar";
 import Footer from "components/Footer";
 
@@ -20,26 +20,15 @@ import summaryLogo from './summaryImage.png';
 const SetContent = memo((props) => {
 
     const { id } = useParams();
+    const { exercises, maxStep, handleBackSet } = props;
 
-    const [exercises, setExercises] = useState([]);
     const [currentStep, setCurrentStep] = useState(0);
-    const [maxStep, setMaxStep] = useState(0);
     const [showFinishAllSet, setShowFinishAllSet] = useState(false);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(setLoading(true));
-        ExercisePlanService.getAllExercisesOfAPlan(id)
-            .then((res) => {
-                setExercises(res);
-                setMaxStep(res?.length);
-            })
-            .catch((err) => {
-                dispatch(setErrorMess(err))
-                dispatch(push("/plans"))
-            })
-            .finally(() => dispatch(setLoading(false)))
+
     }, [dispatch])
 
     const handleFinishSet = () => {
@@ -65,7 +54,7 @@ const SetContent = memo((props) => {
                 )
                     : (
                         <div>
-                            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	<Link to={`/plans-summary/${id}`} className={classes.noDecorBack}>&#60; BACK TO SUMMARY</Link> </Button>
+                            <Button className={clsx(classes.btnReturn, classes.setMargin)} onClick={handleBackSet}>&#60; BACK TO SUMMARY </Button>
                             {
                                 exercises?.length ? (
                                     <div className={classes.summaryBox}>

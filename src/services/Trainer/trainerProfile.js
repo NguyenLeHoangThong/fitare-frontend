@@ -20,4 +20,14 @@ export class TrainerProfileService {
         return Promise.reject(e?.response?.data);
       });
   }
+
+  static async getTrainerCreatedPlans(id) {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/trainers/${id}/exerciseplans/created`)
+      .then((res) => {
+        return Promise.resolve(res.data);
+      })
+      .catch((e) => {
+        return Promise.reject(e?.response?.data);
+      });
+  }
 }

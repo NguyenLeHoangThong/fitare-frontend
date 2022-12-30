@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { UserService } from "services/User/user";
 import { setUserReducer } from "redux/reducers/User/actionTypes";
 import { setTraineeReducer } from "redux/reducers/Trainee/actionTypes";
-import { setTrainerReducer } from "redux/reducers/Trainer/actionTypes";
+import { setTrainerReducer, setTrainerCreatedPlans, setTrainerFavoritePlans } from "redux/reducers/Trainer/actionTypes";
 import { TrainerProfileService } from "services/Trainer/trainerProfile";
 import { TraineeProfileService } from "services/Trainee/traineeProfile";
 import { setLoading, setErrorMess } from "redux/reducers/Status/actionTypes";
@@ -30,6 +30,12 @@ function App({ history, dispatch }) {
                 TrainerProfileService.getTrainerProfile(res?.id)
                   .then((trainerProfile) => {
                     dispatch(setTrainerReducer(trainerProfile))
+                  })
+                  .catch((error) => dispatch(setErrorMess(error)))
+
+                TrainerProfileService.getTrainerCreatedPlans(res?.id)
+                  .then((plans) => {
+                    dispatch(setTrainerCreatedPlans(plans))
                   })
                   .catch((error) => dispatch(setErrorMess(error)))
               }

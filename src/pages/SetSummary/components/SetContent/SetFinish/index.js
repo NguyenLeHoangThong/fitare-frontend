@@ -16,7 +16,7 @@ const SetFinish = memo((props) => {
 
     return (
         <div>
-            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	<Link to={routes.plans} className={classes.noDecorBack}>&#60; PREVIOUS EXERCISES </Link></Button>
+            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	<Link to={routes.plans} className={classes.noDecorBack}>&#60; ALL EXERCISES </Link></Button>
             <div className={classes.summaryBox}>
                 <div className={classes.setName}>{planName}</div>
                 <div className={classes.setComplete}>SET COMPLETED!</div>

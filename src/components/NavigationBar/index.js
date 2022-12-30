@@ -45,14 +45,14 @@ const NavigationBar = () => {
                 user ? (
                     <div className={classes.navigator}>
                         {
-                            (user?.type === UserTypes.TRAINER && router?.location?.pathname === '/myplans')
+                            (user?.type === UserTypes.TRAINER && router?.location?.pathname === routes.myPlans)
                                 ?
                                 <div className={clsx(classes.route, classes.active)}>My post</div>
                                 :
                                 (user?.type === UserTypes.TRAINER
                                     ?
                                     <div className={classes.route}>
-                                        <Link to={routes.default}>My post</Link>
+                                        <Link to={routes.myPlans}>My posts</Link>
                                     </div>
                                     :
                                     null

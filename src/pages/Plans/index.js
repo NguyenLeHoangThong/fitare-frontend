@@ -333,7 +333,7 @@ const Plans = memo((props) => {
                                             </div>
 
                                             <div className={classes.btn}>
-                                                <Link to={`/plans-summary/${plan?.id}`} className={classes.btnSelect}>Select</Link>
+                                                <Link to={`/plan/${plan?.id}`} className={classes.btnSelect}>Select</Link>
                                             </div>
                                         </div>
                                     </Col>

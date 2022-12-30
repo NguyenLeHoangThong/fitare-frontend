@@ -5,13 +5,12 @@ export const routes = {
 
     plans: "/plans",
     myPlans: "/myplans",
-    setExercisePlan: "/setexerciseplan",
+    setExercisePlan: "/myplans/create",
     setExercise: "/setexercise",
     editExercisePlan: "/editexerciseplan",
     editExercise: "/editexercise",
 
 
-    setSummary: "/plans-summary/:id",    
-    setContent: "/plans-content/:id",
+    setSummary: "/plan/:id",
     default: "/"
 }   

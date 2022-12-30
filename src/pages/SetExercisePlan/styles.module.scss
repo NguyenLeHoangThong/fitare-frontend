@@ -6,9 +6,11 @@
 //Title
 .titlePlan {
     color: black;
-    letter-spacing: 2px ;
+    letter-spacing: 2px;
     font-weight: 500;
     font-size: 44px;
+    text-align: center;
+    margin-bottom: 16px;
 }
 
 .titleSetTag {
@@ -38,13 +40,20 @@
 }
 
 .setTag .customSelect {
-    width: 250px;
+    width: 100%;
     margin-bottom: 8px;
+}
+
+.setTag {
+    padding: 12px 8px 24px 8px;
+    height: 100%;
+    justify-content: space-around;
 }
 
 .setTag .muscle {
     font-size: var(--select-fontSize);
     color: var(--color-blue);
+    width: 100%;
 }
 
 .muscle .tagMuscle {
@@ -54,10 +63,11 @@
     margin-bottom: 2px;
 }
 
-
-.content .bannerImage{
-    height: 300px;
-    margin-bottom: 40px;
+.content .bannerImage {
+    height: 400px;
+    background-color: #ccc;
+    max-width: 100%;
+    margin-bottom: 16px;
 }
 
 .content .textareaInput {
@@ -79,14 +89,39 @@
     }
 }
 
-.wrapper .btn :last-child {
+// .wrapper .btn :last-child {
+//     &:hover {
+//         background-color: var(--color-orange);
+//         color: var(--color-white);
+//         border-color: var(--color-orange);
+//     }
+
+//     background-color: var(--color-white);
+//     color: var(--color-blue);
+//     font-weight: bolder;
+// }
+
+.checkboxes {
+}
+
+.btnReturn {
     &:hover {
-        background-color: var(--color-orange);
-        color: var(--color-white);
-        border-color: var(--color-orange);
+        background-color: white;
+        color: var(--color-blue);
+        border-style: none;
+        font-weight: 700
     }
 
-    background-color: var(--color-white);
+    border-style:none;
+
+    letter-spacing: 2px;
+    font-weight: 400;
+    color:var(--color-gray);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.noDecorBack {
+    text-decoration: none;
+    font-size: 25px;
     color: var(--color-blue);
-    font-weight: bolder;
 }

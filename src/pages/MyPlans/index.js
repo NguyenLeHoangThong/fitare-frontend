@@ -1,5 +1,5 @@
-import { memo } from "react";
-import { useDispatch } from "react-redux";
+import { memo, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import classes from "./styles.module.scss";
 import Row from 'react-bootstrap/Row';
@@ -9,136 +9,247 @@ import clsx from 'clsx'
 import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import DropdownChoice from "./components/DropDown";
 import NavigationBar from "components/NavigationBar";
 import Footer from "components/Footer";
+import { setLoading, setErrorMess } from "redux/reducers/Status/actionTypes";
+import { ExercisePlanService } from "services/ExercisePlan";
+import { getBMITypes, getMuscleGroupTypes, getDurationTypes, getLevelTypes, difficultyFormatArray } from "utils/exercisePlan";
+import { GrClose } from 'react-icons/gr';
+import { bmiTypes, muscleGroupTypes, durationTypes, levelTypes } from "models/ExercisePlan";
+import { Link } from "react-router-dom";
+import { routes } from "routers/routes.js";
 
-const CreatePlan = memo((props) => {
+const Plans = memo((props) => {
 
-    // const schema = useMemo(() => {
-    //     return yup.object().shape({
-    //         avatar: yup.mixed(),
-    //         name: yup.string()
-    //     })
-    // }, []);
+    const [defaultContent, setDefaultContent] = useState([]);
+    const [content, setContent] = useState([]);
+    const { createdPlans } = useSelector((state) => state?.trainer)
 
+    const [bmiFilters, setBmiFilters] = useState([]);
+    const [muscleFilters, setMuscleFilters] = useState([]);
+    const [durationFilters, setDurationFilters] = useState([]);
+    const [levelFilters, setLevelFilters] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
 
-    // const {
-    //     register,
-    //     handleSubmit,
-    //     formState: { errors },
-    //     control,
-    //     reset,
-    //     setValue,
-    //     watch
-    // } = useForm({
-    //     resolver: yupResolver(schema),
-    //     mode: "onChange",
-    // });
+    const handleChangeSearch = (value) => {
+        setSearchValue(value);
+    }
 
-    // const onSubmit = (data) => {
-    //     console.log(data);
-    // }
+    const DropdownChoice = (value, name, handleClickBtn, index) => {
 
+        return (
+            <div className={classes.dropdownChoice} key={index}>
+                <div className={classes.content}>
+                    {name}
+                </div>
+                <Button onClick={() => handleClickBtn(value)} type="button" className={classes.icon}>
+                    <GrClose />
+                </Button>
+            </div>
+        )
+    }
 
-    const [dropdownMenu, setDropdownMenu] = useState(<div />);
-    const [content, setContent] = useState("");
+    useEffect(() => {
 
-    const onAddBtnClick = event => {
-        setDropdownMenu(<DropdownChoice />);
+        const renderArray = [...defaultContent]
+            .filter((i1) => {
+                if (bmiFilters?.length > 0) {
+                    return bmiFilters.findIndex((f1) => i1.bmi === f1.value) !== -1
+                }
+                else {
+                    return true;
+                }
+            })
+            .filter((i2) => {
+                if (muscleFilters?.length > 0) {
+                    if (!i2?.muscleGroup || !i2?.muscleGroup?.length) {
+                        return false;
+                    }
+                    return i2?.muscleGroup.some(r => muscleFilters.map((item) => item?.value).indexOf(r) >= 0)
+                }
+                else {
+                    return true;
+                }
+            })
+            .filter((i3) => {
+                if (durationFilters?.length > 0) {
+                    return durationFilters.findIndex((f3) => i3.hours === f3.value) !== -1
+                }
+                else {
+                    return true;
+                }
+            })
+            .filter((i4) => {
+                if (levelFilters?.length > 0) {
+                    return levelFilters.findIndex((f4) => i4.level === f4.value) !== -1
+                }
+                else {
+                    return true;
+                }
+            })
+            .filter((i5) => {
+                if (!searchValue) {
+                    return true;
+                }
+                else {
+                    return i5.name.toLowerCase().includes(searchValue.toLowerCase());
+                }
+            })
 
+        setContent(renderArray);
+
+    }, [bmiFilters, muscleFilters, durationFilters, levelFilters, searchValue])
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setDefaultContent(createdPlans);
+        setContent(createdPlans);
+    }, [dispatch]);
+
+    const handleAddFilterBMI = (value) => {
+        if (bmiFilters.findIndex((item) => item.value === value.value) === -1) {
+            setBmiFilters([...bmiFilters, value]);
+        }
+    };
+
+    const handleRemoveFilterBMI = (value) => {
+        setBmiFilters([...bmiFilters].filter((item) => item.value !== value.value));
+    };
+
+    const handleAddFilterMuscle = (value) => {
+        if (muscleFilters.findIndex((item) => item.value === value.value) === -1) {
+            setMuscleFilters([...muscleFilters, value]);
+        }
+    };
+
+    const handleRemoveFilterMuscle = (value) => {
+        setMuscleFilters([...muscleFilters].filter((item) => item.value !== value.value));
+    };
+
+    const handleAddFilterDuration = (value) => {
+        if (durationFilters.findIndex((item) => item.value === value.value) === -1) {
+            setDurationFilters([...durationFilters, value]);
+        }
+    };
+
+    const handleRemoveFilterDuration = (value) => {
+        setDurationFilters([...durationFilters].filter((item) => item.value !== value.value));
+    };
+
+    const handleAddFilterLevel = (value) => {
+        if (levelFilters.findIndex((item) => item.value === value.value) === -1) {
+            setLevelFilters([...levelFilters, value]);
+        }
+    };
+
+    const handleRemoveFilterLevel = (value) => {
+        setLevelFilters([...levelFilters].filter((item) => item.value !== value.value));
     };
 
     return (
         <div>
             <NavigationBar />
+
             <Row className={classes.Box}>
+                <div className={classes.createPlanWrapper}>
+                    <Button><Link to="/myplans/create">CREATE</Link></Button>
+                </div>
                 <Col xs={12} md={3} className={clsx(classes.flex)}>
                     <div className={classes.filterBox}>
                         <div className={classes.header}>FILTER</div>
                         <div className={clsx(classes.bmiLevel, classes.selection)}>
                             <DropdownButton className={classes.dropdownBtn} id="dropdown-basic-button" title="BMI level">
-                                <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>Underweight</div>
-                                    <div className={classes.number}>&#60; 18.5</div>
-                                </Dropdown.Item>
 
-                                <Dropdown.Item href="#/action-2" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>Normal weight</div>
-                                    <div className={classes.number}>18.5 - 24.9</div>
-                                </Dropdown.Item>
+                                {
+                                    bmiTypes.map((item, index) => (
+                                        <Dropdown.Item key={index} onClick={() => handleAddFilterBMI(item)} className={classes.dropdown}>
+                                            <div className={classes.name}>{item.name}</div>
+                                            <div className={classes.number}>{item.description}</div>
+                                        </Dropdown.Item>
+                                    ))
+                                }
 
-                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>Overweight</div>
-                                    <div className={classes.number}>25 - 29.9</div>
-                                </Dropdown.Item>
-
-                                <Dropdown.Item href="#/action-4" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>Obesity</div>
-                                    <div className={classes.number}>&#62; 30</div>
-                                </Dropdown.Item>
                             </DropdownButton>
+
+                            <div className={classes.filterWrapper}>
+                                {
+                                    bmiFilters?.length ? bmiFilters.map((item, index) => (
+                                        DropdownChoice(item, item.description, handleRemoveFilterBMI, index)
+                                    ))
+                                        : null
+                                }
+                            </div>
                         </div>
-                        {dropdownMenu}
 
                         <div className={clsx(classes.muscleGroup, classes.selection)}>
                             <DropdownButton className={classes.dropdownBtn} id="dropdown-basic-button" title="Muscle Group">
-                                <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>Arms</div>
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-2" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>Chest</div>
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>Abdomen</div>
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-4" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>Shoulders</div>
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-5" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>Legs</div>
-                                </Dropdown.Item>
+
+                                {
+                                    muscleGroupTypes.map((item, index) => (
+                                        <Dropdown.Item key={index} onClick={() => handleAddFilterMuscle(item)} className={classes.dropdown}>
+                                            <div className={classes.name}>{item.name}</div>
+                                        </Dropdown.Item>
+                                    ))
+                                }
+
                             </DropdownButton>
+
+                            <div className={classes.filterWrapper}>
+                                {
+                                    muscleFilters?.length ? muscleFilters.map((item, index) => (
+                                        DropdownChoice(item, item.name, handleRemoveFilterMuscle, index)
+                                    ))
+                                        : null
+                                }
+                            </div>
                         </div>
-                        {dropdownMenu}
 
                         <div className={clsx(classes.duration, classes.selection)}>
                             <DropdownButton className={classes.dropdownBtn} id="dropdown-basic-button" title="Duration">
-                                <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>15 - 30 Minutes</div>
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-2" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>30 - 60 Minutes</div>
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>60 - 90 Minutes</div>
-                                </Dropdown.Item>
+
+                                {
+                                    durationTypes.map((item, index) => (
+                                        <Dropdown.Item key={index} onClick={() => handleAddFilterDuration(item)} className={classes.dropdown}>
+                                            <div className={classes.name}>{item.name} Minutes</div>
+                                        </Dropdown.Item>
+                                    ))
+                                }
+
                             </DropdownButton>
+
+                            <div className={classes.filterWrapper}>
+                                {
+                                    durationFilters?.length ? durationFilters.map((item, index) => (
+                                        DropdownChoice(item, `${item.name} Minutes`, handleRemoveFilterDuration, index)
+                                    ))
+                                        : null
+                                }
+                            </div>
                         </div>
-                        {dropdownMenu}
 
                         <div className={clsx(classes.intensityLevel, classes.selection)}>
                             <DropdownButton className={classes.dropdownBtn} id="dropdown-basic-button" title="Intensity Level">
-                                <Dropdown.Item href="#/action-1" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>1</div>
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-2" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>2</div>
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>3</div>
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>4</div>
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-3" onClick={onAddBtnClick} className={classes.dropdown}>
-                                    <div className={classes.name}>5</div>
-                                </Dropdown.Item>
+
+                                {
+                                    levelTypes.map((item, index) => (
+                                        <Dropdown.Item key={index} onClick={() => handleAddFilterLevel(item)} className={classes.dropdown}>
+                                            <div className={classes.name}>{item.name}</div>
+                                        </Dropdown.Item>
+                                    ))
+                                }
+
                             </DropdownButton>
+
+                            <div className={classes.filterWrapper}>
+                                {
+                                    levelFilters?.length ? levelFilters.map((item, index) => (
+                                        DropdownChoice(item, item.name, handleRemoveFilterLevel, index)
+                                    ))
+                                        : null
+                                }
+                            </div>
                         </div>
-                        {dropdownMenu}
                     </div>
                 </Col>
                 <Col xs={12} md={9} className={clsx(classes.flex)}>
@@ -146,227 +257,90 @@ const CreatePlan = memo((props) => {
                         <div className={classes.search}>
                             <Form className="d-flex" >
                                 <Form.Control
-                                    type="search"
-                                    placeholder="Search"
-                                    className="me-2"
+                                    type="text"
+                                    placeholder="Search by name"
                                     aria-label="Search"
+                                    value={searchValue}
+                                    onChange={(e) => handleChangeSearch(e.target.value)}
                                 />
-                                <Button className={clsx(classes.btnSearch)}>Create</Button>
                             </Form>
                         </div>
 
                         <Row className={classes.boxExercisePlan}>
-                            <Col xs={12} md={6} lg={4}>
-                                <div className={classes.exercisePlan}>
-                                    <div className={classes.titleExer}>Weight Loss Exercises</div>
-                                    <div className={classes.details}>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.bmi)}>
-                                                BMI &#62; 18.5
-                                            </div>
-                                        </div>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.muscle)}>
-                                                CHEST, SHOULDERS, LEGS
-                                            </div>
-                                        </div>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.durationTime)}>
-                                                1
-                                            </div>
-                                            <div className={clsx(classes.infor, classes.durationUnit)}>
-                                                HOURS
-                                            </div>
-                                        </div>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.intensity)}>
-                                                <div className={classes.name}>
-                                                    DIFFICULTY
-                                                </div>
-                                                <div className={classes.level}>
-                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                </div>
-                                                <div className={classes.txt}>
-                                                    Suitable for beginners
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div className={classes.creatorName}>
-                                        Trương Gia Huy
-                                    </div>
+                            {
+                                content?.length ? content.map((plan) => (
+                                    <Col md={4} key={plan?.id}>
+                                        <div className={classes.exercisePlan}>
+                                            <div className={classes.titleExer}>{plan?.name}</div>
+                                            <div className={classes.details}>
+                                                {
+                                                    plan?.bmi && (
+                                                        <div className={classes.inforBox}>
+                                                            <div className={clsx(classes.infor, classes.bmi)}>
+                                                                BMI {getBMITypes(plan?.bmi)?.description}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
+                                                {
+                                                    plan?.muscleGroup && plan?.muscleGroup?.length && (
+                                                        <div className={classes.inforBox}>
+                                                            <div className={clsx(classes.infor, classes.muscle)}>
+                                                                {plan.muscleGroup.join(', ')}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
+                                                {
+                                                    plan?.hours && (
+                                                        <div className={classes.inforBox}>
+                                                            <div className={clsx(classes.infor, classes.durationTime)}>
+                                                                {getDurationTypes(plan?.hours)?.name}
+                                                            </div>
+                                                            <div className={clsx(classes.infor, classes.durationUnit)}>
+                                                                MINS
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
+                                                {
+                                                    plan?.level && (
+                                                        <div className={classes.inforBox}>
+                                                            <div className={clsx(classes.infor, classes.intensity)}>
+                                                                <div className={classes.name}>
+                                                                    DIFFICULTY
+                                                                </div>
+                                                                <div className={classes.level}>
+                                                                    {
+                                                                        difficultyFormatArray(plan?.level).map((item, index) => (
+                                                                            <div key={index} className={clsx(classes.diffNode, item ? classes.on : classes.off)}></div>
+                                                                        ))
+                                                                    }
+                                                                </div>
+                                                                {/* <div className={classes.txt}>
+                                                                    Suitable for beginners
+                                                                </div> */}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
+                                            </div>
 
-                                    <div className={classes.btn}>
-                                        <Button className={classes.btnEdit}>Edit</Button>
-                                        <Button className={classes.btnDelete}>Delete</Button>
-                                        <Button className={classes.btnSelect}>Select</Button>
-                                    </div>
-                                </div>
-                            </Col>
+                                            <div className={classes.creatorName}>
+                                                {plan?.trainerFirstName} {plan?.trainerLastName}
+                                            </div>
 
-                            <Col xs={12} md={6} lg={4}>
-                                <div className={classes.exercisePlan}>
-                                    <div className={classes.titleExer}>Weight Loss Exercises</div>
-                                    <div className={classes.details}>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.bmi)}>
-                                                BMI &#62; 18.5
+                                            <div className={classes.btn}>
+                                                <Button className={classes.btnDelete}>Delete</Button>
+                                                <Button className={classes.btnEdit}><Link to={`/myplans/${plan?.id}/edit`}>Edit</Link></Button>
                                             </div>
                                         </div>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.muscle)}>
-                                                CHEST, SHOULDERS, LEGS
-                                            </div>
-                                        </div>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.durationTime)}>
-                                                1
-                                            </div>
-                                            <div className={clsx(classes.infor, classes.durationUnit)}>
-                                                HOURS
-                                            </div>
-                                        </div>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.intensity)}>
-                                                <div className={classes.name}>
-                                                    DIFFICULTY
-                                                </div>
-                                                <div className={classes.level}>
-                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                </div>
-                                                <div className={classes.txt}>
-                                                    Suitable for beginners
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className={classes.creatorName}>
-                                        Trương Gia Huy
-                                    </div>
-
-                                    <div className={classes.btn}>
-                                        <Button className={classes.btnEdit}>Edit</Button>
-                                        <Button className={classes.btnDelete}>Delete</Button>
-                                        <Button className={classes.btnSelect}>Select</Button>
-                                    </div>
-                                </div>
-                            </Col>
-
-                            <Col xs={12} md={6} lg={4}>
-                                <div className={classes.exercisePlan}>
-                                    <div className={classes.titleExer}>Weight Loss Exercises</div>
-                                    <div className={classes.details}>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.bmi)}>
-                                                BMI &#62; 18.5
-                                            </div>
-                                        </div>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.muscle)}>
-                                                CHEST, SHOULDERS, LEGS
-                                            </div>
-                                        </div>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.durationTime)}>
-                                                1
-                                            </div>
-                                            <div className={clsx(classes.infor, classes.durationUnit)}>
-                                                HOURS
-                                            </div>
-                                        </div>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.intensity)}>
-                                                <div className={classes.name}>
-                                                    DIFFICULTY
-                                                </div>
-                                                <div className={classes.level}>
-                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                </div>
-                                                <div className={classes.txt}>
-                                                    Suitable for beginners
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className={classes.creatorName}>
-                                        Trương Gia Huy
-                                    </div>
-
-                                    <div className={classes.btn}>
-                                        <Button className={classes.btnEdit}>Edit</Button>
-                                        <Button className={classes.btnDelete}>Delete</Button>
-                                        <Button className={classes.btnSelect}>Select</Button>
-                                    </div>
-                                </div>
-                            </Col>
-
-                            <Col xs={12} md={6} lg={4}>
-                                <div className={classes.exercisePlan}>
-                                    <div className={classes.titleExer}>Weight Loss Exercises</div>
-                                    <div className={classes.details}>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.bmi)}>
-                                                BMI &#62; 18.5
-                                            </div>
-                                        </div>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.muscle)}>
-                                                CHEST, SHOULDERS, LEGS
-                                            </div>
-                                        </div>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.durationTime)}>
-                                                1
-                                            </div>
-                                            <div className={clsx(classes.infor, classes.durationUnit)}>
-                                                HOURS
-                                            </div>
-                                        </div>
-                                        <div className={classes.inforBox}>
-                                            <div className={clsx(classes.infor, classes.intensity)}>
-                                                <div className={classes.name}>
-                                                    DIFFICULTY
-                                                </div>
-                                                <div className={classes.level}>
-                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.on)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                    <div className={clsx(classes.diffNode, classes.off)}></div>
-                                                </div>
-                                                <div className={classes.txt}>
-                                                    Suitable for beginners
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className={classes.creatorName}>
-                                        Trương Gia Huy
-                                    </div>
-
-                                    <div className={classes.btn}>
-                                        <Button className={classes.btnEdit}>Edit</Button>
-                                        <Button className={classes.btnDelete}>Delete</Button>
-                                        <Button className={classes.btnSelect}>Select</Button>
-                                    </div>
-                                </div>
-                            </Col>
+                                    </Col>
+                                ))
+                                    :
+                                    null
+                            }
                         </Row>
                     </Container>
 
@@ -378,4 +352,4 @@ const CreatePlan = memo((props) => {
     )
 })
 
-export default CreatePlan;
+export default Plans;

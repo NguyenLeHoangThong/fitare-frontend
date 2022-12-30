@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import { memo, useMemo, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { push } from "connected-react-router";
@@ -14,17 +14,48 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import classes from "./styles.module.scss";
 import clsx from "clsx";
-import { ClassNames } from "@emotion/react";
+import { Link } from "react-router-dom";
+import { routes } from 'routers/routes.js';
+import { bmiTypes, muscleGroupTypes, durationTypes, levelTypes } from "models/ExercisePlan";
+import { getBMITypes, getMuscleGroupTypes, getDurationTypes, getLevelTypes, difficultyFormatArray } from "utils/exercisePlan";
+import SetExercise from "./components/SetExercise";
 
 const SetExercisePlan = memo((props) => {
 
+    yup.addMethod(yup.array, "muscleGroupCheck", function (errorMessage) {
+        return this.test(`test-muscle-group`, errorMessage, function (value) {
+            const { path, createError } = this;
+
+            let check = false;
+            value.forEach((item) => {
+                if (item.checked) {
+                    check = true;
+                }
+            })
+
+            return (
+                check || createError({ path, message: errorMessage })
+            );
+        });
+    });
+
+    const [isSetExPlan, setIsExPlan] = useState(true);
+    const [exPlanData, setExPlanData] = useState(null);
+    const [exData, setExData] = useState([]);
+
     const schema = useMemo(() => {
         return yup.object().shape({
-            imgaePlan: yup.mixed(),
-            description: yup.string()
+            bannerImage: yup.mixed().required("Please choose an image"),
+            description: yup.string().required("Please type in description"),
+            title: yup.string().required("Please type in plan name"),
+            bmiType: yup.object().required("Please choose a bmi type"),
+            durationType: yup.object().required("Please choose a duration type"),
+            levelType: yup.object().required("Please choose a level type"),
+            muscleGroup: yup.array().muscleGroupCheck("Please choose at least 1 muscle group")
         })
     }, []);
 
+    const dispatch = useDispatch();
 
     const {
         register,
@@ -39,115 +70,152 @@ const SetExercisePlan = memo((props) => {
         mode: "onChange",
     });
 
+    useEffect(() => {
+        if (isSetExPlan) {
+            if (exPlanData) {
+                reset({
+                    bannerImage: exPlanData?.bannerImage,
+                    levelType: exPlanData?.levelType,
+                    durationType: exPlanData?.durationType,
+                    title: exPlanData?.title,
+                    description: exPlanData?.description,
+                    bmiType: exPlanData?.bmiType,
+                    muscleGroup: [...exPlanData?.muscleGroup]
+                })
+            }
+        }
+    }, [dispatch, isSetExPlan])
+
+    const returnExPlan = () => {
+        setIsExPlan(true);
+    }
+
+    const handlePushExData = (data) => {
+        setExData([...exData, data]);
+    }
+
+    const handleSetExData = (data, index) => {
+        const tempExData = [...exData];
+        tempExData[index] = data;
+        setExData([...tempExData]);
+    }
+
     const onSubmit = (data) => {
-        console.log(data);
+        setExPlanData(data);
+        setIsExPlan(false);
     }
 
     return (
         <div>
             <NavigationBar />
-            <div className={classes.container}>
-                <Form onSubmit={handleSubmit(onSubmit)}>
-                    <div className={classes.titlePlan}>&#60; SET-EXERCISE-PLAN-NAME &#62;</div>
-                    <Row className={classes.wrapper}>
-                        <Col xs={12} md={3}>
-                            <div className={classes.setTag}>
-                                <div className={classes.titleSetTag}>Set Tag</div>
-                                <CustomSelect
-                                    className={clsx(classes.selectBMI, classes.customSelect)}
-                                    placeholder="BMI Level"
-                                    name={`BMILevel`}
-                                    control={control}
-                                    options={[
-                                        { id: 1, name: "Underweight", description: "< 18.5" },
-                                        { id: 2, name: "Normal weight", description: "18.5 - 24.9" },
-                                        { id: 3, name: "Overweight", description: "25 - 29.9" },
-                                        { id: 4, name: "Obesity", description: "> 30" },
-                                    ]}
-                                    errorMessage={errors?.BMILevel && errors?.BMILevel?.message}
-                                />
-                                <CustomSelect
-                                    className={clsx(classes.selectDuration, classes.customSelect)}
-                                    placeholder="Duration"
-                                    name={`duration`}
-                                    control={control}
-                                    options={[
-                                        { id: 1, name: "15 - 30 Minutes" },
-                                        { id: 2, name: "30 - 60 Minutes" },
-                                        { id: 3, name: "60 - 90 Minutes" },
-                                    ]}
-                                    errorMessage={errors?.duration && errors?.duration?.message}
-                                />
-                                <CustomSelect
-                                    className={clsx(classes.selectIntensity, classes.customSelect)}
-                                    placeholder="Intensity Level"
-                                    name={`intensity`}
-                                    control={control}
-                                    options={[
-                                        { id: 1, name: "1" },
-                                        { id: 2, name: "2" },
-                                        { id: 3, name: "3" },
-                                        { id: 4, name: "4" },
-                                    ]}
-                                    errorMessage={errors?.intensity && errors?.intensity?.message}
-                                />
-
-                                <div className={classes.muscle}>
-                                    <div className={classes.tagMuscle}>
-                                        Tag Muscle Group
-                                    </div>
-                                    <CustomCheckboxes 
-                                        control={control}
-                                        checkboxRef={"checkboxMuscleGroup"}
-                                        options={[
-                                            { id: 1, name: "Arms" }, 
-                                            { id: 2, name: "Chest" },
-                                            { id: 2, name: "Abdomen" },
-                                            { id: 2, name: "Shoulders" },
-                                            { id: 2, name: "Legs" },
-                                        ]}
-                                    />
-                                </div>
-                            </div>
-                        </Col>
-
-                        <Col xs={12} md={9}>
-                            <div className={classes.content}>
-                                <Controller
-                                    name="imgaePlan"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <UploadImage
-                                            // @ts-ignore
-                                            className={classes.bannerImage}
-                                            errorMessage={errors?.imgaePlan?.message}
-                                            avatar={!field.value}
-                                            value={field.value}
-                                            onChange={(file) => {
-                                                return field.onChange(file)
-                                            }}
+            {
+                isSetExPlan ? (
+                    <div className={classes.container}>
+                        <Form onSubmit={handleSubmit(onSubmit)}>
+                            <Button className={clsx(classes.btnReturn, classes.setMargin)}>
+                                <Link to={routes.myPlans} className={classes.noDecorBack}>&#60; Return </Link>
+                            </Button>
+                            <Row className={classes.wrapper}>
+                                <Col xs={12} md={3}>
+                                    <div className={classes.setTag}>
+                                        <div className={classes.titleSetTag}>Set Tag</div>
+                                        <CustomSelect
+                                            className={clsx(classes.selectBMI, classes.customSelect)}
+                                            placeholder="BMI Level"
+                                            name={`bmiType`}
+                                            control={control}
+                                            options={bmiTypes}
+                                            errorMessage={errors?.bmiType && errors?.bmiType?.message}
                                         />
-                                    )}
-                                />
+                                        <CustomSelect
+                                            className={clsx(classes.selectDuration, classes.customSelect)}
+                                            placeholder="Duration"
+                                            name={`durationType`}
+                                            control={control}
+                                            options={durationTypes}
+                                            errorMessage={errors?.durationType && errors?.durationType?.message}
+                                        />
+                                        <CustomSelect
+                                            className={clsx(classes.selectIntensity, classes.customSelect)}
+                                            placeholder="Intensity Level"
+                                            name={`levelType`}
+                                            control={control}
+                                            options={levelTypes}
+                                            errorMessage={errors?.levelType && errors?.levelType?.message}
+                                        />
 
-                                <CustomInput
-                                    inputRef="description"
-                                    className={classes.textareaInput}
-                                    value="10"
-                                    placeholder="Description:"
-                                    control={control}
-                                    errorMessage={errors?.description?.message}
-                                />
-                            </div>
-                        </Col>
-                        
-                        <div className={classes.btn}>
-                            <Button>Add exercise</Button>
-                            <Button type="submit">Post</Button>
-                        </div>
-                    </Row>   
-                </Form>
-            </div>
+                                        <div className={classes.muscle}>
+                                            <CustomCheckboxes
+                                                title={"Tag Muscle Group"}
+                                                control={control}
+                                                checkboxRef={"muscleGroup"}
+                                                options={muscleGroupTypes}
+                                                classNameWrapper={classes.checkboxes}
+                                                errorMessage={errors?.muscleGroup && errors?.muscleGroup?.message}
+                                                defaultCheckedArray={exPlanData?.muscleGroup}
+                                            />
+                                        </div>
+                                    </div>
+                                </Col>
+
+                                <Col xs={12} md={9}>
+                                    <div className={classes.content}>
+                                        <div>
+                                            <CustomInput
+                                                inputRef="title"
+                                                className={classes.titlePlan}
+                                                placeholder="SET EXERCISE PLAN NAME"
+                                                control={control}
+                                                errorMessage={errors?.title?.message}
+                                            />
+                                        </div>
+                                        <Controller
+                                            name="bannerImage"
+                                            control={control}
+                                            render={({ field }) => (
+                                                <UploadImage
+                                                    // @ts-ignore
+                                                    className={classes.bannerImage}
+                                                    errorMessage={errors?.bannerImage?.message}
+                                                    avatar={!field.value}
+                                                    value={field.value}
+                                                    onChange={(file) => {
+                                                        return field.onChange(file)
+                                                    }}
+                                                />
+                                            )}
+                                        />
+
+                                        <CustomInput
+                                            inputRef="description"
+                                            className={classes.textareaInput}
+                                            placeholder="Description:"
+                                            control={control}
+                                            errorMessage={errors?.description?.message}
+                                            textType="textarea"
+                                        />
+                                    </div>
+                                </Col>
+
+                                <div className={classes.btn}>
+                                    {/* <Button>Add exercise</Button> */}
+                                    <Button type="submit">Add exercise</Button>
+                                </div>
+                            </Row>
+                        </Form>
+                    </div>
+                )
+                    :
+                    <SetExercise
+                        returnExPlan={returnExPlan}
+                        handlePushExData={handlePushExData}
+                        handleSetExData={handleSetExData}
+                        exData={exData}
+                        exPlanData={exPlanData}
+                        isSetExPlan={isSetExPlan}
+                    />
+            }
+
             <Footer />
         </div>
     )

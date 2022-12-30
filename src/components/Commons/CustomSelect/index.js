@@ -18,7 +18,6 @@ const customStyles = (errorMessage) => ({
         cursor: state.isDisabled ? "not-allowed" : "pointer",
         background: state.isSelected ? "#e8f1fb" : "#ffffff",
         color: "#2c2c2c",
-        paddingRight: "54px",
         "&:not(:last-child)": {
             borderBottom: "1px solid var(--color-blue)",
         },
