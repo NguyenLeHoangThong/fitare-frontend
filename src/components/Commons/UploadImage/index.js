@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setLoading, setErrorMess } from "redux/reducers/Status/actionTypes";
 import { Button } from "react-bootstrap";
 import clsx from "clsx";
+import addImagePlaceholder from "./addImagePlaceholder.png";
 
 const UploadImage = memo((props) => {
 
@@ -34,6 +35,9 @@ const UploadImage = memo((props) => {
                 .catch((e) => dispatch(setErrorMess(e)))
                 .finally(() => dispatch(setLoading(false)));
         }
+        else {
+            setImagePreviewUrl(null);
+        }
     }, [value, dispatch])
 
     const handleImageChange = (e) => {
@@ -55,14 +59,16 @@ const UploadImage = memo((props) => {
                     <div>
                         {
                             !imagePreviewUrl ?
-                                <img src="https://via.placeholder.com/800x400" />
+                                <img src={addImagePlaceholder} />
                                 :
                                 <img src={imagePreviewUrl} />
                         }
                         <div className={classes.imageOverlay} onClick={handleClick}></div>
                     </div>
                 </div>
-                <input type="file" onChange={handleImageChange} ref={fileInput} />
+                <input type="file" onChange={handleImageChange} ref={fileInput} accept="image/*" onClick={(event) => {
+                    event.target.value = null
+                }} />
             </div>
             {
                 errorMessage ? <p className={classes.errorMessage}>{errorMessage}</p> : null

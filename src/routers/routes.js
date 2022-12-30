@@ -1,5 +1,16 @@
 export const routes = {
-    default: "/",
+    
     login: "/login",
-    signUp: "/signup"
-}
+    register: "/register",
+
+    plans: "/plans",
+    myPlans: "/myplans",
+    setExercisePlan: "/myplans/create",
+    setExercise: "/setexercise",
+    editExercisePlan: "/editexerciseplan",
+    editExercise: "/editexercise",
+
+
+    setSummary: "/plan/:id",
+    default: "/"
+}   

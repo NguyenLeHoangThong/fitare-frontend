@@ -1,0 +1,128 @@
+.btnRegister {
+    &:hover {
+        background-color: var(--color-orange);
+
+        border-style: solid;
+        border-color: rgba(0, 0, 0, 0);
+    }
+
+    border-style: solid;
+    border-radius: 1.75rem;
+    padding: 0.5rem 1rem;
+
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    min-width: 7rem;
+    min-height: 1.5rem;
+}
+
+.btnLogin {
+    &:hover {
+        background-color: var(--color-orange);
+        border-style: none;
+    }
+
+    background-color: var(--color-white);
+    color: var(--color-blue);
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 1.75rem;
+
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    min-width: 7rem;
+    min-height: 1.5rem;
+}
+
+.loginBox {
+    background-color: var(--color-yellow);
+    padding: 3rem 3rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    min-height: 33.75rem;
+
+    margin: 3.75rem 2.25rem;
+    border-radius: 1rem;
+    
+    input[type="checkbox"] {
+        transform: scale(2);
+    }
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--color-blue);
+    margin: 1rem;
+}
+
+.textboxInput {
+    transition: height 0.5s;
+
+    width: 302.5px;
+    border-radius: 1rem;
+    border-width: 2px;
+    //
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.icon {
+    color: var(--color-blue);
+    font-size: 2.5rem;
+}
+
+.flexContent {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.flexInput {
+    display: flex;
+    flex-direction: row;
+    //align-items: center;
+    gap: 1rem;
+    min-height: 4.5rem;
+
+    margin: 1rem 0rem;
+}
+
+.flexBox {
+    display: flex;
+    gap: 2rem;
+    width: 760px;
+    p {
+        max-width: 302px;
+    }
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.noDecor {
+    &:hover {
+        color: var(--color-white);
+    }
+
+    text-decoration: none;
+    color: var(--color-blue);
+}
+
+.checkBoxBox {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 1.25rem;
+}

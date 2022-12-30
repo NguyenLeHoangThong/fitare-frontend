@@ -1,0 +1,94 @@
+.navigationBar {
+     width: 100%;
+     height: max-content;
+     padding: 20px 20px;
+     background-image: linear-gradient(to bottom, rgb(245, 245, 248), rgba(236, 238, 245, 0.475));
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     align-items: center;
+
+     position: fixed;
+     left: 0;
+     top: 0;
+     z-index: 999;
+     min-height: 86px;
+
+     a {
+          text-decoration: none;
+          color: inherit;
+     }
+
+     a:hover {
+          color: inherit;
+     }
+
+     img {
+          position: absolute;
+          left: 20px;
+     }
+}
+
+.navigator {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-center;
+     gap: 0 100px;
+     align-items: center;
+}
+
+.navigator > div {
+     cursor: pointer;
+}
+
+.navigator > div:hover {
+     background: rgb(236, 136, 59);
+     color: white;
+     font-weight: bolder;
+     letter-spacing: -0.01em;
+}
+
+.route {
+     max-width: 150px;
+     padding: 10px;
+     border: 1px solid transparent;
+     border-radius: 12px;
+}
+
+.active {
+     border: 1px solid rgb(236, 136, 59);
+     color: rgb(181, 105, 23);
+     font-weight: bolder;
+     letter-spacing: -0.01em;
+}
+
+.username {
+     position: absolute;
+     right: 20px;
+}
+
+.username:hover {
+     filter: brightness(120%);
+}
+
+.dropdown {
+     [class~="dropdown-item"] {
+          &:hover {
+               background-color: transparent;
+          }
+     }
+     background-color: transparent;
+     &:hover {
+          background-color: transparent;
+     }
+}
+
+.dropdownItem {
+     margin: 16px 0;
+     color: var(--color-blue);
+     &:hover {
+          font-weight: 600;
+     }
+}

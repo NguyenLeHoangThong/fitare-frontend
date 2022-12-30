@@ -2,6 +2,9 @@ import { memo, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { push } from "connected-react-router";
+
+import NavigationBar from "components/NavigationBar";
+import Footer from "components/Footer";
 import UploadImage from "components/Commons/UploadImage";
 import CustomInput from "components/Commons/CustomInput";
 import CustomSelect from "components/Commons/CustomSelect";
@@ -10,6 +13,8 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import classes from "./styles.module.scss";
+import firebaseApp from "services/Firebase";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const Default = memo((props) => {
 
@@ -19,7 +24,6 @@ const Default = memo((props) => {
     //         name: yup.string()
     //     })
     // }, []);
-
 
     // const {
     //     register,
@@ -34,12 +38,29 @@ const Default = memo((props) => {
     //     mode: "onChange",
     // });
 
-    // const onSubmit = (data) => {
-    //     console.log(data);
-    // }
+
+
+    const onSubmit = (data) => {
+        console.log(data);
+        //const storage = getStorage(firebaseApp);
+        //    const storageRef = ref(storage, `/ExercisePlans/${13}/step1.jpg`);
+        // uploadBytes(storageRef, data?.avatar)
+        //     .then((res) => {
+        //         getDownloadURL(storageRef)
+        //         .then((res) => {
+        //         console.log("Uploaded: ", res)
+        //     })
+        // .catch(d => console.log("do something"))
+        //     })
+        //     .catch( d => console.log("do something"))
+
+
+    }
 
     return (
         <div>
+            <NavigationBar />
+
             {/* <Form onSubmit={handleSubmit(onSubmit)}>
                 <Controller
                     name="avatar"
@@ -70,18 +91,20 @@ const Default = memo((props) => {
                     placeholder="testCustom"
                     name={`testCustom`}
                     control={control}
-                    options={[{id: 1, name: "heelo 1", description: "abcd"}, {id: 2, name: "heelo 2", description: "abcd"},]}
+                    options={[{ id: 1, name: "heelo 1", description: "abcd" }, { id: 2, name: "heelo 2", description: "abcd" },]}
                     errorMessage={errors?.testCustom && errors?.testCustom?.message}
                 />
 
-                <CustomCheckboxes 
+                <CustomCheckboxes
                     control={control}
                     checkboxRef={"testCheckboxes"}
-                    options={[{id: 1, name: "Test 1"}, {id: 2, name: "Test 2"}]}
+                    options={[{ id: 1, name: "Test 1" }, { id: 2, name: "Test 2" }]}
                 />
 
                 <Button type="submit">Submit !</Button>
             </Form> */}
+
+            <Footer />
         </div>
     )
 })

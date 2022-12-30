@@ -1,0 +1,22 @@
+.dropdown {
+    width: max-content;
+    height: max-content;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background-color: var(--color-blue);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: white;
+
+    position: absolute;
+    top: 100%;
+    right: 0;
+
+    z-index: 1;
+}
+
+.dropdown div:hover {
+    font-weight: bolder;
+    cursor: pointer;
+    letter-spacing: -0.015em;
+}
