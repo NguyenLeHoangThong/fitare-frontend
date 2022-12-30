@@ -17,11 +17,14 @@ import { ExercisePlanService } from "services/ExercisePlan";
 import firebaseApp from "services/Firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { setLoading, setErrorMess, setSuccessMess } from "redux/reducers/Status/actionTypes";
+import { setTrainerCreatedPlans } from "redux/reducers/Trainer/actionTypes";
 
 const SetExercisePlan = memo((props) => {
 
     const { returnExPlan, handlePushExData, handleSetExData, exData, isSetExPlan, exPlanData } = props;
     const { user } = useSelector((state) => state?.user)
+    const { createdPlans } = useSelector((state) => state?.trainer)
+
 
     const schema = useMemo(() => {
         return yup.object().shape({
@@ -141,37 +144,40 @@ const SetExercisePlan = memo((props) => {
                 step: index + 1
             }))
 
-            const exercisesRes = await ExercisePlanService.postExercisesOfAPlan(exercisePlanRes.id, {
-                exercises: [...finalExData]
-            })
+            if (finalExData?.length) {
+                const exercisesRes = await ExercisePlanService.postExercisesOfAPlan(exercisePlanRes.id, {
+                    exercises: [...finalExData]
+                })
 
-            const tempImageArray = [];
+                const tempImageArray = [];
 
-            const uploadStepImages = await Promise.all(exercisesRes.map(async (item, index) => {
-                const storageStepRef = ref(storage, `/ExercisePlans/${exercisePlanRes.id}/exercise${item.id}.png`);
-                await uploadBytes(storageStepRef, exData[index]?.imageExercise)
-                    .then(async () => {
-                        return await getDownloadURL(storageStepRef)
-                            .then((bannerImage) => {
-                                tempImageArray.push({
-                                    id: item.id,
-                                    url: bannerImage
+                const uploadStepImages = await Promise.all(exercisesRes.map(async (item, index) => {
+                    const storageStepRef = ref(storage, `/ExercisePlans/${exercisePlanRes.id}/exercise${item.id}.png`);
+                    await uploadBytes(storageStepRef, exData[index]?.imageExercise)
+                        .then(async () => {
+                            return await getDownloadURL(storageStepRef)
+                                .then((bannerImage) => {
+                                    tempImageArray.push({
+                                        id: item.id,
+                                        url: bannerImage
+                                    })
                                 })
-                            })
-                    })
-            }))
+                        })
+                }))
 
-            const finalExImage = exercisesRes.map((item, index) => ({
-                id: item.id,
-                step: item?.step || index,
-                bannerImageUrl: tempImageArray.find((i) => i.id === item.id).url
-            }))
+                const finalExImage = exercisesRes.map((item, index) => ({
+                    id: item.id,
+                    step: item?.step || index,
+                    bannerImageUrl: tempImageArray.find((i) => i.id === item.id).url
+                }))
 
-            const updateImageToExercise = await ExercisePlanService.updateExercisesOfAPlan(exercisePlanRes.id, {
-                exercises: [...finalExImage]
-            })
+                const updateImageToExercise = await ExercisePlanService.updateExercisesOfAPlan(exercisePlanRes.id, {
+                    exercises: [...finalExImage]
+                })
+            }
 
             dispatch((setSuccessMess("Successfully create exercise plan !!!")));
+            dispatch(setTrainerCreatedPlans([...createdPlans, exercisePlanRes]))
             dispatch((push("/myplans")));
 
         }
