@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export class TrainerProfileService {
-  static async getTrainerProfile(id) {
-    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/trainers/${id}`)
+export class TraineeProfileService {
+  static async getTraineeProfile(id) {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/trainees/${id}`)
       .then((res) => {
         return Promise.resolve(res.data);
       })
@@ -11,8 +11,8 @@ export class TrainerProfileService {
       });
   }
 
-  static async postTrainerProfile(data) {
-    return axios.post(`${process.env.REACT_APP_BACKEND_URL}/trainers`, data)
+  static async postTraineeProfile(data) {
+    return axios.post(`${process.env.REACT_APP_BACKEND_URL}/trainees`, data)
       .then((res) => {
         return Promise.resolve(res.data);
       })
