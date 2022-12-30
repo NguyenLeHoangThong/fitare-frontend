@@ -10,6 +10,9 @@ import SetContent from "pages/SetContent";
 import Plans from "pages/Plans";
 import MyPlans from "pages/MyPlans";
 import QCList from "pages/QCList";
+import QCSummary from "pages/QCSummary";
+import QCContent from "pages/QCContent";
+//import QCFinish from "pages/QCFinish";
 import SetExercisePlan from "pages/SetExercisePlan";
 import TraineeAuthRoute from "./TraineeAuthRoute";
 
@@ -30,7 +33,11 @@ const Routers = () =>   {
                 <Route path={routes.setContent} exact render={(props) => <SetContent {...props} />} />
                 
                 <Route path={routes.QCList} exact render={(props) => <QCList {...props} />} />
+                <Route path={routes.QCSummary} exact render={(props) => <QCSummary {...props} />} />
+                <Route path={routes.QCContent} exact render={(props) => <QCContent {...props} />} />
+                {/*<Route path={routes.QCFinish} exact render={(props) => <QCFinish {...props} />} /> */}
                 
+
                 <TraineeAuthRoute path={routes.setSummary} exact render={(props) => <SetSummary {...props} />} />
                 <TraineeAuthRoute path={routes.setContent} exact render={(props) => <SetContent {...props} />} />
                 <Route><Redirect to={routes.default} /></Route>

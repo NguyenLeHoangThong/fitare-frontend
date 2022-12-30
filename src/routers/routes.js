@@ -11,6 +11,10 @@ export const routes = {
     setContent: "/plans-content/:id",
 
     QCList: "/qclist",
+    QCSummary: "/qcsummary",
+    QCContent: "qccontent",
+    QCFinish: "/qcfinish",
+
     default: "/"
 
     
