@@ -48,7 +48,7 @@ const SetExercisePlan = memo((props) => {
             <NavigationBar />
             <div className={classes.container}>
                 <Form onSubmit={handleSubmit(onSubmit)}>
-                    <div className={classes.titlePlan}>&#60; SET-EXERCISE-PLAN-NAME &#62;</div>
+                    <div className={classes.titlePlan}>&#60; EDIT-EXERCISE-PLAN-NAME &#62;</div>
                     <Row className={classes.wrapper}>
                         <Col xs={12} md={3}>
                             <div className={classes.setTag}>
