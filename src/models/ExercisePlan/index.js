@@ -99,3 +99,21 @@ export const levelTypes = [
         value: "EXTREME"
     }
 ];
+
+export const practiceExercisesStatuses = [
+    {
+        id: 1,
+        value: "TODO",
+        name: "To-do"
+    },
+    {
+        id: 2,
+        value: "IN_PROGRESS",
+        name: "In-progress"
+    },
+    {
+        id: 3,
+        value: "DONE",
+        name: "Done"
+    }
+]

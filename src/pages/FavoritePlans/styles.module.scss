@@ -3,16 +3,16 @@
     height: 300px;
 }
 
-.Box{
+.Box {
     margin: 2rem;
 }
 
-.flex{
-    display:flex;
+.flex {
+    display: flex;
     flex-direction: column;
 }
 
-.filterBox{
+.filterBox {
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -21,7 +21,7 @@
     border-width: 2px;
     border-radius: 1rem;
     width: 320px;
-    min-height: 60rem; 
+    min-height: 60rem;
 }
 
 .filterBox .header {
@@ -66,10 +66,10 @@
     font-size: 16px;
 }
 
-.planBox{
+.planBox {
     border-radius: 1rem;
     background-color: var(--color-yellow);
-    min-height: 60rem; 
+    min-height: 60rem;
     padding: 5% 5%;
 }
 
@@ -139,18 +139,18 @@
     gap: 2px;
 }
 
-.intensity .level .diffNode{
+.intensity .level .diffNode {
     height: 10px;
     width: 8px;
     border-radius: 2px;
     color: var(--color-orange);
 }
 
-.intensity .level .on{
+.intensity .level .on {
     background-color: var(--color-blue);
 }
 
-.intensity .level .off{
+.intensity .level .off {
     background-color: var(--color-yellow);
 }
 
@@ -161,8 +161,10 @@
 //button
 .exercisePlan .btn {
     display: flex;
-    justify-content: end;
-    margin: 4px 4px 0 0;
+    justify-content: space-between;
+    margin-top: 4px;
+    padding: 0 4px;
+    align-items: center;
 }
 
 .btnSearch {
@@ -178,7 +180,7 @@
     padding: 4px 24px;
     text-align: center;
     text-decoration: none;
-    
+
     &:hover {
         background-color: var(--color-orange);
         color: var(--color-white);
@@ -193,12 +195,12 @@
 
     font-size: 16px;
     font-weight: 600;
-    
+
     min-width: 120px;
     min-height: 25px;
 }
 
-.dropdownBtn {  
+.dropdownBtn {
     & > div {
         padding: 0;
         border: 1px solid var(--color-blue);
@@ -219,9 +221,9 @@
 }
 
 .content {
-   min-width: 100px;
-   text-align: center;
-   color: var(--color-orange);
+    min-width: 100px;
+    text-align: center;
+    color: var(--color-orange);
 }
 
 .icon {
@@ -240,4 +242,24 @@
     margin: 8px 0;
     display: flex;
     flex-wrap: wrap;
+}
+
+.planStatus {
+    margin-left: 32px;
+    padding: 4px;
+    color: var(--color-white);
+    cursor: default;
+    border-radius: 4px;
+}
+
+.planInProgress {
+    background-color: var(--bs-yellow);
+}
+
+.planDone {
+    background-color: var(--bs-green);
+}
+
+.planToDo {
+    background-color: var(--bs-red);
 }

@@ -1,4 +1,4 @@
-import { bmiTypes, muscleGroupTypes, durationTypes, levelTypes } from "models/ExercisePlan";
+import { bmiTypes, muscleGroupTypes, durationTypes, levelTypes, practiceExercisesStatuses } from "models/ExercisePlan";
 
 export const getBMITypes = (value) => {
     const result = bmiTypes.find((item) => item.value === value);
@@ -35,4 +35,9 @@ export const difficultyFormatArray = (value) => {
     }
 
     return levelArr;
+}
+
+export const getExPlansStatus = (value) => {
+    const result = practiceExercisesStatuses.find((item) => item.value === value);
+    return result;
 }
