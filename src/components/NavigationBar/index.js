@@ -47,7 +47,7 @@ const NavigationBar = () => {
                         {
                             (user?.type === UserTypes.TRAINER && router?.location?.pathname === routes.myPlans)
                                 ?
-                                <div className={clsx(classes.route, classes.active)}>My post</div>
+                                <div className={clsx(classes.route, classes.active)}>My posts</div>
                                 :
                                 (user?.type === UserTypes.TRAINER
                                     ?
@@ -58,7 +58,7 @@ const NavigationBar = () => {
                                     null
                                 )
                         }
-                        {(router?.location?.pathname === '/myfavorites') ? <div className={clsx(classes.route, classes.active)}> Favorites </div> : <div className={classes.route}><Link to={routes.default}>Favorites</Link></div>}
+                        {(router?.location?.pathname === routes.favoritePlans) ? <div className={clsx(classes.route, classes.active)}> <Link to={routes.favoritePlans}>Favorites</Link> </div> : <div className={classes.route}><Link to={routes.favoritePlans}>Favorites</Link></div>}
                         {(router?.location?.pathname === routes.plans) ? <div className={clsx(classes.route, classes.active)}> Marketplace </div> : <div className={classes.route}><Link to={routes.plans}>Marketplace</Link></div>}
                     </div>
                 ) : null

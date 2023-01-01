@@ -80,4 +80,64 @@ export class ExercisePlanService {
         return Promise.reject(e?.response?.data);
       });
   }
+
+  static async postTraineeFavoriteExercisesPlan(userId, exercisePlanId, data) {
+    return axios.post(`${process.env.REACT_APP_BACKEND_URL}/trainees/${userId}/exerciseplans/${exercisePlanId}`, data)
+      .then((res) => {
+        return Promise.resolve(res.data);
+      })
+      .catch((e) => {
+        return Promise.reject(e?.response?.data);
+      });
+  }
+
+  static async postTrainerFavoriteExercisesPlan(userId, exercisePlanId, data) {
+    return axios.post(`${process.env.REACT_APP_BACKEND_URL}/trainers/${userId}/exerciseplans/${exercisePlanId}`, data)
+      .then((res) => {
+        return Promise.resolve(res.data);
+      })
+      .catch((e) => {
+        return Promise.reject(e?.response?.data);
+      });
+  }
+
+  static async updateTraineeFavoriteExercisesPlan(userId, exercisePlanId, data) {
+    return axios.put(`${process.env.REACT_APP_BACKEND_URL}/trainees/${userId}/exerciseplans/${exercisePlanId}`, data)
+      .then((res) => {
+        return Promise.resolve(res.data);
+      })
+      .catch((e) => {
+        return Promise.reject(e?.response?.data);
+      });
+  }
+
+  static async updateTrainerFavoriteExercisesPlan(userId, exercisePlanId, data) {
+    return axios.put(`${process.env.REACT_APP_BACKEND_URL}/trainers/${userId}/exerciseplans/${exercisePlanId}`, data)
+      .then((res) => {
+        return Promise.resolve(res.data);
+      })
+      .catch((e) => {
+        return Promise.reject(e?.response?.data);
+      });
+  }
+
+  static async getTraineeFavoriteExercisesPlan(userId) {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/trainees/${userId}/exerciseplans`)
+      .then((res) => {
+        return Promise.resolve(res.data);
+      })
+      .catch((e) => {
+        return Promise.reject(e?.response?.data);
+      });
+  }
+
+  static async getTrainerFavoriteExercisesPlan(userId) {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/trainers/${userId}/exerciseplans`)
+      .then((res) => {
+        return Promise.resolve(res.data);
+      })
+      .catch((e) => {
+        return Promise.reject(e?.response?.data);
+      });
+  }
 }

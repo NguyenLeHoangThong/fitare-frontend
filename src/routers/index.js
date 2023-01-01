@@ -7,6 +7,7 @@ import Login from "pages/Login";
 import Register from "pages/Register";
 import SetSummary from "pages/SetSummary";
 import Plans from "pages/Plans";
+import FavoritePlans from "pages/FavoritePlans";
 import MyPlans from "pages/MyPlans";
 import SetExercisePlan from "pages/SetExercisePlan";
 import EditExercisePlan from "pages/EditExercisePlan";
@@ -24,11 +25,10 @@ const Routers = () =>   {
                 <RedirectAuthRoute path={routes.register} exact render={(props) => <Register {...props} />} />
                 
                 <TraineeAuthRoute path={routes.plans} exact render={(props) => <Plans {...props} />} />
-                <TraineeAuthRoute path={routes.myPlans} exact render={(props) => <MyPlans {...props} />} />
+                <TraineeAuthRoute path={routes.favoritePlans} exact render={(props) => <FavoritePlans {...props} />} />
 
                 {/* <Route path={routes.setExercisePlan} exact render={(props) => <SetExercisePlan {...props} />} /> */}
 
-                <TraineeAuthRoute path={routes.plans} exact render={(props) => <Plans {...props} />} />
                 <TrainerAuthRoute path={routes.myPlans} exact render={(props) => <MyPlans {...props} />} />
                 <TrainerAuthRoute path={routes.setExercisePlan} exact render={(props) => <SetExercisePlan {...props} />} />
                 

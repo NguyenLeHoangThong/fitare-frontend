@@ -20,7 +20,7 @@ import summaryLogo from './summaryImage.png';
 const SetContent = memo((props) => {
 
     const { id } = useParams();
-    const { exercises, maxStep, handleBackSet } = props;
+    const { exercises, maxStep, handleBackSet, handleFinishPlan } = props;
 
     const [currentStep, setCurrentStep] = useState(0);
     const [showFinishAllSet, setShowFinishAllSet] = useState(false);
@@ -50,7 +50,7 @@ const SetContent = memo((props) => {
             <NavigationBar />
             {
                 showFinishAllSet ? (
-                    <SetFinish planName={exercises[currentStep]?.exercisePlanName} />
+                    <SetFinish handleFinishPlan={handleFinishPlan} planName={exercises[currentStep]?.exercisePlanName} />
                 )
                     : (
                         <div>
