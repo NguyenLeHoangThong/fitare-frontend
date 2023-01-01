@@ -12,7 +12,7 @@ import summaryLogo from './finishImage.png';
 
 const SetFinish = memo((props) => {
 
-    const { planName } = props;
+    const { planName, handleFinishPlan } = props;
 
     return (
         <div>
@@ -27,7 +27,7 @@ const SetFinish = memo((props) => {
                     <div className={classes.resultText}>“Strength does not come from physical capacity. It comes from an indomitable will.” - <i>Mahatma Gandhi</i></div>
                 </div>
 
-                <Button className={classes.btnFinish}><Link to={routes.plans} className={classes.noDecorStart}>FINISH</Link></Button>
+                <Button className={classes.btnFinish} onClick={() => handleFinishPlan()}>FINISH</Button>
 
             </div>
         </div>

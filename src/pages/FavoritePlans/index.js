@@ -19,11 +19,14 @@ import { bmiTypes, muscleGroupTypes, durationTypes, levelTypes } from "models/Ex
 import { Link } from "react-router-dom";
 import { routes } from "routers/routes.js";
 
-const Plans = memo((props) => {
+const FavoritePlans = memo((props) => {
+
+    const { user } = useSelector((state) => state.user);
+    const traineeInformation = useSelector((state) => state.trainee);
+    const trainerInformation = useSelector((state) => state.trainer);
 
     const [defaultContent, setDefaultContent] = useState([]);
     const [content, setContent] = useState([]);
-    const { createdPlans } = useSelector((state) => state?.trainer)
 
     const [bmiFilters, setBmiFilters] = useState([]);
     const [muscleFilters, setMuscleFilters] = useState([]);
@@ -103,8 +106,16 @@ const Plans = memo((props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setDefaultContent(createdPlans);
-        setContent(createdPlans);
+        dispatch(setLoading(true));
+        if (user?.type === "TRAINER") {
+            setDefaultContent(trainerInformation.favoritePlans);
+            setContent(trainerInformation.favoritePlans);
+        }
+        else if (user?.type === "TRAINEE") {
+            setDefaultContent(traineeInformation.favoritePlans);
+            setContent(traineeInformation.favoritePlans);
+        }
+        dispatch(setLoading(false));
     }, [dispatch]);
 
     const handleAddFilterBMI = (value) => {
@@ -150,11 +161,7 @@ const Plans = memo((props) => {
     return (
         <div>
             <NavigationBar />
-
             <Row className={classes.Box}>
-                <div className={classes.createPlanWrapper}>
-                    <Button><Link to={routes.setExercisePlan}>CREATE</Link></Button>
-                </div>
                 <Col xs={12} md={3} className={clsx(classes.flex)}>
                     <div className={classes.filterBox}>
                         <div className={classes.header}>FILTER</div>
@@ -332,8 +339,7 @@ const Plans = memo((props) => {
                                             </div>
 
                                             <div className={classes.btn}>
-                                                <Button className={classes.btnDelete}>Delete</Button>
-                                                <Button className={classes.btnEdit}><Link to={`/my-plans/${plan?.id}/edit`}>Edit</Link></Button>
+                                                <Link to={`/plan/${plan?.id}`} className={classes.btnSelect}>Select</Link>
                                             </div>
                                         </div>
                                     </Col>
@@ -343,8 +349,6 @@ const Plans = memo((props) => {
                             }
                         </Row>
                     </Container>
-
-
                 </Col>
             </Row>
             <Footer />
@@ -352,4 +356,4 @@ const Plans = memo((props) => {
     )
 })
 
-export default Plans;
+export default FavoritePlans;

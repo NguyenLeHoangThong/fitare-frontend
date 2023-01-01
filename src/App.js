@@ -11,8 +11,10 @@ import { setTraineeReducer } from "redux/reducers/Trainee/actionTypes";
 import { setTrainerReducer, setTrainerCreatedPlans, setTrainerFavoritePlans } from "redux/reducers/Trainer/actionTypes";
 import { TrainerProfileService } from "services/Trainer/trainerProfile";
 import { TraineeProfileService } from "services/Trainee/traineeProfile";
+import { ExercisePlanService } from "services/ExercisePlan";
 import { setLoading, setErrorMess } from "redux/reducers/Status/actionTypes";
 import { UserTypes } from "models/User";
+import { setTraineeFavoritePlans } from "redux/reducers/Trainee/actionTypes";
 
 function App({ history, dispatch }) {
 
@@ -38,11 +40,23 @@ function App({ history, dispatch }) {
                     dispatch(setTrainerCreatedPlans(plans))
                   })
                   .catch((error) => dispatch(setErrorMess(error)))
+
+                ExercisePlanService.getTrainerFavoriteExercisesPlan(res?.id)
+                  .then((favoritePlans) => {
+                    dispatch(setTrainerFavoritePlans(favoritePlans))
+                  })
+                  .catch((error) => dispatch(setErrorMess(error)))
               }
               else if (res?.type === UserTypes.TRAINEE) {
                 TraineeProfileService.getTraineeProfile(res?.id)
                   .then((traineeProfile) => {
                     dispatch(setTraineeReducer(traineeProfile))
+                  })
+                  .catch((error) => dispatch(setErrorMess(error)))
+
+                ExercisePlanService.getTraineeFavoriteExercisesPlan(res?.id)
+                  .then((favoritePlans) => {
+                    dispatch(setTraineeFavoritePlans(favoritePlans))
                   })
                   .catch((error) => dispatch(setErrorMess(error)))
               }

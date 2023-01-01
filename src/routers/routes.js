@@ -4,10 +4,11 @@ export const routes = {
     register: "/register",
 
     plans: "/plans",
-    myPlans: "/myplans",
-    setExercisePlan: "/myplans/create",
-    setExercise: "/setexercise",
-    editExercisePlan: "/editexerciseplan",
+    myPlans: "/my-plans",
+    favoritePlans: "/favorite-plans",
+    setExercisePlan: "/my-plans/create",
+    setExercise: "/set-exercise",
+    editExercisePlan: "/edit-plans",
     editExercise: "/editexercise",
 
 

@@ -1,5 +1,5 @@
 import { memo, useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import classes from "./styles.module.scss";
 import Row from 'react-bootstrap/Row';
@@ -20,6 +20,10 @@ import { Link } from "react-router-dom";
 import { routes } from "routers/routes.js";
 
 const Plans = memo((props) => {
+
+    const { user } = useSelector((state) => state.user);
+    const traineeInformation = useSelector((state) => state.trainee);
+    const trainerInformation = useSelector((state) => state.trainer);
 
     const [defaultContent, setDefaultContent] = useState([]);
     const [content, setContent] = useState([]);
@@ -100,17 +104,32 @@ const Plans = memo((props) => {
     }, [bmiFilters, muscleFilters, durationFilters, levelFilters, searchValue])
 
     const dispatch = useDispatch();
-
+    const [fakeRender, setFakeRender] = useState(false);
     useEffect(() => {
         dispatch(setLoading(true));
         ExercisePlanService.getAllAvailableExercisePlan()
             .then((res) => {
                 setDefaultContent(res);
                 setContent(res);
+                setFakeRender(!fakeRender);
             })
             .catch((err) => dispatch(setErrorMess(err)))
             .finally(() => dispatch(setLoading(false)));
     }, [dispatch]);
+
+    useEffect(() => {
+        if (user?.type === "TRAINER") {
+            const resultPlans1 = defaultContent.filter((item) => !trainerInformation.favoritePlans.find((fItem) => fItem.id === item.id))
+            const resultPlans2 = resultPlans1.filter((item) => !trainerInformation.createdPlans.find((fItem) => fItem.id === item.id))
+            setDefaultContent(resultPlans2);
+            setContent(resultPlans2);
+        }
+        else if (user?.type === "TRAINEE") {
+            const resultPlans = defaultContent.filter((item) => !traineeInformation.favoritePlans.find((fItem) => fItem.id === item.id))
+            setDefaultContent(resultPlans);
+            setContent(resultPlans);
+        }
+    }, [dispatch, trainerInformation.favoritePlans, traineeInformation.favoritePlans, fakeRender])
 
     const handleAddFilterBMI = (value) => {
         if (bmiFilters.findIndex((item) => item.value === value.value) === -1) {
@@ -339,7 +358,7 @@ const Plans = memo((props) => {
                                     </Col>
                                 ))
                                     :
-                                    null
+                                    <h1 className={classes.noExMore}>NO MORE AVAILABLE EXERCISE FOR YOU !</h1>
                             }
                         </Row>
                     </Container>

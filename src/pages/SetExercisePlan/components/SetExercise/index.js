@@ -178,7 +178,7 @@ const SetExercisePlan = memo((props) => {
 
             dispatch((setSuccessMess("Successfully create exercise plan !!!")));
             dispatch(setTrainerCreatedPlans([...createdPlans, exercisePlanRes]))
-            dispatch((push("/myplans")));
+            dispatch((push(routes.myPlans)));
 
         }
         catch (error) {
