@@ -11,25 +11,31 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import NavigationBar from "components/NavigationBar";
 import Footer from "components/Footer";
-import { setLoading, setErrorMess } from "redux/reducers/Status/actionTypes";
+import { setLoading, setErrorMess, setSuccessMess } from "redux/reducers/Status/actionTypes";
 import { ExercisePlanService } from "services/ExercisePlan";
 import { getBMITypes, getMuscleGroupTypes, getDurationTypes, getLevelTypes, difficultyFormatArray } from "utils/exercisePlan";
 import { GrClose } from 'react-icons/gr';
 import { bmiTypes, muscleGroupTypes, durationTypes, levelTypes } from "models/ExercisePlan";
 import { Link } from "react-router-dom";
 import { routes } from "routers/routes.js";
+import PopupDeleteExercisePlan from "./components/PopupDeleteExercisePlan";
+import { setTrainerCreatedPlans } from "redux/reducers/Trainer/actionTypes";
 
 const Plans = memo((props) => {
 
     const [defaultContent, setDefaultContent] = useState([]);
     const [content, setContent] = useState([]);
-    const { createdPlans } = useSelector((state) => state?.trainer)
+    const { createdPlans } = useSelector((state) => state?.trainer);
 
     const [bmiFilters, setBmiFilters] = useState([]);
     const [muscleFilters, setMuscleFilters] = useState([]);
     const [durationFilters, setDurationFilters] = useState([]);
     const [levelFilters, setLevelFilters] = useState([]);
     const [searchValue, setSearchValue] = useState("");
+    const [exercisePlanModal, setExercisePlanModal] = useState({
+        isOpen: false,
+        id: null
+    });
 
     const handleChangeSearch = (value) => {
         setSearchValue(value);
@@ -105,7 +111,7 @@ const Plans = memo((props) => {
     useEffect(() => {
         setDefaultContent(createdPlans);
         setContent(createdPlans);
-    }, [dispatch]);
+    }, [dispatch, createdPlans]);
 
     const handleAddFilterBMI = (value) => {
         if (bmiFilters.findIndex((item) => item.value === value.value) === -1) {
@@ -145,6 +151,34 @@ const Plans = memo((props) => {
 
     const handleRemoveFilterLevel = (value) => {
         setLevelFilters([...levelFilters].filter((item) => item.value !== value.value));
+    };
+
+    const deleteExercise = (id) => {
+        dispatch(setLoading(true));
+        ExercisePlanService.deleteAExercisePlan(id)
+            .then(async () => {
+                dispatch(setTrainerCreatedPlans([...createdPlans].filter((item) => item.id !== id)))
+                dispatch(setSuccessMess("Successfully delete exercise plan !"));
+            })
+            .catch((error) => dispatch(setErrorMess(error)))
+            .finally(() => {
+                dispatch(setLoading(false));
+                handleCloseDeleteModal();
+            });
+    }
+
+    const handleDeleteExercisePlan = (id) => {
+        setExercisePlanModal({
+            isOpen: true,
+            id: id
+        })
+    };
+
+    const handleCloseDeleteModal = () => {
+        setExercisePlanModal({
+            isOpen: false,
+            id: null
+        })
     };
 
     return (
@@ -332,7 +366,7 @@ const Plans = memo((props) => {
                                             </div>
 
                                             <div className={classes.btn}>
-                                                <Button className={classes.btnDelete}>Delete</Button>
+                                                <Button className={classes.btnDelete} onClick={() => handleDeleteExercisePlan(plan?.id)}>Delete</Button>
                                                 <Button className={classes.btnEdit}><Link to={`/my-plans/${plan?.id}/edit`}>Edit</Link></Button>
                                             </div>
                                         </div>
@@ -343,10 +377,16 @@ const Plans = memo((props) => {
                             }
                         </Row>
                     </Container>
-
-
                 </Col>
             </Row>
+
+            <PopupDeleteExercisePlan
+                isShowModal={exercisePlanModal.isOpen}
+                deleteId={exercisePlanModal.id}
+                handleClose={handleCloseDeleteModal}
+                handleDelete={deleteExercise}
+            />
+
             <Footer />
         </div>
     )

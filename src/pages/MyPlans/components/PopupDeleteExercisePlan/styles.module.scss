@@ -1,0 +1,24 @@
+.title {
+    color: var(--bs-red);
+    font-size: 20px;
+}
+
+.buttonDelete {
+    background-color: var(--bs-red);
+    border-color: var(--bs-red);
+    &:hover {
+        background-color: var(--bs-red);
+        border-color: var(--bs-red);
+        opacity: 0.8;
+    }
+}
+
+.buttonClose {
+    background-color: var(--bs-gray);
+    border-color: var(--bs-gray);
+    &:hover {
+        background-color: var(--bs-gray);
+        border-color: var(--bs-gray);
+        opacity: 0.8;
+    }
+}
