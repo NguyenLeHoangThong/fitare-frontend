@@ -76,13 +76,16 @@ const SetSummary = memo((props) => {
         setIsStartSet(true);
 
         if (user?.type === "TRAINEE") {
-            if (traineeInformation.favoritePlans.find((item) => item.id !== Number(id))) {
+            if (!traineeInformation.favoritePlans.find((item) => item.id === Number(id))) {
                 // create
                 ExercisePlanService.postTraineeFavoriteExercisesPlan(user?.id, id, {
                     status: "IN_PROGRESS"
                 })
                     .then((res) => {
-                        dispatch(setTraineeFavoritePlans([...traineeInformation.favoritePlans, plan]))
+                        dispatch(setTraineeFavoritePlans([...traineeInformation.favoritePlans, {
+                            ...plan,
+                            status: "IN_PROGRESS"
+                        }]))
                         dispatch(setSuccessMess("Successfully start exercise plan !!!"))
                     })
                     .catch((error) => dispatch(setErrorMess(error)))
@@ -94,7 +97,7 @@ const SetSummary = memo((props) => {
                 })
                     .then((res) => {
                         const newExercisePlans = [...traineeInformation.favoritePlans].map((item) => {
-                            if (item.id === id) {
+                            if (item.id === Number(id)) {
                                 return ({
                                     ...item,
                                     status: "IN_PROGRESS"
@@ -109,13 +112,16 @@ const SetSummary = memo((props) => {
             }
         }
         else if (user?.type === "TRAINER") {
-            if (trainerInformation.favoritePlans.find((item) => item.id !== Number(id))) {
+            if (!trainerInformation.favoritePlans.find((item) => item.id === Number(id))) {
                 // create
                 ExercisePlanService.postTrainerFavoriteExercisesPlan(user?.id, id, {
                     status: "IN_PROGRESS"
                 })
                     .then((res) => {
-                        dispatch(setTrainerFavoritePlans([...trainerInformation.favoritePlans, plan]))
+                        dispatch(setTrainerFavoritePlans([...trainerInformation.favoritePlans, {
+                            ...plan,
+                            status: "IN_PROGRESS"
+                        }]))
                         dispatch(setSuccessMess("Successfully start exercise plan !!!"))
                     })
                     .catch((error) => dispatch(setErrorMess(error)))
@@ -127,7 +133,7 @@ const SetSummary = memo((props) => {
                 })
                     .then((res) => {
                         const newExercisePlans = [...trainerInformation.favoritePlans].map((item) => {
-                            if (item.id === id) {
+                            if (item.id === Number(id)) {
                                 return ({
                                     ...item,
                                     status: "IN_PROGRESS"
@@ -151,7 +157,7 @@ const SetSummary = memo((props) => {
             })
                 .then((res) => {
                     const newExercisePlans = [...traineeInformation.favoritePlans].map((item) => {
-                        if (item.id === id) {
+                        if (item.id === Number(id)) {
                             return ({
                                 ...item,
                                 status: "DONE"
@@ -173,7 +179,7 @@ const SetSummary = memo((props) => {
             })
                 .then((res) => {
                     const newExercisePlans = [...trainerInformation.favoritePlans].map((item) => {
-                        if (item.id === id) {
+                        if (item.id === Number(id)) {
                             return ({
                                 ...item,
                                 status: "DONE"
@@ -197,7 +203,10 @@ const SetSummary = memo((props) => {
                 status: "TODO"
             })
                 .then((res) => {
-                    dispatch(setTraineeFavoritePlans([...traineeInformation.favoritePlans, plan]))
+                    dispatch(setTraineeFavoritePlans([...traineeInformation.favoritePlans, {
+                        ...plan,
+                        status: "TODO"
+                    }]))
                     dispatch(setSuccessMess("Successfully add to exercise plans !!!"))
                 })
                 .catch((error) => dispatch(setErrorMess(error)))
@@ -208,7 +217,10 @@ const SetSummary = memo((props) => {
                 status: "TODO"
             })
                 .then((res) => {
-                    dispatch(setTrainerFavoritePlans([...trainerInformation.favoritePlans, plan]))
+                    dispatch(setTrainerFavoritePlans([...trainerInformation.favoritePlans, {
+                        ...plan,
+                        status: "TODO"
+                    }]))
                     dispatch(setSuccessMess("Successfully add to exercise plans !!!"))
                 })
                 .catch((error) => dispatch(setErrorMess(error)))

@@ -13,7 +13,7 @@ import NavigationBar from "components/NavigationBar";
 import Footer from "components/Footer";
 import { setLoading, setErrorMess } from "redux/reducers/Status/actionTypes";
 import { ExercisePlanService } from "services/ExercisePlan";
-import { getBMITypes, getMuscleGroupTypes, getDurationTypes, getLevelTypes, difficultyFormatArray } from "utils/exercisePlan";
+import { getBMITypes, getMuscleGroupTypes, getDurationTypes, getLevelTypes, difficultyFormatArray, getExPlansStatus } from "utils/exercisePlan";
 import { GrClose } from 'react-icons/gr';
 import { bmiTypes, muscleGroupTypes, durationTypes, levelTypes } from "models/ExercisePlan";
 import { Link } from "react-router-dom";
@@ -339,6 +339,16 @@ const FavoritePlans = memo((props) => {
                                             </div>
 
                                             <div className={classes.btn}>
+                                                <div className={clsx(classes.planStatus,
+                                                    getExPlansStatus(plan?.status)?.value === "IN_PROGRESS"
+                                                        ? classes.planInProgress
+                                                        :
+                                                        getExPlansStatus(plan?.status)?.value === "DONE"
+                                                            ? classes.planDone : classes.planToDo)}>
+                                                    {
+                                                        getExPlansStatus(plan?.status)?.name
+                                                    }
+                                                </div>
                                                 <Link to={`/plan/${plan?.id}`} className={classes.btnSelect}>Select</Link>
                                             </div>
                                         </div>
