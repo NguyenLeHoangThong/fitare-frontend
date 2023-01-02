@@ -7,10 +7,7 @@ export const routes = {
     myPlans: "/my-plans",
     favoritePlans: "/favorite-plans",
     setExercisePlan: "/my-plans/create",
-    setExercise: "/set-exercise",
-    editExercisePlan: "/edit-plans",
-    editExercise: "/editexercise",
-
+    editExercisePlan: "/my-plans/:planId/edit",
 
     setSummary: "/plan/:id",
     default: "/"

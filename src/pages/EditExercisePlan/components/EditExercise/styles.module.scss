@@ -43,11 +43,15 @@
     font-weight: 500;
     font-size: 40px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .bannerImage {
-    height: 280px;
-    margin-bottom: 40px;
+    height: 400px;
+    background-color: #ccc;
+    max-width: 100%;
+    min-width: 80%;
+    margin-bottom: 16px;
 }
 
 .linkVideo {

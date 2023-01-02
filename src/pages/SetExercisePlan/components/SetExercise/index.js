@@ -121,16 +121,17 @@ const SetExercisePlan = memo((props) => {
                 isCensored: false
             }
 
-
+            let bannerImageUrlDispatch;
             const exercisePlanRes = await ExercisePlanService.createAExercisePlan(exPlanPostData)
 
             const storage = getStorage(firebaseApp);
             const storageRef = ref(storage, `/ExercisePlans/${exercisePlanRes.id}/bannerImage.png`);
             await uploadBytes(storageRef, exPlanData?.bannerImage)
-                .then(() => {
-                    getDownloadURL(storageRef)
-                        .then((bannerImage) => {
-                            ExercisePlanService.updateAExercisePlan(exercisePlanRes.id, {
+                .then(async () => {
+                    return await getDownloadURL(storageRef)
+                        .then(async (bannerImage) => {
+                            bannerImageUrlDispatch = bannerImage;
+                            return await ExercisePlanService.updateAExercisePlan(exercisePlanRes.id, {
                                 bannerImageUrl: bannerImage
                             })
                         })
@@ -177,7 +178,10 @@ const SetExercisePlan = memo((props) => {
             }
 
             dispatch((setSuccessMess("Successfully create exercise plan !!!")));
-            dispatch(setTrainerCreatedPlans([...createdPlans, exercisePlanRes]))
+            dispatch(setTrainerCreatedPlans([...createdPlans, {
+                ...exercisePlanRes,
+                bannerImageUrl: bannerImageUrlDispatch
+            }]))
             dispatch((push(routes.myPlans)));
 
         }

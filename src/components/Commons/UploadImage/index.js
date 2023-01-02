@@ -9,7 +9,7 @@ import addImagePlaceholder from "./addImagePlaceholder.png";
 const UploadImage = memo((props) => {
 
     // @ts-ignore
-    const { value, onChange, className, errorMessage } = props;
+    const { value, onChange, className, errorMessage, placeholderImageUrl } = props;
 
     const dispatch = useDispatch();
 
@@ -59,7 +59,7 @@ const UploadImage = memo((props) => {
                     <div>
                         {
                             !imagePreviewUrl ?
-                                <img src={addImagePlaceholder} />
+                                <img src={placeholderImageUrl || addImagePlaceholder} />
                                 :
                                 <img src={imagePreviewUrl} />
                         }
