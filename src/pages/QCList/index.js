@@ -196,9 +196,7 @@ const Plans = memo((props) => {
                                                 {plan?.trainerFirstName} {plan?.trainerLastName}
                                             </div>
                                             <div className={classes.flexRow}>
-                                                <div className={classes.btn}>
-                                                    <Link className={classes.btnApprove}>Approve</Link>
-                                                </div>
+                                                
 
                                                 <div className={classes.btn}>
                                                     <Link to={`/plans-summary/${plan?.id}`} className={classes.btnSelect}>Select</Link>

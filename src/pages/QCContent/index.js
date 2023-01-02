@@ -91,7 +91,7 @@ const SetContent = memo((props) => {
                                         <div className={classes.flexContent}>
                                             <Button className={classes.btnFavorites} disabled={currentStep <= 0} onClick={() => handleReturnSet()}>RETURN</Button>
                                             <div className={classes.pageNumberBox}> {currentStep + 1}/{maxStep} </div>
-                                            <Button className={classes.btnFinish} onClick={() => handleFinishSet()}>FINISH</Button>
+                                            <Button className={classes.btnFinish} onClick={() => handleFinishSet()}>Next</Button>
                                         </div>
                                     </div>
                                 ) : null

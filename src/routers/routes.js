@@ -13,7 +13,7 @@ export const routes = {
     QCList: "/qclist",
     QCSummary: "/qcsummary",
     QCContent: "qccontent",
-    QCFinish: "/qcfinish",
+    //QCFinish: "/qcfinish",
 
     default: "/"
 
