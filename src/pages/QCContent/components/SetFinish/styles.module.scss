@@ -1,0 +1,219 @@
+//button
+.btnReturn {
+    &:hover {
+        background-color: rgba(0, 0, 0, 0);
+        color: var(--color-gray);
+        text-shadow: 0.15rem 0.15rem 0.2rem;
+        border-style: none;
+        font-weight: 700
+    }
+
+    border-style:none;
+
+    letter-spacing: 0.3rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+
+    min-width: 7rem;
+    min-height: 1.5rem;
+
+    color:var(--color-gray);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.btnFinish {
+    &:hover {
+        background-color: var(--color-orange);
+        
+        border-style: solid;
+        border-color: rgba(0,0,0,0);
+    }
+
+    margin: 2rem 0  0 0;
+
+    border-style: solid;
+    border-radius: 1.75rem;
+    padding: 0.25rem 1rem;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    min-width: 12rem;
+    min-height: 1.5rem;
+}
+
+//container
+.setMargin {
+    margin: 3.75rem 2.25rem 0rem 2.25rem;
+}
+
+.summaryBox {
+    background-color: var(--color-yellow);
+    padding: 3rem 3rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    min-height: 41.75rem;
+
+    margin: 0rem 2.25rem 3.75rem 2.25rem;
+    border-radius: 1rem;
+    border-style: solid;
+    border-color: var(--color-blue);
+    border-width: 2px;
+
+}
+
+
+//Title
+.setName {
+    color: black;
+
+
+    letter-spacing: 0.1rem;
+    font-weight: 600;
+    font-size: 2.5rem;
+}
+
+.setComplete {
+    color: black;   
+
+    letter-spacing: 0.2rem;
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+.image {
+    border-radius: 1rem;
+    height: 375px;
+}
+
+.resultBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 0.5rem;
+
+    background-color: var(--color-white);
+    color:black;
+
+    width: 50rem;
+    height: 15rem;
+
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 1rem;
+    border-color: var(--color-blue);
+
+    margin: 0.5rem;
+}
+
+.resultText{
+    font-size: 2.5rem;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flexContent {
+    display: flex;
+    justify-content: space-between;
+
+    min-width: 40rem;
+}
+
+.flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    gap: 1.25rem;
+}
+
+.flexInput {
+    display: flex;
+    flex-direction: row;
+    //align-items: center;
+    gap: 1rem;
+    min-height: 4.5rem;
+
+    margin: 1rem 0rem;
+}
+
+.noDecorStart{
+    &:hover{
+        color: var(--color-white);
+    }
+    text-decoration: none;
+    color: var(--color-white);
+    
+}
+
+.noDecorBack{
+    &:hover{
+        color: var(--color-black);
+    }
+    text-decoration: none;
+    color: var(--color-black);
+    
+}
+
+.flexContent {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 1rem;
+    min-width: 800px;
+}
+
+.btnApprove {
+    &:hover {
+        background-color: var(--color-orange);
+        border-style: solid;
+        border-color:rgba(0, 0, 0, 0);
+    }
+
+    border-color: var(--color-blue);
+    background-color: var(--color-white);
+    color: var(--color-blue);
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 1.75rem;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    min-width: 12.75rem;
+    min-height: 1.5rem;
+}
+
+.btnDecline {
+    &:hover {
+        background-color: var(--color-orange);
+        color: var(--white);
+        border-style: solid;
+        border-color:rgba(0, 0, 0, 0);
+    }
+    
+    background-color: var(--color-white);
+    color: var(--color-orange);
+    border-color: var(--color-orange);
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 1.75rem;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    min-width: 12.75rem;
+    min-height: 1.5rem;
+}
+

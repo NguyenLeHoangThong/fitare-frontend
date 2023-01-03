@@ -9,6 +9,16 @@ export const routes = {
     setExercisePlan: "/my-plans/create",
     editExercisePlan: "/my-plans/:planId/edit",
 
+    //setSummary: "/plans-summary/:id",    
+    //setContent: "/plans-content/:id",
+
+    QCList: "/qclist",
+    QCSummary: "/qcsummary",
+    QCContent: "qccontent",
+    //QCFinish: "/qcfinish",
+
     setSummary: "/plan/:id",
     default: "/"
+
+    
 }   
