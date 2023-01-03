@@ -24,68 +24,15 @@ const Plans = memo((props) => {
     const [defaultContent, setDefaultContent] = useState([]);
     const [content, setContent] = useState([]);
 
-    const [bmiFilters, setBmiFilters] = useState([]);
-    const [muscleFilters, setMuscleFilters] = useState([]);
-    const [durationFilters, setDurationFilters] = useState([]);
-    const [levelFilters, setLevelFilters] = useState([]);
     const [searchValue, setSearchValue] = useState("");
 
     const handleChangeSearch = (value) => {
         setSearchValue(value);
     }
 
-    const DropdownChoice = (value, name, handleClickBtn, index) => {
-
-        return (
-            <div className={classes.dropdownChoice} key={index}>
-                <div className={classes.content}>
-                    {name}
-                </div>
-                <Button onClick={() => handleClickBtn(value)} type="button" className={classes.icon}>
-                    <GrClose />
-                </Button>
-            </div>
-        )
-    }
-
     useEffect(() => {
 
         const renderArray = [...defaultContent]
-            .filter((i1) => {
-                if (bmiFilters?.length > 0) {
-                    return bmiFilters.findIndex((f1) => i1.bmi === f1.value) !== -1
-                }
-                else {
-                    return true;
-                }
-            })
-            .filter((i2) => {
-                if (muscleFilters?.length > 0) {
-                    if (!i2?.muscleGroup || !i2?.muscleGroup?.length) {
-                        return false;
-                    }
-                    return i2?.muscleGroup.some(r => muscleFilters.map((item) => item?.value).indexOf(r) >= 0)
-                }
-                else {
-                    return true;
-                }
-            })
-            .filter((i3) => {
-                if (durationFilters?.length > 0) {
-                    return durationFilters.findIndex((f3) => i3.hours === f3.value) !== -1
-                }
-                else {
-                    return true;
-                }
-            })
-            .filter((i4) => {
-                if (levelFilters?.length > 0) {
-                    return levelFilters.findIndex((f4) => i4.level === f4.value) !== -1
-                }
-                else {
-                    return true;
-                }
-            })
             .filter((i5) => {
                 if (!searchValue) {
                     return true;
@@ -97,13 +44,13 @@ const Plans = memo((props) => {
 
         setContent(renderArray);
 
-    }, [bmiFilters, muscleFilters, durationFilters, levelFilters, searchValue])
+    }, [searchValue])
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(setLoading(true));
-        ExercisePlanService.getAllAvailableExercisePlan()
+        ExercisePlanService.getAllUncensoredExercisePlan()
             .then((res) => {
                 setDefaultContent(res);
                 setContent(res);
@@ -196,10 +143,9 @@ const Plans = memo((props) => {
                                                 {plan?.trainerFirstName} {plan?.trainerLastName}
                                             </div>
                                             <div className={classes.flexRow}>
-                                                
 
                                                 <div className={classes.btn}>
-                                                    <Link to={`/plans-summary/${plan?.id}`} className={classes.btnSelect}>Select</Link>
+                                                    <Link to={`/censored/plan/${plan?.id}`} className={classes.btnSelect}>Select</Link>
                                                 </div>
                                             </div>
 

@@ -11,8 +11,28 @@ export class ExercisePlanService {
       });
   }
 
+  static async getAllUncensoredExercisePlan(id) {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/exerciseplans?status=uncensored`)
+      .then((res) => {
+        return Promise.resolve(res.data);
+      })
+      .catch((e) => {
+        return Promise.reject(e?.response?.data);
+      });
+  }
+
   static async getOneAvailableExercisePlan(id) {
     return axios.get(`${process.env.REACT_APP_BACKEND_URL}/exerciseplans/${id}?status=censored`)
+      .then((res) => {
+        return Promise.resolve(res.data);
+      })
+      .catch((e) => {
+        return Promise.reject(e?.response?.data);
+      });
+  }
+
+  static async getOneNotAvailableExercisePlan(id) {
+    return axios.get(`${process.env.REACT_APP_BACKEND_URL}/exerciseplans/${id}?status=uncensored`)
       .then((res) => {
         return Promise.resolve(res.data);
       })
@@ -42,7 +62,17 @@ export class ExercisePlanService {
   }
 
   static async censoredAExercisePlan(id) {
-    return axios.put(`${process.env.REACT_APP_BACKEND_URL}/exerciseplans/${id}`)
+    return axios.put(`${process.env.REACT_APP_BACKEND_URL}/exerciseplans/${id}/censored`)
+      .then((res) => {
+        return Promise.resolve(res.data);
+      })
+      .catch((e) => {
+        return Promise.reject(e?.response?.data);
+      });
+  }
+
+  static async notCensoredAExercisePlan(id) {
+    return axios.put(`${process.env.REACT_APP_BACKEND_URL}/exerciseplans/${id}/not-censored`)
       .then((res) => {
         return Promise.resolve(res.data);
       })

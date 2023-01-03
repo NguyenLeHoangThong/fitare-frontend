@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { routes } from "./routes";
 
 
-const RedirectAuthRoute = ({
+const QualityControllerRoute = ({
     path,
     render,
     ...rest
@@ -16,20 +16,20 @@ const RedirectAuthRoute = ({
         <Route
             {...rest}
             render={(props) => {
-                if (user && user?.type !== "QUALITY_CONTROLLER") {
+                if (!user) {
                     return (
                         <Redirect
                             to={{
-                                pathname: routes.plans,
+                                pathname: routes.login,
                             }}
                         />
                     );
                 }
-                else if (user && user?.type == "QUALITY_CONTROLLER") {
+                else if (user.type !== "QUALITY_CONTROLLER") {
                     return (
                         <Redirect
                             to={{
-                                pathname: routes.QCList,
+                                pathname: routes.plans,
                             }}
                         />
                     );
@@ -40,4 +40,4 @@ const RedirectAuthRoute = ({
     );
 };
 
-export default RedirectAuthRoute;
+export default QualityControllerRoute;

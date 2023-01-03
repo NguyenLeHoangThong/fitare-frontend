@@ -14,7 +14,7 @@ import { ExercisePlanService } from "services/ExercisePlan";
 import { getBMITypes, getMuscleGroupTypes, getDurationTypes, getLevelTypes, difficultyFormatArray } from "utils/exercisePlan";
 import NavigationBar from "components/NavigationBar";
 import Footer from "components/Footer";
-
+import QCContent from "./components/QCContent";
 //Image:
 import summaryLogo from './summaryImage.png';
 const SetSummary = memo((props) => {
@@ -22,92 +22,97 @@ const SetSummary = memo((props) => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const [plan, setPlan] = useState(null);
+    const [isStartPlan, setIsStartPlan] = useState(false);
 
     useEffect(() => {
         dispatch(setLoading(true));
-        ExercisePlanService.getOneAvailableExercisePlan(id)
+        ExercisePlanService.getOneNotAvailableExercisePlan(id)
             .then((res) => {
                 if (!res) {
-                    dispatch(push(routes.plans));
+                    dispatch(push(routes.QCList));
                 }
                 setPlan(res);
             })
             .catch((err) => {
                 dispatch(setErrorMess(err))
-                dispatch(push(routes.plans))
+                dispatch(push(routes.QCList))
             })
             .finally(() => dispatch(setLoading(false)))
 
     }, [dispatch])
 
+
     return (
         <>
             <NavigationBar />
 
-            <div>
-                <Button className={clsx(classes.btnReturn, classes.setMargin)}><Link to={routes.plans} className={classes.noDecorBack}>&#60; ALL EXERCISE </Link>	</Button>
-                <div className={classes.summaryBox}>
-                    <div className={classes.setName}>{plan?.name}</div>
-                    <div className={classes.setCreator}>Set Creator: {plan?.trainerFirstName} {plan?.trainerLastName}</div>
+            {
+                !isStartPlan ?
+                    <div>
+                        <Button className={clsx(classes.btnReturn, classes.setMargin)}><Link to={routes.QCList} className={classes.noDecorBack}>&#60; ALL EXERCISE </Link>	</Button>
+                        <div className={classes.summaryBox}>
+                            <div className={classes.setName}>{plan?.name}</div>
+                            <div className={classes.setCreator}>Set Creator: {plan?.trainerFirstName} {plan?.trainerLastName}</div>
 
-                    <Row className={classes.infoBox}>
-                        <Col xs={12} md={4} className={classes.flexCenter}>
-                            <img src={plan?.bannerImageUrl || summaryLogo} className={classes.image} alt="setImage" />
-                        </Col>
-                        <Col xs={12} md={5} className={classes.flexCenter}>
-                            <div className={classes.description}>Description: {plan?.description}</div>
-                        </Col>
-                        <Col xs={12} md={3} className={clsx(classes.flexCenter, classes.leftColumn)}>
+                            <Row className={classes.infoBox}>
+                                <Col xs={12} md={4} className={classes.flexCenter}>
+                                    <img src={plan?.bannerImageUrl || summaryLogo} className={classes.image} alt="setImage" />
+                                </Col>
+                                <Col xs={12} md={5} className={classes.flexCenter}>
+                                    <div className={classes.description}>Description: {plan?.description}</div>
+                                </Col>
+                                <Col xs={12} md={3} className={clsx(classes.flexCenter, classes.leftColumn)}>
 
-                            {
-                                plan?.level && (
-                                    <div className={clsx(classes.tagBox, classes.flexCol)}>
-                                        <div>Difficulty</div>
-                                        <div className={classes.flexRow}>
-                                            {
-                                                difficultyFormatArray(plan?.level).map((item, index) => (
-                                                    <div key={index} className={clsx(classes.diffNode, item ? classes.on : classes.off)}></div>
-                                                ))
-                                            }
-                                        </div>
-                                    </div>
-                                )
-                            }
+                                    {
+                                        plan?.level && (
+                                            <div className={clsx(classes.tagBox, classes.flexCol)}>
+                                                <div>Difficulty</div>
+                                                <div className={classes.flexRow}>
+                                                    {
+                                                        difficultyFormatArray(plan?.level).map((item, index) => (
+                                                            <div key={index} className={clsx(classes.diffNode, item ? classes.on : classes.off)}></div>
+                                                        ))
+                                                    }
+                                                </div>
+                                            </div>
+                                        )
+                                    }
 
-                            {
-                                plan?.muscleGroup && plan?.muscleGroup?.length && (
-                                    <div className={classes.tagBox}>
-                                        {plan.muscleGroup.join(', ')}
-                                    </div>
-                                )
-                            }
+                                    {
+                                        plan?.muscleGroup && plan?.muscleGroup?.length && (
+                                            <div className={classes.tagBox}>
+                                                {plan.muscleGroup.join(', ')}
+                                            </div>
+                                        )
+                                    }
 
-                            {
-                                plan?.bmi && (
-                                    <div className={classes.tagBox}>
-                                        BMI {getBMITypes(plan?.bmi)?.description}
-                                    </div>
-                                )
-                            }
+                                    {
+                                        plan?.bmi && (
+                                            <div className={classes.tagBox}>
+                                                BMI {getBMITypes(plan?.bmi)?.description}
+                                            </div>
+                                        )
+                                    }
 
-                            {
-                                plan?.hours && (
-                                    <div className={classes.tagBox}>
-                                        {getDurationTypes(plan?.hours)?.name}{" "}
-                                        Mins
-                                    </div>
-                                )
-                            }
-                        </Col>
-                    </Row>
+                                    {
+                                        plan?.hours && (
+                                            <div className={classes.tagBox}>
+                                                {getDurationTypes(plan?.hours)?.name}{" "}
+                                                Mins
+                                            </div>
+                                        )
+                                    }
+                                </Col>
+                            </Row>
 
-                    <div className={classes.flexContent}>
-                        <Button className={classes.btnApprove}>Approve</Button>
-                        <Button className={classes.btnDecline}>Decline</Button>
-                        <Button type="submit" className={classes.btnStart} ><Link to={`/plans-content/`} className={classes.noDecorStart}>START SET</Link></Button>
+                            <div className={clsx(classes.flexContent, "justify-content-end")}>
+                                <Button type="button" className={classes.btnStart} onClick={() => setIsStartPlan(true)}>START SET</Button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                    :
+                    <QCContent planId={id} handleBackSummary={() => setIsStartPlan(false)}/>
+            }
 
             <Footer />
         </>

@@ -18,6 +18,7 @@ import { GrClose } from 'react-icons/gr';
 import { bmiTypes, muscleGroupTypes, durationTypes, levelTypes } from "models/ExercisePlan";
 import { Link } from "react-router-dom";
 import { routes } from "routers/routes.js";
+import { push } from "connected-react-router";
 
 const Plans = memo((props) => {
 
@@ -106,15 +107,20 @@ const Plans = memo((props) => {
     const dispatch = useDispatch();
     const [fakeRender, setFakeRender] = useState(false);
     useEffect(() => {
-        dispatch(setLoading(true));
-        ExercisePlanService.getAllAvailableExercisePlan()
-            .then((res) => {
-                setDefaultContent(res);
-                setContent(res);
-                setFakeRender(!fakeRender);
-            })
-            .catch((err) => dispatch(setErrorMess(err)))
-            .finally(() => dispatch(setLoading(false)));
+        if (user?.type === "QUALITY_CONTROLLER") {
+            dispatch(push(routes.QCList));
+        }
+        else {
+            dispatch(setLoading(true));
+            ExercisePlanService.getAllAvailableExercisePlan()
+                .then((res) => {
+                    setDefaultContent(res);
+                    setContent(res);
+                    setFakeRender(!fakeRender);
+                })
+                .catch((err) => dispatch(setErrorMess(err)))
+                .finally(() => dispatch(setLoading(false)));
+        }
     }, [dispatch]);
 
     useEffect(() => {

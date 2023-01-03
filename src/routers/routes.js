@@ -8,14 +8,8 @@ export const routes = {
     favoritePlans: "/favorite-plans",
     setExercisePlan: "/my-plans/create",
     editExercisePlan: "/my-plans/:planId/edit",
-
-    //setSummary: "/plans-summary/:id",    
-    //setContent: "/plans-content/:id",
-
-    QCList: "/qclist",
-    QCSummary: "/qcsummary",
-    QCContent: "qccontent",
-    //QCFinish: "/qcfinish",
+    QCList: "/checklist",
+    QCSummary: "/censored/plan/:id",
 
     setSummary: "/plan/:id",
     default: "/"

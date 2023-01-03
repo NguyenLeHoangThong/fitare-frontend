@@ -11,12 +11,11 @@ import FavoritePlans from "pages/FavoritePlans";
 import MyPlans from "pages/MyPlans";
 import QCList from "pages/QCList";
 import QCSummary from "pages/QCSummary";
-import QCContent from "pages/QCContent";
-//import QCFinish from "pages/QCFinish";
 import EditExercisePlan from "pages/EditExercisePlan";
 import SetExercisePlan from "pages/SetExercisePlan";
 import TraineeAuthRoute from "./TraineeAuthRoute";
 import TrainerAuthRoute from "./TrainerAuthRoute";
+import QualityControllerRoute from "./QualityControllerRoute";
 import RedirectAuthRoute from "./RedirectAuthRoute";
 
 
@@ -28,11 +27,8 @@ const Routers = () =>   {
                 <RedirectAuthRoute path={routes.login} exact render={(props) => <Login {...props} />} />
                 <RedirectAuthRoute path={routes.register} exact render={(props) => <Register {...props} />} />
                 
-                <Route path={routes.QCList} exact render={(props) => <QCList {...props} />} />
-                <Route path={routes.QCSummary} exact render={(props) => <QCSummary {...props} />} />
-                <Route path={routes.QCContent} exact render={(props) => <QCContent {...props} />} />
-                {/*<Route path={routes.QCFinish} exact render={(props) => <QCFinish {...props} />} /> */}
-                
+                <QualityControllerRoute path={routes.QCList} exact render={(props) => <QCList {...props} />} />
+                <QualityControllerRoute path={routes.QCSummary} exact render={(props) => <QCSummary {...props} />} />
 
                 <TraineeAuthRoute path={routes.plans} exact render={(props) => <Plans {...props} />} />
                 <TraineeAuthRoute path={routes.setSummary} exact render={(props) => <SetSummary {...props} />} />

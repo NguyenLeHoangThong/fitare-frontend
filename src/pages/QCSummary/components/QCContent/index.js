@@ -17,7 +17,7 @@ import Footer from "components/Footer";
 //Image:
 import summaryLogo from './summaryImage.png';
 
-const SetContent = memo((props) => {
+const QCContent = memo((props) => {
 
     const { id } = useParams();
 
@@ -25,6 +25,8 @@ const SetContent = memo((props) => {
     const [currentStep, setCurrentStep] = useState(0);
     const [maxStep, setMaxStep] = useState(0);
     const [showFinishAllSet, setShowFinishAllSet] = useState(false);
+
+    const { handleBackSummary } = props;
 
     const dispatch = useDispatch();
 
@@ -61,11 +63,11 @@ const SetContent = memo((props) => {
             <NavigationBar />
             {
                 showFinishAllSet ? (
-                    <SetFinish planName={exercises[currentStep]?.exercisePlanName} />
+                    <SetFinish planName={exercises[currentStep]?.exercisePlanName} planId={id} />
                 )
                     : (
                         <div>
-                            <Button className={clsx(classes.btnReturn, classes.setMargin)}>	<Link to={`/plans-summary/${id}`} className={classes.noDecorBack}>&#60; ALL EXERCISE</Link> </Button>
+                            <Button onClick={handleBackSummary} className={clsx(classes.btnReturn, classes.setMargin)}>&#60; BACK</Button>
                             {
                                 exercises?.length ? (
                                     <div className={classes.summaryBox}>
@@ -104,4 +106,4 @@ const SetContent = memo((props) => {
 
 })
 
-export default SetContent;
+export default QCContent;
