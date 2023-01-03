@@ -11,31 +11,28 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import NavigationBar from "components/NavigationBar";
 import Footer from "components/Footer";
-import { setLoading, setErrorMess, setSuccessMess } from "redux/reducers/Status/actionTypes";
+import { setLoading, setErrorMess } from "redux/reducers/Status/actionTypes";
 import { ExercisePlanService } from "services/ExercisePlan";
-import { getBMITypes, getMuscleGroupTypes, getDurationTypes, getLevelTypes, difficultyFormatArray } from "utils/exercisePlan";
+import { getBMITypes, getMuscleGroupTypes, getDurationTypes, getLevelTypes, difficultyFormatArray, getExPlansStatus } from "utils/exercisePlan";
 import { GrClose } from 'react-icons/gr';
 import { bmiTypes, muscleGroupTypes, durationTypes, levelTypes } from "models/ExercisePlan";
 import { Link } from "react-router-dom";
 import { routes } from "routers/routes.js";
-import PopupDeleteExercisePlan from "./components/PopupDeleteExercisePlan";
-import { setTrainerCreatedPlans } from "redux/reducers/Trainer/actionTypes";
 
-const Plans = memo((props) => {
+const FavoritePlans = memo((props) => {
+
+    const { user } = useSelector((state) => state.user);
+    const traineeInformation = useSelector((state) => state.trainee);
+    const trainerInformation = useSelector((state) => state.trainer);
 
     const [defaultContent, setDefaultContent] = useState([]);
     const [content, setContent] = useState([]);
-    const { createdPlans } = useSelector((state) => state?.trainer);
 
     const [bmiFilters, setBmiFilters] = useState([]);
     const [muscleFilters, setMuscleFilters] = useState([]);
     const [durationFilters, setDurationFilters] = useState([]);
     const [levelFilters, setLevelFilters] = useState([]);
     const [searchValue, setSearchValue] = useState("");
-    const [exercisePlanModal, setExercisePlanModal] = useState({
-        isOpen: false,
-        id: null
-    });
 
     const handleChangeSearch = (value) => {
         setSearchValue(value);
@@ -109,9 +106,17 @@ const Plans = memo((props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setDefaultContent(createdPlans);
-        setContent(createdPlans);
-    }, [dispatch, createdPlans]);
+        dispatch(setLoading(true));
+        if (user?.type === "TRAINER") {
+            setDefaultContent(trainerInformation.favoritePlans);
+            setContent(trainerInformation.favoritePlans);
+        }
+        else if (user?.type === "TRAINEE") {
+            setDefaultContent(traineeInformation.favoritePlans);
+            setContent(traineeInformation.favoritePlans);
+        }
+        dispatch(setLoading(false));
+    }, [dispatch]);
 
     const handleAddFilterBMI = (value) => {
         if (bmiFilters.findIndex((item) => item.value === value.value) === -1) {
@@ -153,42 +158,10 @@ const Plans = memo((props) => {
         setLevelFilters([...levelFilters].filter((item) => item.value !== value.value));
     };
 
-    const deleteExercise = (id) => {
-        dispatch(setLoading(true));
-        ExercisePlanService.deleteAExercisePlan(id)
-            .then(async () => {
-                dispatch(setTrainerCreatedPlans([...createdPlans].filter((item) => item.id !== id)))
-                dispatch(setSuccessMess("Successfully delete exercise plan !"));
-            })
-            .catch((error) => dispatch(setErrorMess(error)))
-            .finally(() => {
-                dispatch(setLoading(false));
-                handleCloseDeleteModal();
-            });
-    }
-
-    const handleDeleteExercisePlan = (id) => {
-        setExercisePlanModal({
-            isOpen: true,
-            id: id
-        })
-    };
-
-    const handleCloseDeleteModal = () => {
-        setExercisePlanModal({
-            isOpen: false,
-            id: null
-        })
-    };
-
     return (
         <div>
             <NavigationBar />
-
             <Row className={classes.Box}>
-                <div className={classes.createPlanWrapper}>
-                    <Button><Link to={routes.setExercisePlan}>CREATE</Link></Button>
-                </div>
                 <Col xs={12} md={3} className={clsx(classes.flex)}>
                     <div className={classes.filterBox}>
                         <div className={classes.header}>FILTER</div>
@@ -366,8 +339,17 @@ const Plans = memo((props) => {
                                             </div>
 
                                             <div className={classes.btn}>
-                                                <Button className={classes.btnDelete} onClick={() => handleDeleteExercisePlan(plan?.id)}>Delete</Button>
-                                                <Button className={classes.btnEdit}><Link to={`/my-plans/${plan?.id}/edit`}>Edit</Link></Button>
+                                                <div className={clsx(classes.planStatus,
+                                                    getExPlansStatus(plan?.status)?.value === "IN_PROGRESS"
+                                                        ? classes.planInProgress
+                                                        :
+                                                        getExPlansStatus(plan?.status)?.value === "DONE"
+                                                            ? classes.planDone : classes.planToDo)}>
+                                                    {
+                                                        getExPlansStatus(plan?.status)?.name
+                                                    }
+                                                </div>
+                                                <Link to={`/plan/${plan?.id}`} className={classes.btnSelect}>Select</Link>
                                             </div>
                                         </div>
                                     </Col>
@@ -379,17 +361,9 @@ const Plans = memo((props) => {
                     </Container>
                 </Col>
             </Row>
-
-            <PopupDeleteExercisePlan
-                isShowModal={exercisePlanModal.isOpen}
-                deleteId={exercisePlanModal.id}
-                handleClose={handleCloseDeleteModal}
-                handleDelete={deleteExercise}
-            />
-
             <Footer />
         </div>
     )
 })
 
-export default Plans;
+export default FavoritePlans;

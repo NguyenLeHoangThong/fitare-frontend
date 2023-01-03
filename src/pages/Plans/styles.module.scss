@@ -241,3 +241,10 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.noExMore {
+    font-size: 48px;
+    text-align: center;
+    color: var(--bs-red);
+    margin-top: 36px;
+}

@@ -161,8 +161,10 @@
 //button
 .exercisePlan .btn {
     display: flex;
-    justify-content: end;
-    margin: 4px 4px 0 0;
+    justify-content: space-between;
+    margin-top: 4px;
+    padding: 0 4px;
+    align-items: center;
 }
 
 .btnSearch {
@@ -195,58 +197,6 @@
     font-weight: 600;
 
     min-width: 120px;
-    min-height: 25px;
-}
-
-.btnDelete {
-    &:hover {
-        opacity: 0.8;
-        background-color: var(--bs-red);
-        border: 1px solid var(--bs-red);
-    }
-
-    background-color: var(--bs-red);
-    border: 1px solid var(--bs-red);
-    color: var(--color-white);
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 16px;
-
-    font-size: 16px;
-    font-weight: 600;
-
-    min-width: 80px;
-    min-height: 25px;
-}
-
-.btn {
-    justify-content: center !important;
-    button {
-        margin-left: 12px;
-    }
-    a {
-        color: #fff;
-        text-decoration: none;
-    }
-}
-
-.btnEdit {
-    &:hover {
-        background-color: var(--color-orange);
-        color: var(--color-white);
-        border-color: var(--color-orange);
-    }
-
-    background-color: var(--color-blue);
-    color: var(--color-white);
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 16px;
-
-    font-size: 16px;
-    font-weight: 600;
-
-    min-width: 80px;
     min-height: 25px;
 }
 
@@ -294,23 +244,22 @@
     flex-wrap: wrap;
 }
 
-.createPlanWrapper {
-    display: flex;
-    justify-content: flex-end;
-    button {
-        background-color: var(--color-orange);
-        border: 1px solid var(--color-orange);
-        &:hover {
-            background-color: var(--color-orange);
-            opacity: 0.8;
-            border: 1px solid var(--color-orange);
-        }
-        transition: all 0.3s ease;
-    }
-    a {
-        font-size: 24px;
-        color: #fff;
-        text-decoration: none;
-    }
-    margin-bottom: 12px;
+.planStatus {
+    margin-left: 32px;
+    padding: 4px;
+    color: var(--color-white);
+    cursor: default;
+    border-radius: 4px;
+}
+
+.planInProgress {
+    background-color: var(--bs-yellow);
+}
+
+.planDone {
+    background-color: var(--bs-green);
+}
+
+.planToDo {
+    background-color: var(--bs-red);
 }

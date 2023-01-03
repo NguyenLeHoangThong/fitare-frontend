@@ -12,31 +12,6 @@ import { GrClose } from 'react-icons/gr';
 
 const CreatePlan = memo((props) => {
 
-    // const schema = useMemo(() => {
-    //     return yup.object().shape({
-    //         avatar: yup.mixed(),
-    //         name: yup.string()
-    //     })
-    // }, []);
-
-
-    // const {
-    //     register,
-    //     handleSubmit,
-    //     formState: { errors },
-    //     control,
-    //     reset,
-    //     setValue,
-    //     watch
-    // } = useForm({
-    //     resolver: yupResolver(schema),
-    //     mode: "onChange",
-    // });
-
-    // const onSubmit = (data) => {
-    //     console.log(data);
-    // }
-
     return (
         <div className={classes.dropdownChoice}>
             <div className={classes.content}>

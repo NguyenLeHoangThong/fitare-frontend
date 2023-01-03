@@ -1,8 +1,8 @@
 import { memo, useMemo, useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { push } from "connected-react-router";
-
+import { useParams } from "react-router-dom";
 import NavigationBar from "components/NavigationBar";
 import Footer from "components/Footer";
 import UploadImage from "components/Commons/UploadImage";
@@ -18,9 +18,14 @@ import { Link } from "react-router-dom";
 import { routes } from 'routers/routes.js';
 import { bmiTypes, muscleGroupTypes, durationTypes, levelTypes } from "models/ExercisePlan";
 import { getBMITypes, getMuscleGroupTypes, getDurationTypes, getLevelTypes, difficultyFormatArray } from "utils/exercisePlan";
-import SetExercise from "./components/SetExercise";
+import EditExercise from "./components/EditExercise";
+import { ExercisePlanService } from "services/ExercisePlan";
+import { setLoading, setErrorMess, setSuccessMess } from "redux/reducers/Status/actionTypes";
 
-const SetExercisePlan = memo((props) => {
+const EditExercisePlan = memo((props) => {
+
+    const { createdPlans } = useSelector((state) => state.trainer);
+    const { planId } = useParams();
 
     yup.addMethod(yup.array, "muscleGroupCheck", function (errorMessage) {
         return this.test(`test-muscle-group`, errorMessage, function (value) {
@@ -45,7 +50,7 @@ const SetExercisePlan = memo((props) => {
 
     const schema = useMemo(() => {
         return yup.object().shape({
-            bannerImage: yup.mixed().required("Please choose an image"),
+            bannerImage: yup.mixed(),
             description: yup.string().required("Please type in description"),
             title: yup.string().required("Please type in plan name"),
             bmiType: yup.object().required("Please choose a bmi type"),
@@ -56,6 +61,7 @@ const SetExercisePlan = memo((props) => {
     }, []);
 
     const dispatch = useDispatch();
+    const [defaultValue, setDefaultValue] = useState();
 
     const {
         register,
@@ -69,6 +75,60 @@ const SetExercisePlan = memo((props) => {
         resolver: yupResolver(schema),
         mode: "onChange",
     });
+
+    useEffect(() => {
+        if (createdPlans?.length) {
+            const currentPlan = createdPlans.find((item) => item.id === Number(planId));
+
+            if (currentPlan) {
+                dispatch(setLoading(false));
+                setDefaultValue({
+                    bannerImageUrl: currentPlan?.bannerImageUrl,
+                    level: currentPlan?.level,
+                    hours: currentPlan?.hours,
+                    name: currentPlan?.name,
+                    description: currentPlan?.description,
+                    bmi: currentPlan?.bmi,
+                    muscleGroup: [...currentPlan?.muscleGroup]
+                });
+
+                reset({
+                    levelType: getLevelTypes(currentPlan?.level),
+                    durationType: getDurationTypes(currentPlan?.hours),
+                    title: currentPlan?.name,
+                    description: currentPlan?.description,
+                    bmiType: getBMITypes(currentPlan?.bmi),
+                    muscleGroup: muscleGroupTypes.map((item) => {
+                        if (currentPlan?.muscleGroup.find((cItem) => cItem === item.value)) {
+                            return ({
+                                ...item,
+                                checked: true
+                            })
+                        }
+                        else {
+                            return ({
+                                ...item,
+                                checked: false
+                            })
+                        }
+                    })
+                })
+                
+                ExercisePlanService.getAllExercisesOfAPlan(Number(planId))
+                    .then((res) => {
+                        setExData(res)
+                    })
+                    .catch((err) => dispatch(setErrorMess(err)))
+                    .finally(() => dispatch(setLoading(false)))
+            }
+            else {
+                dispatch(push(routes.myPlans));
+            }
+        }
+        else {
+            dispatch(push(routes.myPlans));
+        }
+    }, [dispatch])
 
     useEffect(() => {
         if (isSetExPlan) {
@@ -101,7 +161,10 @@ const SetExercisePlan = memo((props) => {
     }
 
     const onSubmit = (data) => {
-        setExPlanData(data);
+        setExPlanData({
+            ...data,
+            id: Number(planId)
+        });
         setIsExPlan(false);
     }
 
@@ -175,6 +238,7 @@ const SetExercisePlan = memo((props) => {
                                             render={({ field }) => (
                                                 <UploadImage
                                                     // @ts-ignore
+                                                    placeholderImageUrl={defaultValue?.bannerImageUrl}
                                                     className={classes.bannerImage}
                                                     errorMessage={errors?.bannerImage?.message}
                                                     avatar={!field.value}
@@ -198,15 +262,14 @@ const SetExercisePlan = memo((props) => {
                                 </Col>
 
                                 <div className={classes.btn}>
-                                    {/* <Button>Add exercise</Button> */}
-                                    <Button type="submit">Add exercise</Button>
+                                    <Button type="submit">Update exercise</Button>
                                 </div>
                             </Row>
                         </Form>
                     </div>
                 )
                     :
-                    <SetExercise
+                    <EditExercise
                         returnExPlan={returnExPlan}
                         handlePushExData={handlePushExData}
                         handleSetExData={handleSetExData}
@@ -221,4 +284,4 @@ const SetExercisePlan = memo((props) => {
     )
 })
 
-export default SetExercisePlan;
+export default EditExercisePlan;
