@@ -26,37 +26,24 @@ function App({ history, dispatch }) {
       auth.onAuthStateChanged((user) => {
         if (user) {
           UserService.getUserData(user?.uid)
-            .then((res) => {
+            .then(async (res) => {
               dispatch(setUserReducer(res));
               if (res?.type === UserTypes.TRAINER) {
-                TrainerProfileService.getTrainerProfile(res?.id)
-                  .then((trainerProfile) => {
+                await Promise.all([TrainerProfileService.getTrainerProfile(res?.id), TrainerProfileService.getTrainerCreatedPlans(res?.id), ExercisePlanService.getTrainerFavoriteExercisesPlan(res?.id)])
+                  .then((results) => {
+                    const [trainerProfile, plans, favoritePlans] = results;
                     dispatch(setTrainerReducer(trainerProfile))
-                  })
-                  .catch((error) => dispatch(setErrorMess(error)))
-
-                TrainerProfileService.getTrainerCreatedPlans(res?.id)
-                  .then((plans) => {
                     dispatch(setTrainerCreatedPlans(plans))
-                  })
-                  .catch((error) => dispatch(setErrorMess(error)))
-
-                ExercisePlanService.getTrainerFavoriteExercisesPlan(res?.id)
-                  .then((favoritePlans) => {
                     dispatch(setTrainerFavoritePlans(favoritePlans))
                   })
                   .catch((error) => dispatch(setErrorMess(error)))
               }
               else if (res?.type === UserTypes.TRAINEE) {
-                TraineeProfileService.getTraineeProfile(res?.id)
-                  .then((traineeProfile) => {
-                    dispatch(setTraineeReducer(traineeProfile))
-                  })
-                  .catch((error) => dispatch(setErrorMess(error)))
-
-                ExercisePlanService.getTraineeFavoriteExercisesPlan(res?.id)
-                  .then((favoritePlans) => {
-                    dispatch(setTraineeFavoritePlans(favoritePlans))
+                await Promise.all([TraineeProfileService.getTraineeProfile(res?.id), ExercisePlanService.getTraineeFavoriteExercisesPlan(res?.id)])
+                  .then((results) => {
+                    const [traineeProfile, favoritePlans] = results;
+                    dispatch(setTraineeReducer(traineeProfile));
+                    dispatch(setTraineeFavoritePlans(favoritePlans));
                   })
                   .catch((error) => dispatch(setErrorMess(error)))
               }
