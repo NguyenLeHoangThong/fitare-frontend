@@ -8,7 +8,11 @@ export const routes = {
     favoritePlans: "/favorite-plans",
     setExercisePlan: "/my-plans/create",
     editExercisePlan: "/my-plans/:planId/edit",
+    QCList: "/checklist",
+    QCSummary: "/censored/plan/:id",
 
     setSummary: "/plan/:id",
     default: "/"
+
+    
 }   

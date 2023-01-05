@@ -42,7 +42,7 @@ const NavigationBar = () => {
             <img src={logo} alt="logo" width='50px' />
 
             {
-                user ? (
+                user && user?.type !== UserTypes.QUALITY_CONTROLLER ? (
                     <div className={classes.navigator}>
                         {
                             (user?.type === UserTypes.TRAINER && router?.location?.pathname === routes.myPlans)
