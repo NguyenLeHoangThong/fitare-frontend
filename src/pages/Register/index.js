@@ -34,7 +34,7 @@ const Register = memo((props) => {
             email: yup.string().email("Please input valid email").required("Please input email"),
             password: yup.string().required("Please input password").matches(
                 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                "Must have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number"
+                "Must have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character"
             ),
             conPassword: yup.string().required("Please input confirm password").oneOf([yup.ref('password'), null], "Confirm password must match password"),
             firstName: yup.string().required("Please input First Name"),
